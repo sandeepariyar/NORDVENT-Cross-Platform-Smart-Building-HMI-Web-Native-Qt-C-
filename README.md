@@ -6,7 +6,7 @@ An 800 × 480 smart-building control interface implemented in **Qt Quick/QML and
 
 **[Open the interactive engineering showcase](https://sandeepariyar.github.io/NORDVENT-Cross-Platform-Smart-Building-HMI-Web-Native-Qt-C-/)**
 
-The showcase places both implementations at the top of the page. The Qt WebAssembly application starts automatically when a compiled bundle is deployed; otherwise its status identifies the missing build. Both applications are simulations; neither is connected to real equipment.
+The first screen leads with the native Qt/QML/C++ WebAssembly runtime and places the independent HTML design reference alongside it. The native build starts automatically when the compiled bundle is available; otherwise the UI shows an explicit build status. Neither demonstration controls real equipment.
 
 ## Native implementation
 
@@ -24,7 +24,7 @@ The showcase places both implementations at the top of the page. The Qt WebAssem
 | `native-qt/core/` | Portable C++ controller state and logic |
 | `native-qt/assets/` | Raster artwork used by the native runtime |
 | `web/` | Original independent browser prototype |
-| `docs/` | Showcase, browser inspector, design system and engineering notes |
+| `docs/` | Native C++ diagnostics, dual-runtime showcase, design system and engineering notes |
 | `.github/workflows/pages.yml` | Qt WebAssembly build, checks and Pages deployment |
 
 ## Run with Qt Creator
@@ -33,7 +33,7 @@ Open `native-qt/CMakeLists.txt` with a **Qt 6.11.2 MinGW 64-bit** kit on Windows
 
 ## Browser presentation and device-size inspection
 
-The landing page displays the native port beside its browser prototype. Both have independent state. The browser inspector reads actual HTML application events; it is **not** a native Qt telemetry inspector.
+The landing page prioritizes the native Qt implementation while retaining the browser prototype as a visual comparison. The engineering panel is driven by read-only messages emitted from the **actual C++ backend running in WebAssembly**, including state revision, runtime uptime, selected view, ventilation model value, simulated fault count and controller JSON. These are not browser click events, measured frame rates or real hardware telemetry.
 
 The **Actual size** control has two modes: an 800 × 480 logical-pixel inspection view and a calibrated physical 5-inch-screen view. Physical-size accuracy depends on measuring the supplied 100 mm calibration line with a ruler; CSS pixels alone cannot determine a monitor's physical scale.
 
@@ -47,7 +47,7 @@ Open `http://localhost:8080`. A real native browser run requires the compiled Qt
 
 ## Implementation status
 
-The desktop QML/C++ project and its source files are included. CI is configured to build and smoke-test the WebAssembly port before deployment. A working local Qt desktop build has been reported by the project author; this README does not substitute for a fresh native runtime test.
+The desktop QML/C++ project and its source files are included. CI builds the WebAssembly port and checks native controller snapshots, changes in state revision and the portfolio's device-view controls before deploying. A working local Qt desktop build has been reported by the project author; this README does not substitute for a fresh native runtime test.
 
 **Not implemented or validated:** physical MCU firmware, Qt Quick Ultralite or LVGL ports, real sensor/actuator integration, safety-rated equipment control and device-level timing/memory measurements. Those require target hardware and separate verification.
 
