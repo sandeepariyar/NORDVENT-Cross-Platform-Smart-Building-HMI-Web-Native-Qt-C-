@@ -1,5 +1,7 @@
 # Publish the complete NORDVENT Engineering Lab
 
+**Current state:** A standalone landing page has already been committed at `docs/index.html`. You may enable GitHub Pages now on `main /docs` to publish that initial page. It includes a functional standalone simulator inspector, and clearly marks the original web application and Qt source as pending until the full upload.
+
 The full source package (web v17, native Qt v17.1 and the engineering showcase) contains hundreds of files and photographic PNG/WebP assets. The linked GitHub connector can initialize repository text files but cannot upload the complete ZIP archive or its binary contents directly. Do not mistake this bootstrap state for a complete deployment.
 
 ## Creator-only upload (Windows)
