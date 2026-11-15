@@ -46,6 +46,7 @@ jobs:
           npm install --no-save --no-audit --no-fund playwright-core@1.56.1
           CHROME_PATH="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
           test -n "$CHROME_PATH"
+          export CHROME_PATH
           echo "CHROME_PATH=$CHROME_PATH" >> "$GITHUB_ENV"
           python3 -m http.server 8765 --bind 127.0.0.1 --directory docs >/tmp/nordvent-art.log 2>&1 &
           ART_SERVER=$!
