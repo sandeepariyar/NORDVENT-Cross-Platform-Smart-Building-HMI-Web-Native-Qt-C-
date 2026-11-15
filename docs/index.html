@@ -31,11 +31,11 @@
   <div class="live-grid" id="labGrid">
     <article class="runtime-card" id="webCard" aria-labelledby="webCardTitle"><div class="runtime-header"><div class="runtime-index">A</div><div><div class="runtime-caption">RUNTIME / 01</div><h3 id="webCardTitle">Browser native <span>— HTML/CSS/JS</span></h3></div><div class="runtime-status status-on" id="webStatus">● LIVE WEB</div></div>
       <div class="runtime-screen" id="webViewport"><iframe id="webApp" src="web/index.html" title="Actual interactive NORDVENT Web v17 application" loading="eager" allow="fullscreen"></iframe></div>
-      <div class="runtime-foot"><span>Original v17 · Real application / original interactions</span><div class="inline-actions"><button type="button" id="webRefresh" aria-label="Reset HTML application">↻ Reset</button><button type="button" data-expand="web" aria-label="Expand HTML application">⛶ Expand</button></div></div>
+      <div class="runtime-foot"><span>Original v17 · Real application / original interactions</span><div class="inline-actions"><button type="button" id="webRefresh" aria-label="Reset HTML application">↻ Reset</button><button type="button" data-expand="web" aria-label="Show HTML at actual device size">▣ Actual size</button></div></div>
     </article>
     <article class="runtime-card" id="qtCard" aria-labelledby="qtCardTitle"><div class="runtime-header"><div class="runtime-index">B</div><div><div class="runtime-caption">RUNTIME / 02</div><h3 id="qtCardTitle">Compiled native <span>— Qt/QML/C++</span></h3></div><div class="runtime-status status-idle" id="qtStatus">○ NOT LOADED</div></div>
       <div class="runtime-screen" id="qtViewport"><iframe id="qtApp" title="Real NORDVENT Qt WebAssembly application" allow="fullscreen" loading="lazy"></iframe><div class="wasm-gate" id="wasmGate"><img src="assets/screens/v17_reference_home.png" alt="Original NORDVENT interface reference shown until the Qt WebAssembly runtime loads" width="800" height="480"><div class="wasm-overlay"><span class="wasm-mark">QT / WEBASSEMBLY</span><h4>Real Qt.<br>Inside the browser.</h4><p>No HTML imitation. Compile and run the original QML/C++ interface in this panel.</p><button class="btn btn-primary" id="loadQt" type="button">Load Qt runtime <span aria-hidden="true">→</span></button><small id="qtHint">Starts automatically when the verified Qt WebAssembly bundle is available.</small></div></div></div>
-      <div class="runtime-foot"><span id="qtFootStatus">Qt 6.11.2 target · WebAssembly build must be deployed</span><div class="inline-actions"><button type="button" id="qtRefresh" aria-label="Restart Qt runtime">↻ Reset</button><button type="button" data-expand="qt" aria-label="Expand Qt application">⛶ Expand</button></div></div>
+      <div class="runtime-foot"><span id="qtFootStatus">Qt 6.11.2 target · WebAssembly build must be deployed</span><div class="inline-actions"><button type="button" id="qtRefresh" aria-label="Restart Qt runtime">↻ Reset</button><button type="button" data-expand="qt" aria-label="Show Qt at actual device size">▣ Actual size</button></div></div>
     </article>
   </div>
   <div class="micro-footnote"><strong>Truth in the comparison.</strong> HTML v17 and Qt v17.1 are separate implementations of the same concept, not two skins of one app. The page checks whether the generated WASM binary exists before claiming Qt is available.</div>
@@ -107,6 +107,15 @@
 </main>
 <footer class="footer"><div class="section-wrap footer-inner"><div><div class="footer-brand">NORDVENT <span>/ ENGINEERING LAB</span></div><p>Original design and engineering by Sandeep Pariyar.<br>Browser demos are simulations, not hardware-connected control systems.</p></div><div><a href="#top">Back to top ↑</a><a href="https://github.com/sandeepariyar/NORDVENT-Cross-Platform-Smart-Building-HMI-Web-Native-Qt-C-" target="_blank" rel="noopener noreferrer">GitHub ↗</a><span>© 2026 SANDEEP PARIYAR · ALL RIGHTS RESERVED</span></div></div></footer>
 <div class="preview-modal" id="previewModal" hidden><div class="preview-backdrop" data-close-modal></div><div class="preview-dialog" role="dialog" aria-modal="true" aria-labelledby="previewTitle"><div class="preview-dialog-head"><strong id="previewTitle">Application preview</strong><button type="button" id="closePreview">Close ×</button></div><div class="preview-dialog-screen" id="expandedViewport"><div class="preview-guide">This interactive runtime is shown in the original 800 × 480 aspect ratio.</div></div></div></div>
+<div class="physical-mask" id="physicalMask" hidden></div>
+<div class="physical-tools" id="physicalTools" hidden role="dialog" aria-modal="true" aria-label="Physical device size calibration">
+  <div class="physical-tools-head"><strong id="physicalLabel">NORDVENT · ACTUAL DEVICE SIZE</strong><button type="button" id="closePhysical">Close ×</button></div>
+  <p>Reference: 5-inch diagonal, 800 × 480 screen (approximately 109 × 65 mm). Calibrate once against a physical ruler; browser CSS units are not guaranteed to match your monitor.</p>
+  <label for="physicalAdjust">Adjust until the line below measures exactly 100 mm with your ruler.</label>
+  <div class="physical-ruler"><div id="physicalRuler" class="physical-ruler-line"><span>0</span><span>100 mm</span></div></div>
+  <input id="physicalAdjust" type="range" min="50" max="180" value="100" step="1" aria-label="Adjust physical scale of the device">
+  <div class="physical-tools-footer"><span id="physicalPercent">100% nominal CSS scale · calibration required</span><button type="button" id="resetPhysical">Reset scale</button></div>
+</div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
