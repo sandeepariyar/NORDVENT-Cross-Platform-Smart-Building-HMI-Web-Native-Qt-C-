@@ -1,0 +1,5 @@
+# Files copied into the Pages publishing tree are deployment artifacts, not additional authored source.
+docs/web/** linguist-generated=true
+# WebAssembly bundles are build outputs if committed in future.
+docs/native/*.wasm linguist-generated=true
+docs/native/*.js linguist-generated=true
