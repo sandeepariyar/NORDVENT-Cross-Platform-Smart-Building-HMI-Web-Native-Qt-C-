@@ -67,3 +67,28 @@
 .native-notice{border-top:1px solid #2a4755;background:#0a202c;padding:13px 22px;color:#9fb8c2;font-size:10px;line-height:1.7}
 @media(max-width:1180px){.native-metric-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:760px){.native-inspector-head{display:block;padding:18px}.native-diag-status{display:inline-block;margin-top:15px}.native-metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.native-metric-grid>div{padding:14px}.native-data-head{padding:12px}.native-json{margin:0 12px 12px}}
+
+/* First-screen native showcase: keep both applications visible without scrolling on desktop. */
+#live.section-block{padding-top:22px;padding-bottom:56px;scroll-margin-top:78px}
+#live .section-top{margin-bottom:14px}
+#live .section-top h2{font-size:clamp(28px,3vw,44px);line-height:1.12;margin:7px 0}
+#live .section-intro{max-width:930px;line-height:1.55;margin:0;font-size:12px}
+#live .section-side-note{font-size:9px}
+#live .lab-toolbar{margin:12px 0}
+#live .runtime-header{padding:10px 13px;min-height:56px;gap:9px}
+#live .runtime-index{width:27px;height:27px;font-size:12px}
+#live .runtime-header h3{font-size:12px}
+#live .runtime-header h3 span{font-size:10px}
+#live .runtime-foot{min-height:40px;padding:6px 10px;font-size:9px}
+#live .runtime-screen{aspect-ratio:5/3}
+#live .micro-footnote{margin-top:10px;padding:9px 13px}
+.mcu-brief{margin-top:19px;padding:19px 21px;background:#0b202c;border:1px solid #365967;border-radius:12px}
+.mcu-brief-heading h3{font-size:21px;margin:5px 0 6px;letter-spacing:-.03em}
+.mcu-brief-heading p{margin:0;color:#aac4ce;font-size:12px;line-height:1.65}
+.mcu-brief-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:15px}
+.mcu-brief-grid>div{border-left:2px solid #64d9df;padding-left:12px}
+.mcu-brief-grid strong{display:block;color:#eaf9fa;font-size:14px;margin-bottom:3px}
+.mcu-brief-grid span{display:block;color:#a7bdc7;font-size:10px;line-height:1.6}
+.mcu-brief>a{display:inline-block;margin-top:14px;color:#8debe7;font-size:11px;font-weight:750}
+@media(max-width:900px){.mcu-brief-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){#live.section-block{padding-top:12px}#live .runtime-header{flex-wrap:wrap}.mcu-brief-grid{grid-template-columns:1fr}}
