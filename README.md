@@ -25,7 +25,7 @@ The web and Qt applications are **separate implementations**, not a single share
 
 Read the [complete-source publishing instructions](PUBLISHING.md) for the one-command Windows upload.
 
-**Publishing status:** The repository has been initialized with the project description and proprietary notice. The full source/assets upload is a separate step; paths above may not appear until it completes. Do not enable GitHub Pages as a completed demonstration until the files are present.
+**Publishing status (15 November 2026):** A standalone, responsive portfolio landing page is now committed at [docs/index.html](docs/index.html), including a clearly labeled local simulated-control inspector, design-system preview, architecture and case study. The ORIGINAL v17 HTML app, binary assets and complete Qt source are **not yet uploaded**: use [PUBLISHING.md](PUBLISHING.md) and the supplied ZIP to complete that step. The website intentionally marks those parts as pending rather than pretending a Qt WebAssembly demo exists.
 
 Once the complete source is uploaded, enable GitHub Pages under **Settings → Pages → Deploy from a branch → main /docs**.
 
