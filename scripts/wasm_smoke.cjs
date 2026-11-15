@@ -30,7 +30,29 @@ const fs = require('node:fs');
     if (errors.some(msg => /QQml|qml:.*error|Unable to load|ReferenceError|TypeError|wasm.*abort|uncaught|NORDVENT_WASM/i.test(msg)))
       throw new Error('Qt/QML runtime error: '+errors.join('\n'));
     fs.writeFileSync('wasm-smoke.log', `Status ready; canvas ${rect.width}x${rect.height}; clicked native Night scene.\n${errors.join('\n')}`);
-    console.log('NORDVENT Qt WASM smoke: PASS — native QML canvas launched and accepted a click.');
+    // The portfolio must embed two runtimes without a fake HTML diagnostic feed.
+    const showcase=await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
+    if(!showcase?.ok())throw new Error('showcase failed to load');
+    if(await page.locator('#inspector').count())throw new Error('Retired HTML inspector still present');
+    if(!(await page.locator('#qtCard').count())||!(await page.locator('#webCard').count()))
+      throw new Error('Both HMI runtimes must be present above the design narrative');
+    await page.waitForFunction(() =>
+      document.querySelector('#nativeDiagStatus')?.textContent?.includes('C++ BACKEND CONNECTED'),null,{timeout:120000});
+    const first=await page.evaluate(()=>JSON.parse(document.querySelector('#nativeStateOutput').textContent));
+    if(first.runtime!=='qt-wasm'||first.schema!==1||first.hardwareConnected!==false)
+      throw new Error('Native inspector must receive genuine C++ simulated-state data');
+    await page.waitForFunction(previous=>{
+      try{return JSON.parse(document.querySelector('#nativeStateOutput').textContent).revision>previous}
+      catch{return false}
+    },first.revision,{timeout:15000});
+    await page.locator('[data-expand="qt"]').click();
+    if(!(await page.locator('#qtCard').evaluate(el=>el.classList.contains('physical-active'))))
+      throw new Error('Device-sized Qt inspection did not open');
+    await page.locator('#closePhysical').click();
+    if(await page.locator('#qtCard').evaluate(el=>el.classList.contains('physical-active')))
+      throw new Error('Device-sized Qt inspection did not close');
+    fs.appendFileSync('wasm-smoke.log','Showcase: C++ native diagnostic snapshots updated; both app cards present; Qt physical-size viewer opened and closed.\n');
+    console.log('NORDVENT Qt WASM smoke: PASS — native QML canvas, controller telemetry, dual-run preview and device viewer.');
   } finally {
     await browser.close();
   }
