@@ -73,6 +73,13 @@ physicalMask.addEventListener('click',closePhysical);
 addEventListener('keydown',event=>{if(event.key==='Escape'&&physicalCard)closePhysical()});
 physicalAdjust.addEventListener('input',()=>{localStorage.setItem('nordventPhysicalCalibration',physicalAdjust.value);renderPhysical()});
 $('#resetPhysical').addEventListener('click',()=>{physicalAdjust.value=100;localStorage.removeItem('nordventPhysicalCalibration');renderPhysical()});
+$('#physicalModeToggle').addEventListener('click',()=>{
+  physicalMode=physicalMode==='pixels'?'device':'pixels';
+  $('#physicalModeToggle').textContent=physicalMode==='pixels'?'View at calibrated 5-inch size':'View at 800×480 pixels';
+  $('#physicalLabel').textContent='NORDVENT · '+(physicalMode==='pixels'?'800 × 480 PIXEL INSPECTION':'CALIBRATED PHYSICAL SCREEN');
+  physicalTools.classList.toggle('pixel-mode',physicalMode==='pixels');
+  renderPhysical();
+});
 addEventListener('resize',()=>{if(physicalCard)renderPhysical()});
 
 $('#menuToggle').addEventListener('click',()=>{const header=$('.site-header');const open=header.classList.toggle('menu-open');$('#menuToggle').setAttribute('aria-expanded',String(open))});
