@@ -287,26 +287,4 @@ async function refreshWeather(){const btn=document.querySelector('[data-action="
 function scheduledTick(){const d=new Date();const key=`${d.getFullYear()}-${d.getMonth()}-${d.getDate()} ${d.getHours()}:${d.getMinutes()}`;if(lastMinute===key)return;lastMinute=key;const hm=d.toTimeString().slice(0,5);for(const rt of state.routines)if(rt.enabled&&rt.time===hm)scheduleRun(rt,'Routine')}
 function updateClockAndBoost(){clock();if(state.boostUntil&&Date.now()>=state.boostUntil){state.boostUntil=0;state.ventMode=state.preBoost||'Auto';state.ventilation=state.preBoostVentilation;state.preBoost='Auto';render();toast('Boost finished · previous ventilation settings restored')}scheduledTick();}
 $('buildingImage').src=sequenceUrls[0];startBackgroundSequence();setInterval(updateClockAndBoost,1000);render();
-
-// NORDVENT Engineering Lab: read-only bridge for same-origin developer inspection.
-// Does not send commands or transmit data. This is a demonstration, not real device telemetry.
-window.__NORDVENT_DEV__ = Object.freeze({
-  snapshot() {
-    return JSON.parse(JSON.stringify({
-      page:state.page, room:state.room, scene:state.scene,
-      lights:state.lights, blinds:state.blinds, targets:state.targets,
-      temps:state.temps, co2:state.co2, occupied:state.occupied,
-      ventilation:state.ventilation, ventMode:state.ventMode,
-      manualFlow:state.manualFlow, recovery:state.recovery,
-      heating:state.heating, water:state.water,
-      locked:state.locked, alarm:state.alarm,
-      leak:state.leak, smoke:state.smoke, sensorOffline:state.sensorOffline,
-      heatPumpFault:state.heatPumpFault, motion:state.motion, effects:state.effects,
-      boostActive:boostActive(), flowM3h:flow(), healthAlerts:healthAlerts().map(e=>({code:e.code,level:e.level,title:e.title}))
-    }));
-  },
-  version:'v17 web simulation',
-  source:'real in-browser state; no physical hardware connected'
-});
-
 })();
