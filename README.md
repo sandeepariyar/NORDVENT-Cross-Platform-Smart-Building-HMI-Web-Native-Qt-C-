@@ -29,6 +29,16 @@ Read the [complete-source publishing instructions](PUBLISHING.md) for the one-co
 
 Once the complete source is uploaded, enable GitHub Pages under **Settings → Pages → Deploy from a branch → main /docs**.
 
+## Repository and branch strategy
+
+**One product, one repository, two independent implementations.**
+
+Keep the original web implementation in `web/` and the native Qt/QML/C++ implementation in `native-qt/`, with the public engineering showcase in `docs/`. Shared architectural and verification material belongs in common documentation and test folders. This structure allows recruiters to see both implementations together without switching branches.
+
+Use `main` as the authoritative integrated branch (and GitHub Pages source from `main /docs`). Create short-lived feature branches such as `feature/virtual-device-lab`, `feature/qt-wasm` and `feature/lvgl-port` for changes under development. Merge only after validation. Release tags may identify independently verified versions such as `web-v17` or `qt-v17.1`.
+
+The native Qt desktop app is not the same as an MCU/Qt Quick Ultralite build; WebAssembly and LVGL remain separate targets until built and tested.
+
 ## Building the native app
 
 Open `native-qt/CMakeLists.txt` in Qt Creator and use **Desktop Qt 6.11.2 MinGW 64-bit**. Build and run `NordventDesktop`.
