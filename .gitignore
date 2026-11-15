@@ -1,0 +1,17 @@
+# Build products / local files
+build/
+**/build/
+CMakeFiles/
+*.exe
+*.dll
+*.o
+*.obj
+*.pdb
+*.user
+*.user.*
+.DS_Store
+__pycache__/
+*.pyc
+.env
+.env.*
+node_modules/
