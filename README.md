@@ -8,6 +8,12 @@ An 800 × 480 smart-building control interface implemented in **Qt Quick/QML and
 
 The first screen leads with the native Qt/QML/C++ WebAssembly runtime and places the independent HTML design reference alongside it. The native build starts automatically when the compiled bundle is available; otherwise the UI shows an explicit build status. Neither demonstration controls real equipment.
 
+## MCU engineering target
+
+The reference display is **800 × 480**, with an intended **5-inch WVGA-class touch interface**. The current Qt 6 Quick/QML implementation is a **desktop/WebAssembly demonstration**, not a Qt Quick Ultralite firmware build. A single full-screen RGB565 framebuffer would require **768,000 bytes (0.732 MiB)**; double-buffering would require **1,536,000 bytes (1.465 MiB)**, before textures, stack, heap and application data. These are calculated sizing examples, not measured target memory usage.
+
+The design favors reusable controls, constrained raster artwork, explicit state changes and frame-based animation where appropriate. A hardware port must still validate image formats and decompression, flash/RAM/PSRAM budgets, frame timing, touch latency, event routing and physical I/O on the selected board. No MCU performance measurements are claimed.
+
 ## Native implementation
 
 - **QML:** fixed 800 × 480 scene, page/room navigation, reusable buttons, labels, icons and sliders; moving blinds, HVAC rotor, lighting and flow animations.
