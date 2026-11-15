@@ -19,5 +19,9 @@ for file in (site/'index.html',site/'web/index.html'):
     html=file.read_text(encoding='utf8')
     for relative in re.findall(r'(?:src|href)="([^"]+)"',html):
         if not relative or relative.startswith(('http://','https://','data:','blob:','#','mailto:','../')): continue
+        # Screenshots are generated during Pages build from the actual HTML runtime.
+        # Source-only CI validates the authored code before those captures exist.
+        if relative.startswith('assets/screens/') and not (file.parent/relative).exists():
+            continue
         assert (file.parent/relative).exists(),f'Missing relative link: {file}: {relative}'
 print('NORDVENT repo integrity: PASS')
