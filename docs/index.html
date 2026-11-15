@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#061320">
-<meta name="description" content="NORDVENT Engineering Lab — an original smart-building interface explored in HTML and native Qt WebAssembly, with a reverse-engineered HMI design system and engineering case study.">
-<meta property="og:title" content="NORDVENT — One interface. Two engines.">
+<meta name="description" content="NORDVENT is an embedded smart-building HMI engineering project: native Qt/QML/C++ control logic, 800 × 480 visual systems, and an interactive web design reference.">
+<meta property="og:title" content="NORDVENT — Embedded HMI · Qt/QML/C++">
 <meta property="og:description" content="Explore two live HMI implementations, a documented component system and the engineering behind a constrained 800 × 480 interface.">
 <meta property="og:image" content="assets/screens/v17_reference_home.png">
 <title>NORDVENT — Cross-Platform HMI Engineering Lab</title>
@@ -29,11 +29,11 @@
   <div class="section-top"><div><div class="eyebrow">NORDVENT / LIVE ENGINEERING SHOWCASE</div><h2 id="liveHeading">One interface. <em>Two running engines.</em></h2><p class="section-intro">Interact with the original browser HMI and the real Qt/QML/C++ WebAssembly port side by side. Both use an 800 × 480 logical canvas; state is independent and no hardware is connected.</p></div><div class="section-side-note"><span class="thin-rule"></span> TWO INDEPENDENT CODEBASES<br>ONE DESIGN CONTRACT</div></div>
   <div class="lab-toolbar"><div class="view-toggle" role="group" aria-label="Application view"><button type="button" class="is-selected" data-layout="both" aria-pressed="true">Side by side</button><button type="button" data-layout="web" aria-pressed="false">HTML focus</button><button type="button" data-layout="qt" aria-pressed="false">Qt focus</button></div><span class="lab-note"><span class="tiny-dot"></span> Independent simulated control states · No connected hardware</span></div>
   <div class="live-grid" id="labGrid">
-    <article class="runtime-card" id="webCard" aria-labelledby="webCardTitle"><div class="runtime-header"><div class="runtime-index">A</div><div><div class="runtime-caption">RUNTIME / 01</div><h3 id="webCardTitle">Browser native <span>— HTML/CSS/JS</span></h3></div><div class="runtime-status status-on" id="webStatus">● LIVE WEB</div></div>
+    <article class="runtime-card" id="webCard" aria-labelledby="webCardTitle"><div class="runtime-header"><div class="runtime-index">A</div><div><div class="runtime-caption">RUNTIME / 01</div><h3 id="webCardTitle">Original UI prototype <span>— HTML/CSS/JS</span></h3></div><div class="runtime-status status-on" id="webStatus">● LIVE WEB</div></div>
       <div class="runtime-screen" id="webViewport"><iframe id="webApp" src="web/index.html" title="Actual interactive NORDVENT Web v17 application" loading="eager" allow="fullscreen"></iframe></div>
       <div class="runtime-foot"><span>Original v17 · Real application / original interactions</span><div class="inline-actions"><button type="button" id="webRefresh" aria-label="Reset HTML application">↻ Reset</button><button type="button" data-expand="web" aria-label="Show HTML at actual device size">▣ Actual size</button></div></div>
     </article>
-    <article class="runtime-card" id="qtCard" aria-labelledby="qtCardTitle"><div class="runtime-header"><div class="runtime-index">B</div><div><div class="runtime-caption">RUNTIME / 02</div><h3 id="qtCardTitle">Compiled native <span>— Qt/QML/C++</span></h3></div><div class="runtime-status status-idle" id="qtStatus">○ NOT LOADED</div></div>
+    <article class="runtime-card" id="qtCard" aria-labelledby="qtCardTitle"><div class="runtime-header"><div class="runtime-index">B</div><div><div class="runtime-caption">RUNTIME / 02</div><h3 id="qtCardTitle">Native engineering port <span>— Qt/QML/C++</span></h3></div><div class="runtime-status status-idle" id="qtStatus">○ NOT LOADED</div></div>
       <div class="runtime-screen" id="qtViewport"><iframe id="qtApp" title="Real NORDVENT Qt WebAssembly application" allow="fullscreen" loading="lazy"></iframe><div class="wasm-gate" id="wasmGate"><img src="assets/screens/v17_reference_home.png" alt="Original NORDVENT interface reference shown until the Qt WebAssembly runtime loads" width="800" height="480"><div class="wasm-overlay"><span class="wasm-mark">QT / WEBASSEMBLY</span><h4>Real Qt.<br>Inside the browser.</h4><p>No HTML imitation. Compile and run the original QML/C++ interface in this panel.</p><button class="btn btn-primary" id="loadQt" type="button">Load Qt runtime <span aria-hidden="true">→</span></button><small id="qtHint">Starts automatically when the verified Qt WebAssembly bundle is available.</small></div></div></div>
       <div class="runtime-foot"><span id="qtFootStatus">Qt 6.11.2 target · WebAssembly build must be deployed</span><div class="inline-actions"><button type="button" id="qtRefresh" aria-label="Restart Qt runtime">↻ Reset</button><button type="button" data-expand="qt" aria-label="Show Qt at actual device size">▣ Actual size</button></div></div>
     </article>
@@ -46,9 +46,9 @@
 
 <section id="overview" class="hero section-wrap" aria-labelledby="heroTitle">
   <div class="hero-copy">
-    <div class="eyebrow"><span class="signal"></span> A CROSS-PLATFORM HMI EXPERIMENT <span class="eyebrow-separator">/</span> 2026</div>
+    <div class="eyebrow"><span class="signal"></span> EMBEDDED HMI · QT QUICK · C++17 <span class="eyebrow-separator">/</span> 2026</div>
     <h1 id="heroTitle">One interface.<br><em>Two engines.</em><br>Every detail matters.</h1>
-    <p class="hero-lead">A smart-building control experience engineered twice—once for the web, once in Qt/QML/C++. Explore the live implementations, then uncover the design system, motion and engineering decisions behind them.</p>
+    <p class="hero-lead">An 800 × 480 smart-building interface developed in Qt Quick/QML with a C++ controller. Compare the running native port with its original browser prototype, then explore the component architecture, animation paths and MCU engineering constraints.</p>
     <div class="hero-actions"><a class="btn btn-primary" href="#live">Explore both applications <span aria-hidden="true">↘</span></a><a class="btn btn-outline" href="#design">Inspect design system <span aria-hidden="true">↗</span></a></div>
     <div class="hero-facts" aria-label="Project facts"><div><b>800 × 480</b><span>Touchscreen canvas</span></div><div><b>02</b><span>Independent implementations</span></div><div><b>15</b><span>Architectural animation frames</span></div></div>
   </div>
@@ -114,7 +114,7 @@
   <label for="physicalAdjust">Adjust until the line below measures exactly 100 mm with your ruler.</label>
   <div class="physical-ruler"><div id="physicalRuler" class="physical-ruler-line"><span>0</span><span>100 mm</span></div></div>
   <input id="physicalAdjust" type="range" min="50" max="180" value="100" step="1" aria-label="Adjust physical scale of the device">
-  <div class="physical-tools-footer"><span id="physicalPercent">100% nominal CSS scale · calibration required</span><button type="button" id="resetPhysical">Reset scale</button></div>
+  <div class="physical-tools-footer"><button type="button" id="physicalModeToggle">View at 800×480 pixels</button><span id="physicalPercent">100% nominal CSS scale · calibration required</span><button type="button" id="resetPhysical">Reset scale</button></div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
