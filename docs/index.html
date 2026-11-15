@@ -26,21 +26,39 @@
 </header>
 <main id="main">
 <section id="live" class="section-wrap section-block" aria-labelledby="liveHeading">
-  <div class="section-top"><div><div class="eyebrow">NORDVENT / LIVE ENGINEERING SHOWCASE</div><h2 id="liveHeading">One interface. <em>Two running engines.</em></h2><p class="section-intro">Interact with the original browser HMI and the real Qt/QML/C++ WebAssembly port side by side. Both use an 800 × 480 logical canvas; state is independent and no hardware is connected.</p></div><div class="section-side-note"><span class="thin-rule"></span> TWO INDEPENDENT CODEBASES<br>ONE DESIGN CONTRACT</div></div>
+  <div class="section-top"><div><div class="eyebrow">NORDVENT / LIVE ENGINEERING SHOWCASE</div><h2 id="liveHeading">Native HMI. <em>Original reference.</em></h2><p class="section-intro">Explore the Qt/QML/C++ implementation alongside the original interactive HTML design prototype. Both use an 800 × 480 logical canvas; state is independent and no hardware is connected.</p></div><div class="section-side-note"><span class="thin-rule"></span> TWO INDEPENDENT CODEBASES<br>ONE DESIGN CONTRACT</div></div>
   <div class="lab-toolbar"><div class="view-toggle" role="group" aria-label="Application view"><button type="button" class="is-selected" data-layout="both" aria-pressed="true">Side by side</button><button type="button" data-layout="web" aria-pressed="false">HTML focus</button><button type="button" data-layout="qt" aria-pressed="false">Qt focus</button></div><span class="lab-note"><span class="tiny-dot"></span> Independent simulated control states · No connected hardware</span></div>
   <div class="live-grid" id="labGrid">
-    <article class="runtime-card" id="webCard" aria-labelledby="webCardTitle"><div class="runtime-header"><div class="runtime-index">A</div><div><div class="runtime-caption">RUNTIME / 01</div><h3 id="webCardTitle">Original UI prototype <span>— HTML/CSS/JS</span></h3></div><div class="runtime-status status-on" id="webStatus">● LIVE WEB</div></div>
-      <div class="runtime-screen" id="webViewport"><iframe id="webApp" src="web/index.html" title="Actual interactive NORDVENT Web v17 application" loading="eager" allow="fullscreen"></iframe></div>
-      <div class="runtime-foot"><span>Original v17 · Real application / original interactions</span><div class="inline-actions"><button type="button" id="webRefresh" aria-label="Reset HTML application">↻ Reset</button><button type="button" data-expand="web" aria-label="Show HTML at actual device size">▣ Actual size</button></div></div>
-    </article>
-    <article class="runtime-card" id="qtCard" aria-labelledby="qtCardTitle"><div class="runtime-header"><div class="runtime-index">B</div><div><div class="runtime-caption">RUNTIME / 02</div><h3 id="qtCardTitle">Native engineering port <span>— Qt/QML/C++</span></h3></div><div class="runtime-status status-idle" id="qtStatus">○ NOT LOADED</div></div>
+    <article class="runtime-card" id="qtCard" aria-labelledby="qtCardTitle"><div class="runtime-header"><div class="runtime-index">A</div><div><div class="runtime-caption">RUNTIME / 01</div><h3 id="qtCardTitle">Native engineering port <span>— Qt/QML/C++</span></h3></div><div class="runtime-status status-idle" id="qtStatus">○ NOT LOADED</div></div>
       <div class="runtime-screen" id="qtViewport"><iframe id="qtApp" title="Real NORDVENT Qt WebAssembly application" allow="fullscreen" loading="lazy"></iframe><div class="wasm-gate" id="wasmGate"><img src="assets/screens/v17_reference_home.png" alt="Original NORDVENT interface reference shown until the Qt WebAssembly runtime loads" width="800" height="480"><div class="wasm-overlay"><span class="wasm-mark">QT / WEBASSEMBLY</span><h4>Real Qt.<br>Inside the browser.</h4><p>No HTML imitation. Compile and run the original QML/C++ interface in this panel.</p><button class="btn btn-primary" id="loadQt" type="button">Load Qt runtime <span aria-hidden="true">→</span></button><small id="qtHint">Starts automatically when the verified Qt WebAssembly bundle is available.</small></div></div></div>
       <div class="runtime-foot"><span id="qtFootStatus">Qt 6.11.2 target · WebAssembly build must be deployed</span><div class="inline-actions"><button type="button" id="qtRefresh" aria-label="Restart Qt runtime">↻ Reset</button><button type="button" data-expand="qt" aria-label="Show Qt at actual device size">▣ Actual size</button></div></div>
     </article>
+    <article class="runtime-card" id="webCard" aria-labelledby="webCardTitle"><div class="runtime-header"><div class="runtime-index">B</div><div><div class="runtime-caption">RUNTIME / 02</div><h3 id="webCardTitle">Original UI prototype <span>— HTML/CSS/JS</span></h3></div><div class="runtime-status status-on" id="webStatus">● LIVE WEB</div></div>
+      <div class="runtime-screen" id="webViewport"><iframe id="webApp" src="web/index.html" title="Actual interactive NORDVENT Web v17 application" loading="eager" allow="fullscreen"></iframe></div>
+      <div class="runtime-foot"><span>Original v17 · Real application / original interactions</span><div class="inline-actions"><button type="button" id="webRefresh" aria-label="Reset HTML application">↻ Reset</button><button type="button" data-expand="web" aria-label="Show HTML at actual device size">▣ Actual size</button></div></div>
+    </article>
   </div>
   <div class="micro-footnote"><strong>Truth in the comparison.</strong> HTML v17 and Qt v17.1 are separate implementations of the same concept, not two skins of one app. The page checks whether the generated WASM binary exists before claiming Qt is available.</div>
-  <div class="inspector-block" id="inspector"><div class="inspector-intro"><div class="eyebrow">DEVELOPER INSPECTOR / HTML SOURCE · NATIVE ENGINEERING BELOW</div><div class="inspector-intro-row"><div><h3>What happens <em>behind the click?</em></h3><p>This is the browser inspector; the native Qt/C++ runtime has its own backend and engineering documentation below. Interact with the HTML HMI above. This panel reads that actual application's state and records locally observed control events—not made-up sensor values or Qt events.</p></div><span class="bridge" id="bridgeStatus">CONNECTING…</span></div><div class="inspector-shortcuts"><span>JUMP TO A VIEW</span><button data-page="home">Home</button><button data-page="rooms">Rooms</button><button data-page="climate">Climate</button><button data-page="energy">Energy</button><button data-page="routines">Routines</button><button data-page="more">More</button></div></div>
-    <div class="inspector-data"><div class="inspector-data-head"><div class="view-toggle small" role="group" aria-label="Inspector view"><button class="is-selected" data-inspect="events">Event trace <span id="eventCount">0</span></button><button data-inspect="state">App state</button><button data-inspect="diff">State changes</button></div><div class="inline-actions"><button id="clearEvents" type="button">Clear</button><button id="copyEvents" type="button">Copy JSON</button></div></div><div class="log-surface"><div class="log-pane" id="eventsPanel"><p class="empty-log">Events will appear here as you use the HTML application.</p></div><pre class="log-pane code-pane" id="statePanel" hidden></pre><pre class="log-pane code-pane" id="diffPanel" hidden></pre></div><div class="inspector-data-foot"><span>READ-ONLY · SAME-ORIGIN SOURCE</span><span id="lastEventTime">AWAITING INTERACTION</span></div></div>
+
+  <div class="native-inspector" id="nativeInspector">
+    <div class="native-inspector-head">
+      <div><div class="eyebrow">QT QUICK / C++17 · NATIVE DIAGNOSTICS</div>
+        <h3>Inside the <em>native runtime.</em></h3>
+        <p>Read-only state published directly by the running C++ backend compiled to WebAssembly. No browser control events and no hardware telemetry.</p>
+      </div>
+      <span id="nativeDiagStatus" class="native-diag-status" role="status">AWAITING NATIVE RUNTIME</span>
+    </div>
+    <div class="native-metric-grid" aria-label="Native runtime state">
+      <div><span>Backend revision</span><strong id="nativeRevision">—</strong></div>
+      <div><span>C++ uptime</span><strong id="nativeUptime">—</strong></div>
+      <div><span>Active view</span><strong id="nativePage">—</strong></div>
+      <div><span>Ventilation flow (simulated)</span><strong id="nativeFlow">—</strong></div>
+      <div><span>Fault flags</span><strong id="nativeFaults">—</strong></div>
+      <div><span>Motion / effects</span><strong id="nativeMotion">—</strong></div>
+    </div>
+    <div class="native-data-head"><div><strong>Controller snapshot</strong><small>Actual Qt/C++ model values · simulated equipment</small></div><button type="button" id="copyNativeState" disabled>Copy native JSON</button></div>
+    <pre class="native-json" id="nativeStateOutput" aria-live="off">Native controller data appears after the verified Qt WebAssembly build starts. Target MCU RAM, heap usage and frame-rate measurements are not available in this browser demo.</pre>
+    <div class="native-notice">Engineering scope: Qt Quick desktop/WebAssembly; hardware-facing firmware, memory budgets on MCU silicon and device acknowledgement remain unverified.</div>
   </div>
 </section>
 
