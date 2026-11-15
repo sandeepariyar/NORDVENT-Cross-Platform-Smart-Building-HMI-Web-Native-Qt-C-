@@ -3,3 +3,6 @@ docs/web/** linguist-generated=true
 # WebAssembly bundles are build outputs if committed in future.
 docs/native/*.wasm linguist-generated=true
 docs/native/*.js linguist-generated=true
+# Bundled and archived source snapshots contain embedded raster media; not primary authored HTML.
+web/NORDVENT_Standalone.html linguist-generated=true
+native-qt/docs/NORDVENT_v17_HTML_REFERENCE.html linguist-generated=true
