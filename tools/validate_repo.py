@@ -13,8 +13,8 @@ assert 'All rights reserved' in (root/'LICENSE.md').read_text(), 'Missing propri
 assert len(list((site/'web/assets/sequence_webp').glob('frame_*.webp'))) == 15, 'Web sequence incomplete'
 assert len(list((root/'native-qt/assets/sequence').glob('frame_*.png'))) == 15, 'Qt sequence incomplete'
 assert len(list((root/'native-qt/assets/lighting').glob('*.png'))) == 8, 'Lighting overlays incomplete'
-assert 'window.__NORDVENT_DEV__' in (site/'web/app.js').read_text(), 'Missing read-only inspector bridge'
-assert 'window.__NORDVENT_DEV__' not in (root/'web/app.js').read_text(), 'Do not mutate original HTML source'
+assert (site/'web/app.js').read_bytes() == (root/'web/app.js').read_bytes(), 'The published HTML prototype must match its original JavaScript'
+assert 'window.__NORDVENT_DEV__' not in (site/'web/app.js').read_text(), 'Unexpected retired HTML inspector bridge'
 for file in (site/'index.html',site/'web/index.html'):
     html=file.read_text(encoding='utf8')
     for relative in re.findall(r'(?:src|href)="([^"]+)"',html):
