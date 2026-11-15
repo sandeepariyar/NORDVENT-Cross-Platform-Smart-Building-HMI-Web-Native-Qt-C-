@@ -10,7 +10,7 @@ let iconManifest=[];let toastTimeout=0;
 const metrics={eventLimit:150};
 
 function notify(message){const el=$('#toast');el.textContent=message;el.classList.add('visible');clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>el.classList.remove('visible'),2100)}
-function fitFrame(iframe,viewport){if(!iframe||!viewport)return;const scale=viewport.clientWidth/800;iframe.style.transform=`scale(${scale})`}
+function fitFrame(iframe,viewport){if(!iframe||!viewport)return;const scale=Math.min(viewport.clientWidth/800,viewport.clientHeight/480);iframe.style.transform=`scale(${scale})`;iframe.style.left=`${Math.max(0,(viewport.clientWidth-800*scale)/2)}px`;iframe.style.top=`${Math.max(0,(viewport.clientHeight-480*scale)/2)}px`}
 function resizeApps(){fitFrame(webFrame,webViewport);fitFrame(qtFrame,qtViewport)}
 if('ResizeObserver' in window){const observer=new ResizeObserver(resizeApps);observer.observe(webViewport);observer.observe(qtViewport)}
 addEventListener('resize',resizeApps);resizeApps();
@@ -34,8 +34,8 @@ $('#loadQt').addEventListener('click',loadQt);
 addEventListener('message',event=>{if(event.origin!==location.origin||event.source!==qtFrame.contentWindow)return;const value=event.data||{};
   if(value.type==='NORDVENT_WASM_READY'){qtReady=true;updateQtStatus('● QT RUNTIME ACTIVE','on');$('#qtFootStatus').textContent='Real compiled Qt Quick / QML / C++17 · browser simulation'}
   if(value.type==='NORDVENT_WASM_ERROR'||value.type==='NORDVENT_WASM_EXIT'){qtReady=false;updateQtStatus('● QT RUNTIME ERROR','error');$('#qtFootStatus').textContent=String(value.message||'Qt runtime failed; inspect browser console').slice(0,130)}});
-// Proactive status only; actual native runtime waits for a user gesture to conserve memory.
-qtBinaryPresent().then(ok=>{if(!ok&&!qtStarted){updateQtStatus('○ BUILD NOT DEPLOYED','idle');$('#qtFootStatus').textContent='QML/C++ source exists · Generated WebAssembly not yet published';$('#qtHint').textContent='Deploy the GitHub Actions Qt build to activate this panel.'}});
+// The live Qt/WebAssembly port auto-starts when deployed. A missing binary is never represented by a screenshot labelled live.
+qtBinaryPresent().then(ok=>{if(ok){loadQt()}else if(!qtStarted){updateQtStatus('○ BUILD NOT DEPLOYED','idle');$('#qtFootStatus').textContent='QML/C++ source exists · Generated WebAssembly not yet published';$('#qtHint').textContent='Deploy the GitHub Actions Qt build to activate this panel.'}});
 
 // Source-linked instrumentation, not a synthetic second simulation.
 function snapshot(){try{return webWin?.__NORDVENT_DEV__?.snapshot()||null}catch{return null}}
