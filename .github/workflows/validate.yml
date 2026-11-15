@@ -5,16 +5,21 @@ on:
   pull_request:
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - name: Node syntax checks
+      - name: Recover original NORDVENT imagery
         run: |
+          python3 -m pip install 'Pillow>=11,<13' 'CairoSVG>=2.7,<3' 'beautifulsoup4>=4.12,<5'
+          python3 scripts/rebuild_assets_from_standalone.py --with-doc-icons
+          python3 native-qt/tests/check_project.py
+          python3 native-qt/tests/check_animation_routes.py
+      - name: Validate repository and JavaScript
+        run: |
+          python3 tools/validate_repo.py
           node --check docs/lab.js
           node --check docs/web/app.js
           node --check web/app.js
-      - name: Source and Pages asset validation
-        run: python3 tools/validate_repo.py
       - name: Configure C++ core
         run: cmake -S native-qt/core -B build/core -DCMAKE_BUILD_TYPE=Release
       - name: Build C++ core
