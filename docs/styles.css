@@ -33,3 +33,14 @@
 .actual-hardware-photo{position:absolute;width:83%;height:83%;object-fit:contain;inset:8.5%;opacity:.22;filter:saturate(.58) contrast(1.18) blur(3px);mix-blend-mode:screen;z-index:0;pointer-events:none}
 .device-board,.hardware-device{z-index:2}.hardware-reference{opacity:.3;filter:saturate(.75) contrast(1.1) blur(1px)}
 @media (prefers-reduced-motion:reduce){.actual-hardware-photo{filter:saturate(.58)}}
+
+/* Primary live demonstration, always above the design narrative. */
+#live{padding-top:20px;padding-bottom:60px}#live>.section-top{margin-bottom:12px;align-items:center}#live .section-top h2{font-size:clamp(25px,3vw,40px);margin:4px 0}#live .section-intro{font-size:12px;line-height:1.5}#live .lab-toolbar{margin-bottom:10px}#live .runtime-header{min-height:55px;padding:9px 12px}#live .runtime-foot{min-height:42px;padding:8px 11px}#live .live-grid{gap:12px}
+.physical-mask{position:fixed;inset:0;background:#010a12df;z-index:900}.physical-mask[hidden],.physical-tools[hidden]{display:none}body.physical-open{overflow:hidden}
+.runtime-card.physical-active{position:fixed;z-index:901;left:50%;top:40%;transform:translate(-50%,-50%);width:var(--physical-width);max-width:none;border:1px solid #5a9fab;border-radius:4px;overflow:visible;box-shadow:0 22px 90px #000a}
+.runtime-card.physical-active .runtime-header,.runtime-card.physical-active .runtime-foot{display:none}.runtime-card.physical-active .runtime-screen{width:var(--physical-width);height:var(--physical-height);aspect-ratio:auto;max-height:none}
+.runtime-card.physical-active .runtime-screen iframe{left:0!important;top:0!important;transform:scale(var(--physical-scale))!important}
+.physical-tools{position:fixed;z-index:902;bottom:12px;left:50%;transform:translateX(-50%);width:min(630px,calc(100vw - 24px));padding:12px 16px;border-radius:12px;background:#102733;border:1px solid #46727d;box-shadow:0 15px 60px #000b;color:#dceef2;font-size:12px}
+.physical-tools-head,.physical-tools-footer{display:flex;justify-content:space-between;align-items:center;gap:10px}.physical-tools button{background:#143644;color:#d6f6f8;border:1px solid #486d79;border-radius:5px;padding:6px 12px}.physical-tools p{color:#a7c7d0;line-height:1.45;margin:7px 0}.physical-tools label{display:block;font-size:11px;margin-bottom:5px}
+.physical-ruler{overflow-x:auto;max-width:100%;padding:5px 0 10px}.physical-ruler-line{height:25px;border-bottom:2px solid #7be9e9;display:flex;justify-content:space-between;align-items:end;font:10px Consolas,monospace;white-space:nowrap}.physical-tools input{width:100%;accent-color:#63e5e7}.physical-tools-footer{font-size:10px;color:#a6c8d2}.physical-tools.pixel-mode .physical-ruler,.physical-tools.pixel-mode label,.physical-tools.pixel-mode input{display:none}
+@media(max-width:900px){#live{padding-top:16px}.physical-tools{bottom:5px}}
