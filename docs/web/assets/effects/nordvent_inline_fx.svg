@@ -1,0 +1,58 @@
+<svg class="effect-svg" id="effectSvg" viewBox="0 0 800 352" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<defs>
+  <filter id="glowC" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="1.9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="glowA" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="2.0" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="glowV" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="0.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <linearGradient id="slatTint"><stop stop-color="#6c66d5" stop-opacity=".48"/><stop offset=".55" stop-color="#a09bf6" stop-opacity=".40"/><stop offset="1" stop-color="#6d66d8" stop-opacity=".56"/></linearGradient>
+  <linearGradient id="slatStroke" x1="0" x2="1" y1="0" y2="0"><stop stop-color="#c0aeff" stop-opacity=".22"/><stop offset=".5" stop-color="#d6ceff" stop-opacity=".96"/><stop offset="1" stop-color="#a18dff" stop-opacity=".35"/></linearGradient>
+  <linearGradient id="airJet" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#46f7ff" stop-opacity=".72"/><stop offset="1" stop-color="#46f7ff" stop-opacity="0"/></linearGradient>
+  <clipPath id="clip-bedroom"><rect id="blind-bedroom" x="380" y="80" width="0" height="64"/></clipPath>
+  <clipPath id="clip-living"><rect id="blind-living" x="381" y="157" width="0" height="67"/></clipPath>
+  <clipPath id="clip-kitchen"><rect id="blind-kitchen" x="381" y="238" width="0" height="71"/></clipPath>
+</defs>
+<!-- Independent cyan ventilation: rooftop fan, real right-side riser, then ceiling diffusers. -->
+<g class="fx fx-air" id="airFx">
+  <path class="duct-casing" d="M661 42H700Q713 42 714 55V84Q714 91 706 91H548Q538 91 538 98V104 M714 90V168H548Q538 168 538 176V182 M714 168V246H549Q538 246 538 253V261"/>
+  <path class="air-pipe" d="M661 42H700Q713 42 714 55V84Q714 91 706 91H548Q538 91 538 98V104 M714 90V168H548Q538 168 538 176V182 M714 168V246H549Q538 246 538 253V261"/>
+  <path class="air-moving" d="M661 42H700Q713 42 714 55V84Q714 91 706 91H548Q538 91 538 98V104 M714 90V168H548Q538 168 538 176V182 M714 168V246H549Q538 246 538 253V261"/>
+  <g class="vent-outlets">
+    <g transform="translate(552 92)"><path class="outlet-head" d="M-9 0H9l3 4h-24z"/><path class="outlet-arrow" d="M-6 7v17m-3-5 3 5 3-5M0 7v19m-3-5 3 5 3-5M6 7v17m-3-5 3 5 3-5"/><path class="air-mist" d="M-14 6h28l10 24h-48z"/></g>
+    <g transform="translate(646 92)"><path class="outlet-head" d="M-9 0H9l3 4h-24z"/><path class="outlet-arrow" d="M-6 7v17m-3-5 3 5 3-5M0 7v19m-3-5 3 5 3-5M6 7v17m-3-5 3 5 3-5"/><path class="air-mist" d="M-14 6h28l10 24h-48z"/></g>
+    <g transform="translate(556 169)"><path class="outlet-head" d="M-9 0H9l3 4h-24z"/><path class="outlet-arrow" d="M-6 7v16m-3-5 3 5 3-5M0 7v19m-3-5 3 5 3-5M6 7v16m-3-5 3 5 3-5"/><path class="air-mist" d="M-14 6h28l10 24h-48z"/></g>
+    <g transform="translate(643 169)"><path class="outlet-head" d="M-9 0H9l3 4h-24z"/><path class="outlet-arrow" d="M-6 7v16m-3-5 3 5 3-5M0 7v19m-3-5 3 5 3-5M6 7v16m-3-5 3 5 3-5"/><path class="air-mist" d="M-14 6h28l10 24h-48z"/></g>
+    <g transform="translate(553 246)"><path class="outlet-head" d="M-9 0H9l3 4h-24z"/><path class="outlet-arrow" d="M-6 7v17m-3-5 3 5 3-5M0 7v19m-3-5 3 5 3-5M6 7v17m-3-5 3 5 3-5"/><path class="air-mist" d="M-14 6h28l10 24h-48z"/></g>
+    <g transform="translate(640 246)"><path class="outlet-head" d="M-9 0H9l3 4h-24z"/><path class="outlet-arrow" d="M-6 7v17m-3-5 3 5 3-5M0 7v19m-3-5 3 5 3-5M6 7v17m-3-5 3 5 3-5"/><path class="air-mist" d="M-14 6h28l10 24h-48z"/></g>
+  </g>
+  <g class="turbine" id="turbine" transform="translate(628 37)"><circle r="17" class="fan-ring"/><g class="fan-blades"><path d="M0-2C-15-20-3-22 2-16Q9-8 2 0C17-10 24 2 16 7Q7 11 1 2C8 22-5 25-10 16Q-12 7-1 1Z"/><circle r="3"/></g></g>
+</g>
+<!-- Two physically separate counterflow indicators confined to the roof unit, not a room. -->
+<g class="fx fx-recovery" id="recoveryFx"><path class="recovery-cyan" d="M534 32H581"/><path class="recovery-amber" d="M581 40H534"/></g>
+<!-- Warm-water circuit stays at the basement utility equipment and embedded kitchen floor. -->
+<g class="fx fx-heat" id="heatFx">
+  <path class="heat-base" d="M689 261v-8h-15v15h-9v19h-11v7M687 278v24h-33M630 301H468Q442 301 442 306Q442 313 466 313H622Q636 313 636 307Q636 300 619 300H483"/>
+  <path class="heat-running" d="M689 261v-8h-15v15h-9v19h-11v7M687 278v24h-33M630 301H468Q442 301 442 306Q442 313 466 313H622Q636 313 636 307Q636 300 619 300H483"/>
+  <circle class="heat-pump-dot" cx="688" cy="280" r="2.5"/>
+</g>
+<!-- Vertical slat blinds, exactly masked to the three left-hand glazing bays. The
+     percent command changes mask WIDTH: slats slide laterally, never fill a room. -->
+<g class="fx fx-blind" id="blindFx">
+  <g id="bank-bedroom" class="blind-bank" clip-path="url(#clip-bedroom)">
+    <rect x="380" y="80" width="33" height="64" fill="url(#slatTint)"/>
+    <path class="blind-slat" d="M382 80V144 M384.6 80V144 M387.2 80V144 M389.8 80V144 M392.4 80V144 M395 80V144 M397.6 80V144 M400.2 80V144 M402.8 80V144 M405.4 80V144 M408 80V144 M410.6 80V144"/>
+  </g>
+  <g id="bank-living" class="blind-bank" clip-path="url(#clip-living)">
+    <rect x="381" y="157" width="33" height="67" fill="url(#slatTint)"/>
+    <path class="blind-slat" d="M383 157V224 M385.6 157V224 M388.2 157V224 M390.8 157V224 M393.4 157V224 M396 157V224 M398.6 157V224 M401.2 157V224 M403.8 157V224 M406.4 157V224 M409 157V224 M411.6 157V224"/>
+  </g>
+  <g id="bank-kitchen" class="blind-bank" clip-path="url(#clip-kitchen)">
+    <rect x="381" y="238" width="33" height="71" fill="url(#slatTint)"/>
+    <path class="blind-slat" d="M383 238V309 M385.6 238V309 M388.2 238V309 M390.8 238V309 M393.4 238V309 M396 238V309 M398.6 238V309 M401.2 238V309 M403.8 238V309 M406.4 238V309 M409 238V309 M411.6 238V309"/>
+  </g>
+  <path id="blind-edge-bedroom" class="blind-edge" d="M380 80V144"/>
+  <path id="blind-edge-living" class="blind-edge" d="M381 157V224"/>
+  <path id="blind-edge-kitchen" class="blind-edge" d="M381 238V309"/>
+</g>
+<!-- Room callouts connect to actual room interiors, never float over the structure. -->
+<g class="leader-lines" id="leaderLines"><path d="M403 112h16l13 11h25"/><circle cx="457" cy="123" r="2.6"/><path d="M402 188h20l14 13h23"/><circle cx="459" cy="201" r="2.6"/><path d="M403 269h17l12 12h25"/><circle cx="457" cy="281" r="2.6"/></g>
+<g id="roomFocusFx" class="focus-svg"><rect id="focusFill" x="380" y="75" width="344" height="73" rx="4"/><rect id="focusStroke" x="380" y="75" width="344" height="73" rx="4"/><path id="focusTop" d="M381 75h38m-38 0v18m343-18h-38m38 0v18"/></g>
+</svg>

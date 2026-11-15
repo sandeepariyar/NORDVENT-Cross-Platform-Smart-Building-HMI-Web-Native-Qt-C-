@@ -1,0 +1,133 @@
+{
+  "canvas": [
+    800,
+    352
+  ],
+  "photographicMaster": [
+    1672,
+    941
+  ],
+  "render": "base plus separately positioned transparent light overlays",
+  "fixtures": [
+    {
+      "id": "bedroom_ceiling",
+      "room": "bedroom",
+      "name": "Ceiling spotlights",
+      "on": "assets/lighting/bedroom_ceiling_on.png",
+      "off": "base image only (no overlay)",
+      "left": 398,
+      "top": 62,
+      "width": 318,
+      "height": 92,
+      "center": [
+        530.1136363636364,
+        84.16578108395323
+      ]
+    },
+    {
+      "id": "bedroom_left_lamp",
+      "room": "bedroom",
+      "name": "Left bedside lamp",
+      "on": "assets/lighting/bedroom_left_lamp_on.png",
+      "off": "base image only (no overlay)",
+      "left": 403,
+      "top": 65,
+      "width": 225,
+      "height": 92,
+      "center": [
+        503.57356459330146,
+        120.45058448459086
+      ]
+    },
+    {
+      "id": "bedroom_right_lamp",
+      "room": "bedroom",
+      "name": "Right bedside lamp",
+      "on": "assets/lighting/bedroom_right_lamp_on.png",
+      "off": "base image only (no overlay)",
+      "left": 469,
+      "top": 65,
+      "width": 239,
+      "height": 91,
+      "center": [
+        590.296052631579,
+        120.45058448459086
+      ]
+    },
+    {
+      "id": "living_ceiling",
+      "room": "living",
+      "name": "Ceiling spots",
+      "on": "assets/lighting/living_ceiling_on.png",
+      "off": "base image only (no overlay)",
+      "left": 390,
+      "top": 144,
+      "width": 327,
+      "height": 89,
+      "center": [
+        539.4587320574162,
+        163.46865037194473
+      ]
+    },
+    {
+      "id": "living_floor_lamp",
+      "room": "living",
+      "name": "Reading floor lamp",
+      "on": "assets/lighting/living_floor_lamp_on.png",
+      "off": "base image only (no overlay)",
+      "left": 417,
+      "top": 146,
+      "width": 296,
+      "height": 91,
+      "center": [
+        581.6985645933014,
+        194.51647183846973
+      ]
+    },
+    {
+      "id": "kitchen_pendants",
+      "room": "kitchen",
+      "name": "Dining pendants",
+      "on": "assets/lighting/kitchen_pendants_on.png",
+      "off": "base image only (no overlay)",
+      "left": 399,
+      "top": 223,
+      "width": 236,
+      "height": 94,
+      "center": [
+        499.0879186602871,
+        248.75664187035068
+      ]
+    },
+    {
+      "id": "kitchen_cabinets",
+      "room": "kitchen",
+      "name": "Counter lights",
+      "on": "assets/lighting/kitchen_cabinets_on.png",
+      "off": "base image only (no overlay)",
+      "left": 425,
+      "top": 224,
+      "width": 216,
+      "height": 92,
+      "center": [
+        586.1842105263158,
+        268.5823591923486
+      ]
+    },
+    {
+      "id": "utility_worklight",
+      "room": "utility",
+      "name": "Utility room light",
+      "on": "assets/lighting/utility_worklight_on.png",
+      "off": "base image only (no overlay)",
+      "left": 623,
+      "top": 223,
+      "width": 113,
+      "height": 94,
+      "center": [
+        675.8971291866028,
+        260.3528161530287
+      ]
+    }
+  ]
+}

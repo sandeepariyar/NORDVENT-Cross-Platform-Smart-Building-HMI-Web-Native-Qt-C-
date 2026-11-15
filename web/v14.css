@@ -1,0 +1,84 @@
+/* NORDVENT v14 — visual language for systems + compact diagnostics */
+.fx-air.on{opacity:var(--air-strength,.65)!important}
+.workspace[data-flow="boost"] .fx-air.on{opacity:1!important;filter:drop-shadow(0 0 2px #b3ffff)}
+.workspace[data-flow="boost"] .air-pipe{stroke:#96f7ff;stroke-width:4;opacity:.83}
+.workspace[data-flow="boost"] .air-moving{stroke:#e0ffff;stroke-width:3.2;filter:drop-shadow(0 0 3px #c6ffff)}
+.workspace[data-flow="boost"] .air-mist{opacity:.65;fill:#a9f8ff}
+.workspace[data-flow="boost"] .outlet-arrow{stroke:#dfffff;stroke-width:1.7;opacity:1}
+.workspace[data-flow="eco"] .air-pipe{stroke:#22848b;opacity:.3;stroke-width:2}
+.workspace[data-flow="eco"] .air-moving{stroke:#61cad3;opacity:.4;stroke-width:1.2}
+.workspace[data-flow="eco"] .air-mist{opacity:.035}
+.workspace[data-flow="iaq"] .air-pipe,.workspace[data-flow="iaq"] .air-moving{stroke:#9df5e4}
+.workspace[data-flow="manual"] .air-pipe{stroke:var(--air-hue);opacity:calc(.22 + var(--air-strength) * .58)}
+.workspace[data-flow="manual"] .air-moving{opacity:var(--air-strength)}
+.fx-air.boost-surge.on{animation:boostArrival .8s ease-out 1}
+@keyframes boostArrival{0%{filter:brightness(.8)}30%{filter:brightness(2)}100%{filter:brightness(1)}}
+.fx-water{opacity:0;transition:opacity .25s}
+.fx-water.on{opacity:.95}
+.water-base,.water-moving{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.water-base{stroke:#2b6fa8;stroke-width:6;opacity:.4}
+.water-moving{stroke:#71A9FF;stroke-width:3;stroke-dasharray:6 8;animation:flow 2.7s linear infinite}
+.water-indicator{fill:#a4d3ff}
+.fx-defrost{opacity:0;transition:opacity .3s}
+.fx-defrost.on{opacity:.9}
+.defrost-ring{fill:none;stroke:#7dbdff;stroke-width:2;stroke-dasharray:5 7;animation:selection 5s linear infinite}
+.defrost-snow{fill:none;stroke:#b6e1ff;stroke-width:1.8;stroke-linecap:round}
+.fault-marker{opacity:0;transition:opacity .25s;pointer-events:none}
+.fault-marker.active{opacity:1}
+.fault-marker circle{fill:#0c2940e8;stroke:#73b6fa;stroke-width:2}
+.fault-marker path{fill:none;stroke:#9bcfff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.fault-marker.critical circle{fill:#53262ce5;stroke:#ff636b}
+.fault-marker.critical path{stroke:#ffd6d7}
+.fault-marker.warning circle{fill:#3b2b21e5;stroke:#ffc27b}
+.fault-marker.warning path{stroke:#ffe0bb}
+.fault-marker.notice circle{stroke:#82bdcd}
+.fault-marker.frost circle{stroke:#90baff}
+.health-chip{position:absolute;top:56px;right:12px;z-index:25;min-height:28px;max-width:180px;display:flex;align-items:center;gap:6px;padding:5px 10px;border-radius:16px;border:1px solid #78c7b24b;background:#061e2ccc;color:#baf8df;font-size:9px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;backdrop-filter:blur(6px);pointer-events:auto;cursor:pointer}
+.health-chip .health-led{height:6px;width:6px;flex:none;border-radius:50%;background:#80d9af;box-shadow:0 0 5px #71de9a}
+.health-chip[data-level="critical"]{color:#fff0eb;border-color:#f58b88a8;background:#3b1b26ed}
+.health-chip[data-level="critical"] .health-led{background:#ff6262;box-shadow:0 0 5px #ff6666}
+.health-chip[data-level="warning"]{color:#ffe3bd;border-color:#dea96d7d}
+.health-chip[data-level="warning"] .health-led{background:#f1b86f;box-shadow:none}
+.health-chip[data-level="notice"]{color:#c7dbea;border-color:#7d9dad7d}
+.health-chip[data-level="notice"] .health-led{background:#9bbac8;box-shadow:none}
+.health-chip .health-arrow{font-size:15px;opacity:.65;line-height:1}
+.security-overlay .header-action.state-confirm{animation:securityConfirm .7s ease-out}
+@keyframes securityConfirm{0%{box-shadow:0 0 0 0 #73fbe3a8}75%{box-shadow:0 0 0 8px #73fbe300}100%{box-shadow:none}}
+.security-overlay .header-action.unlocked{box-shadow:inset 0 0 0 1px #dbaa7180,0 4px 14px #0009}
+.security-overlay .header-action.armed{box-shadow:inset 0 0 0 1px #81dbb280,0 4px 14px #0009}
+.more-v13{width:281px}
+.more-tabs-v13{grid-template-columns:repeat(4,minmax(0,1fr));gap:3px;margin:7px 0 10px}
+.more-tabs-v13 button{height:31px;font-size:9px;padding:0 2px}
+.health-headline{display:flex;align-items:center;justify-content:space-between;min-height:33px;border-bottom:1px solid #91bfc12b;font-size:12px;gap:5px}
+.health-headline b{font-size:11px;color:#b9f4d6}.health-headline.has-alerts b{color:#fbd6ac}
+.health-headline small{font-size:8px;color:#8fb5c1}
+.health-list{height:auto;min-height:38px;max-height:106px;overflow:clip;margin:4px 0}
+.health-item{height:35px;display:flex;align-items:flex-start;justify-content:center;flex-direction:column;gap:2px;border-bottom:1px solid #c8e8f012}
+.health-item b{font-size:10px;color:#ffdfb3;font-weight:690}.health-item small{font-size:9px;color:#a7c4ce}
+.health-item.critical b{color:#ff9b9b}.health-item.ok b{color:#91dbbd}
+.health-data{display:grid;grid-template-columns:1fr 1fr;gap:7px 6px;padding-top:9px;font-size:9px;color:#afcdd9}
+.health-data span{min-width:0;white-space:nowrap}
+.health-action{width:100%;margin-top:11px;height:34px;font-size:10px}
+.demo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:8px 0 9px}
+.demo-chip{min-height:37px;border:1px solid #8bc3cb33;border-radius:7px;background:#17394a88;color:#daf1fa;font-size:10px;font-weight:630}
+.demo-chip:focus-visible{outline:2px solid #7ce4e4;outline-offset:1px}
+.demo-reset{height:33px;width:100%;font-size:10px}
+.health-dialog-list{display:flex;flex-direction:column;gap:4px}
+.health-dialog-row{padding:7px 8px;display:flex;justify-content:space-between;align-items:center;gap:12px;background:#17374a66;border-left:2px solid #8baeba;border-radius:4px}
+.health-dialog-row.critical{border-color:#ff6c77}.health-dialog-row.warning{border-color:#f8b16c}.health-dialog-row.ok{border-color:#8ddbb1}
+.health-dialog-row b{font-size:10px}.health-dialog-row small{font-size:9px;color:#a1c7d2}
+.health-dialog-buttons{display:flex;gap:7px;margin:10px 0 5px}.health-dialog-buttons button{flex:1;height:32px;font-size:10px}
+.full-boost.boost-active{background:#d8fbff!important;color:#074457!important}
+.workspace[data-page="energy"] #waterFx.on{opacity:1}
+.workspace[data-page="energy"] #heatFx.on{opacity:.73}
+.reduce-motion .fx-air.boost-surge,.reduce-motion .water-moving,.reduce-motion .defrost-ring,.reduce-motion .header-action.state-confirm{animation:none!important}
+
+/* Fit the full Energy / Climate content above fixed nav with no clipped footer. */
+.energy-v13 .energy-strips{margin:11px 0 8px}
+.energy-v13 .energy-mini-legend{margin-bottom:9px}
+.energy-v13 .thin-switch{min-height:38px}
+.energy-v13 .energy-fan-reading{padding-top:7px}
+.energy-v13 .inline-note{margin-top:3px;font-size:8.5px}
+.climate-v13 .vent-modes{margin:8px 0}
+.climate-v13 .thin-switch{min-height:37px}
+.climate-v13 .full-boost{margin-top:8px}

@@ -1,0 +1,173 @@
+/* NORDVENT v13: 800 x 480 locked MCU layout. No scrolling, no off-canvas drawers. */
+:root{--cyan:#60e9e6;--amber:#f7bc76}
+html,body,#viewport,.device,.workspace,.view,.room-view{overflow:hidden!important}
+.device{width:800px!important;height:480px!important}
+.workspace{height:375px!important}
+/* Architectural base stays visible to the right of a single contextual panel. */
+.workspace[data-page="rooms"] .art,.workspace[data-page="climate"] .art,.workspace[data-page="energy"] .art{transform:translate(0,0) scale(1)!important;filter:brightness(.91) saturate(1.04)!important}
+.workspace[data-page="routines"] .art,.workspace[data-page="more"] .art{opacity:.82!important;filter:brightness(.64)!important}
+.workspace[data-page="home"].focused .art{transform:translate(-44px,var(--zoom-y,0px)) scale(1.13)!important;filter:brightness(.92)!important}
+.workspace.focused .fx-blind{opacity:.82}
+.workspace.focused .room-view{display:block;z-index:12}
+.workspace.focused .view{display:none}
+.workspace.focused .hotspots{display:none}
+/* One side-panel visual language shared across all views. */
+.side-panel,.room-side{position:absolute;left:0;top:0;width:228px;height:375px;overflow:hidden;background:linear-gradient(90deg,#061a2bfa 0%,#092737f7 94%,#092737df 100%);padding:19px 15px 12px;backdrop-filter:blur(5px);box-shadow:9px 0 22px #020d1944;border:0;border-radius:0;pointer-events:auto;color:#e5f7fb}
+.side-kicker{display:block;font-size:8px;letter-spacing:1.3px;font-weight:780;color:#79d3d8;line-height:12px}
+.side-titleline{display:flex;align-items:baseline;justify-content:space-between;margin-top:5px;min-height:40px;gap:8px}
+.side-titleline h2{font-size:24px;font-weight:690;letter-spacing:-.8px;line-height:1.2;margin:0}
+.side-titleline small{font-size:10px;color:#91b9c6;white-space:nowrap}
+.inline-note{font-size:9px;color:#85afbd;line-height:1.3;margin:7px 0 0}
+/* Four compact room-image selectors, vertical single column. */
+.rooms-v13{width:238px}
+.rooms-v13-list{display:flex;flex-direction:column;gap:7px;margin-top:5px}
+.room-pick{height:64px;display:grid;grid-template-columns:50px minmax(0,1fr) 36px 5px;gap:7px;align-items:center;min-width:0;padding:4px 7px 4px 4px;text-align:left;border:0;border-radius:8px;background:linear-gradient(90deg,#173b4b90,#071c2f9a);color:#e4f7fc;transition:background .2s,transform .18s;cursor:pointer}
+.room-pick:active{transform:scale(.97)}.room-pick:hover,.room-pick:focus-visible{background:#17475b;outline:1px solid #70e5df}
+.room-pick-icon{height:50px;width:50px;object-fit:cover;border-radius:7px;pointer-events:none}
+.room-pick-copy{display:flex;flex-direction:column;gap:5px;min-width:0}
+.room-pick-copy b{font-size:11.5px;font-weight:720;white-space:nowrap;line-height:1.05}
+.room-pick-copy small{font-size:8.5px;color:#95bcc9;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.room-pick>strong{font-size:13px;font-weight:740;white-space:nowrap;font-variant-numeric:tabular-nums}
+.room-pick-chevron{color:#82cbd3;font-size:17px}
+.rooms-v13-foot{display:flex;gap:7px;align-items:center;margin-top:13px;color:#93b6c2;font-size:9px;white-space:nowrap}
+.foot-pulse{height:5px;width:5px;border-radius:50%;background:#56e2df;box-shadow:0 0 6px #5df6e7;flex:none}
+/* Selected room uses the exact same LEFT position as Home; never hides the house. */
+.room-side{width:228px;padding:13px 14px 10px;animation:panelEnter .22s ease-out both}
+@keyframes panelEnter{from{opacity:.7;transform:translateX(-9px)}to{opacity:1;transform:translateX(0)}}
+.room-side-header{display:flex;justify-content:space-between;align-items:center;height:26px}
+.room-exit{display:grid;place-items:center;width:31px;height:29px;border:0;border-radius:7px;background:#ffffff16;color:#d4f4fb}
+.room-exit .ico{width:15px;height:15px}
+.room-side h2{font-size:22px;font-weight:710;letter-spacing:-.65px;margin:3px 0 5px;white-space:nowrap}
+.room-data{height:39px;display:flex;justify-content:space-between;align-items:center;gap:6px}
+.room-data strong{font-size:20px;font-weight:730;font-variant-numeric:tabular-nums}
+.room-data span{text-align:right;font-size:9px;line-height:1.35;color:#90b7c6}
+.room-mini-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:3px;margin:5px 0 10px}
+.room-mini-nav button{min-width:0;height:30px;border:0;border-radius:5px;padding:0 1px;background:#0c2f40;color:#8caebb;font-size:9px;font-weight:660}
+.room-mini-nav button.active{background:#52e0db31;color:#adfffb;box-shadow:inset 0 -2px #69e9e3}
+.room-action-block{border-top:1px solid #92bdc127;padding:7px 0 7px;min-height:65px}
+.room-action-block.last{padding-bottom:0}
+.room-action-top{display:flex;align-items:center;justify-content:space-between;height:23px;gap:5px}
+.room-action-top>span{display:flex;align-items:center;gap:6px;font-weight:660;color:#b5d5de;font-size:10px}
+.room-action-top .ico{width:13px;height:13px;color:#f5c58b}
+.room-action-top strong{font-size:15px;font-weight:720;color:#e7f8fa}
+.room-action-top>small{font-size:9px;color:#98b8c6}
+.room-action-top>button{border:0;background:transparent;color:#9ff0eb;font-size:9px;padding:3px 4px}
+.room-action-buttons{display:flex;align-items:center;gap:5px;height:33px;margin-top:2px}
+.room-action-buttons button{height:31px;min-width:35px;border:0;border-radius:6px;color:#dfedf4;background:#ffffff10;font-size:10px;font-weight:690;padding:0 8px;flex:1}
+.room-action-buttons button .ico{width:14px;height:14px}
+.room-action-buttons button.active{background:#52dbd531;color:#9dfff6;box-shadow:inset 0 -2px #6ce3dd}
+.room-action-buttons.two button{flex:1}
+.room-action-buttons.three button{flex:1;padding:0 2px}
+.room-light-buttons button{min-width:34px;flex:0 0 auto}
+.room-light-buttons .range{min-width:25px;flex:1;height:28px}
+/* Minimal Climate and Energy in the same, narrow information strip. */
+.climate-v13,.energy-v13{width:234px}
+.measure-hero{margin-top:2px;height:61px;display:flex;align-items:baseline;gap:7px}
+.measure-hero strong{font-size:44px;line-height:1.25;font-weight:670;letter-spacing:-2px;color:#ecfbff;font-variant-numeric:tabular-nums}
+.measure-hero>span{font-size:13px;color:#6de9e6}
+.measure-hint{font-size:10px;color:#92b8c7;margin-top:-9px;margin-bottom:10px}
+.vent-modes{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin:12px 0}
+.vent-modes button,.more-tabs-v13 button{height:35px;border:0;border-radius:5px;background:#ffffff0d;color:#97bbc7;font-size:10px;font-weight:690}
+.vent-modes button.active,.more-tabs-v13 button.active{background:#43e0dc26;color:#c4fafa;box-shadow:inset 0 -2px #58e2db}
+.thin-switch{min-height:42px;display:flex;align-items:center;justify-content:space-between;gap:5px;border-bottom:1px solid #92b9bc27;font-size:12px;color:#d0e7ed}
+.thin-switch>span{display:flex;align-items:center;gap:7px}
+.thin-switch .ico{width:14px;height:14px;color:#80e4e7}
+.thin-switch .switch{height:32px;min-width:52px;border-radius:7px;font-size:10px}
+.full-boost{height:39px;width:100%;margin-top:12px;font-size:11px}
+.manual-v13{display:flex;align-items:center;gap:6px;height:34px}.manual-v13 input{flex:1;min-width:0}.manual-v13 output{font-size:9px;white-space:nowrap;color:#b3d1d9}
+.energy-strips{display:flex;width:100%;height:11px;overflow:hidden;border-radius:4px;gap:2px;margin:20px 0 9px}
+.energy-strips>span{display:block;min-width:1px;transition:width .4s ease}
+.energy-mini-legend{display:flex;gap:8px;margin-bottom:14px;font-size:8.5px;color:#b7cad4}
+.energy-mini-legend span{display:flex;align-items:center;gap:3px}.energy-mini-legend i{height:6px;width:6px;border-radius:50%}
+.energy-fan-reading{display:flex;align-items:center;justify-content:space-between;padding-top:13px;font-size:11px;color:#99c0cb}
+.energy-fan-reading span{display:flex;align-items:center;gap:6px}.energy-fan-reading .ico{width:13px;height:13px}
+.energy-fan-reading strong{font-size:11px;color:#e1f8fa;font-weight:700}.energy-fan-reading strong small{font-size:9px;color:#86abb7}
+.energy-flow.v11-flow{display:none!important}
+/* Routines as a short three-row timeline. */
+.routines-v13{width:263px}
+.routine-add{height:31px;padding:0 11px;display:flex;align-items:center;gap:5px;border:0;border-radius:16px;background:#3be0dc24;color:#bafff7;font-size:11px;font-weight:690}
+.routine-add:disabled{opacity:.35}.routine-add .ico{width:13px;height:13px}
+.routine-list-v13{margin-top:12px}.routine-item{height:65px;display:grid;grid-template-columns:43px minmax(0,1fr) 35px 25px;align-items:center;gap:7px;border-bottom:1px solid #c5e2e122}
+.routine-time{font-size:12px;color:#f1fbff;font-weight:760;letter-spacing:-.25px;font-variant-numeric:tabular-nums}
+.routine-label{display:flex;flex-direction:column;gap:4px;min-width:0}.routine-label b{font-size:10px;color:#d9f6fa;font-weight:700;white-space:nowrap}.routine-label small{font-size:9px;color:#88acb9;white-space:nowrap}
+.routine-toggle-v13{height:30px;padding:0 2px;border:0;border-radius:6px;background:#ffffff0e;color:#95b7c2;font-size:10px}
+.routine-toggle-v13.on{background:#4bdad326;color:#a9fff6}
+.routine-edit-v13{border:0;background:transparent;color:#a2ced6;font-size:19px;padding:0}
+.routines-foot{font-size:9px;color:#90b2be;margin-top:17px}.routines-empty{font-size:11px;color:#96b7c4;margin-top:18px}
+/* More: advanced content is secondary and never covers the whole building. */
+.more-v13{width:279px}
+.more-tabs-v13{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin:9px 0 15px}
+.more-status-row{display:flex;align-items:center;justify-content:space-between;gap:6px;min-height:47px;border-bottom:1px solid #a0cbd023;font-size:11px;color:#bdd6df}
+.more-status-row>span{display:flex;align-items:center;gap:7px}.more-status-row .ico{height:14px;width:14px}.more-status-row>strong{font-weight:690;color:#e5fcff;font-size:10px}.more-status-row .btn{height:33px;font-size:10px;min-width:69px}
+.mini-asset-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin:7px 0 11px}.mini-asset-actions .btn{height:34px;padding:0;font-size:10px}
+/* Prevent old large panels from being displayed; this build only renders new view classes. */
+.room-rail,.room-quick{display:none!important}
+/* All interactive panels are exact 375px high; no page scrolling. */
+.side-panel,.room-side{overscroll-behavior:none}
+/* Verified fixed-canvas adjustments: never clip the 4th room or final blind action. */
+.rooms-v13-list{gap:6px}
+.room-pick{height:59px}
+.rooms-v13-foot{margin-top:8px}
+.room-mini-nav{margin:4px 0 7px}
+.room-action-block{padding:6px 0;min-height:62px}
+.room-side{padding-top:12px;padding-bottom:7px}
+/* Critical: `hidden` still allows browser focus to scroll an element. `clip` does not.
+   MCU screen navigation must never shift the physical 800×480 viewport. */
+html,body,#viewport,.device,.workspace,.view,.room-view{overflow:clip!important}
+
+/* Repair: SVG presentation attributes were being overridden by a flat opaque violet CSS fill.
+   These are fabric-like vertical blinds, not bright rectangles covering the cutaway. */
+.fx-blind .blind-bank{filter:none!important;opacity:1!important}
+.fx-blind .blind-bank rect{fill:url(#slatTint)!important;opacity:.83!important;filter:none!important;stroke:none!important}
+.fx-blind .blind-slat{stroke:#c7d4df!important;stroke-width:.72!important;stroke-opacity:.59!important;stroke-linecap:butt!important}
+.fx-blind .blind-edge{stroke:#b8cbd7!important;stroke-width:1!important;filter:none!important;opacity:.35}
+.workspace[data-page="home"]:not(.focused) .fx-blind{opacity:.85}
+.workspace.focused .fx-blind{opacity:.88}
+
+/* v13.3 — accessible in-place room navigation, 800×480 MCU canvas */
+.room-heading-row{display:grid;grid-template-columns:29px minmax(0,1fr) 29px;align-items:center;column-gap:4px;margin:2px 0 1px}
+.room-heading-row h2{font-size:19px;margin:0;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:720;letter-spacing:-.5px}
+.room-cycle{width:29px;height:31px;border:0;border-radius:7px;background:#183c4b;color:#b1eff1;font-size:27px;line-height:1;font-weight:350;display:flex;align-items:center;justify-content:center}
+.room-cycle:active,.room-cycle:focus-visible{background:#2b6975;color:#ffffff;outline:2px solid #52e4e0;outline-offset:-2px}
+.room-data{height:31px}
+.room-mini-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin:5px 0 6px}
+.room-mini-nav .room-switch-tile{height:48px;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:2px 1px;border-radius:7px;background:#0b293b;border:1px solid #36627871;color:#9fbdc8;font-size:8px;line-height:1;cursor:pointer}
+.room-mini-nav .room-switch-tile img{display:block;width:23px;height:23px;object-fit:contain;pointer-events:none;filter:saturate(.78)}
+.room-mini-nav .room-switch-tile span{display:block;font-size:8px;font-weight:650;white-space:nowrap;pointer-events:none}
+.room-mini-nav .room-switch-tile.active{color:#ccffff;background:#135664;border-color:#74f5eb;box-shadow:inset 0 -2px #66e9df}
+.room-mini-nav .room-switch-tile.active img{filter:brightness(1.22) saturate(1.25)}
+.room-mini-nav .room-switch-tile:focus-visible{outline:2px solid #8cffff;outline-offset:-2px}
+.room-side{padding-top:9px;padding-bottom:5px}
+.room-action-block{min-height:61px;padding:5px 0}
+.room-action-top{height:21px}
+.room-action-buttons{height:32px;margin-top:1px}
+.room-action-buttons button{height:30px}
+
+/* v13.4 — floating global security buttons and meaningful Night/Away visuals. */
+.top{gap:9px!important}
+.mode-strip{gap:5px!important;margin-left:4px}
+.mode-choice{height:33px;min-width:55px;border-radius:17px}
+.mode-choice.active{background:#1e677047;border-color:#64e7df;color:#e8ffff;box-shadow:inset 0 -2px #67e6dd}
+.security-overlay{position:absolute;z-index:27;top:12px;left:255px;right:12px;display:flex;justify-content:space-between;align-items:center;pointer-events:none}
+.security-overlay .header-action{height:36px;min-width:82px;padding:0 11px;display:flex;gap:6px;align-items:center;justify-content:center;border:1px solid #73c8d155;background:#071c2bcf;color:#daedf2;font-size:10px;font-weight:680;backdrop-filter:blur(6px);box-shadow:0 5px 18px #03111d99;pointer-events:auto;border-radius:18px}
+.security-overlay .header-action .ico{width:15px;height:15px}
+.security-overlay .header-action.unlocked{color:#ffdcab;border-color:#dba46370}
+.security-overlay .header-action.armed{color:#8af5cc;border-color:#72b99870}
+.security-overlay .header-action:focus-visible{outline:2px solid #7ef4ea;outline-offset:2px}
+.scene-shade{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:visible}
+.scene-shade .shade-room{fill:url(#roomShadeGrad);opacity:0;transition:opacity .42s ease}
+.lighting-layers{z-index:2!important}
+.mode-scene-hint{position:absolute;right:16px;bottom:10px;z-index:15;padding:5px 9px;font-size:9px;line-height:1;letter-spacing:1px;font-weight:700;color:#c9e9f0;background:#062538d9;box-shadow:0 4px 15px #00172787;border-radius:12px;opacity:0;pointer-events:none;transform:translateY(4px);transition:opacity .18s,transform .18s}
+.mode-scene-hint.show{opacity:1;transform:none}
+.workspace[data-mode="Night"] .mode-scene-hint{color:#ffe1b2;background:#392a20d9}
+.workspace[data-mode="Away"] .mode-scene-hint{color:#afd3e3;background:#071b2bd9}
+.workspace[data-mode="Night"] .lighting-layers{filter:brightness(1.12) saturate(1.13)}
+.workspace[data-mode="Away"] .lighting-layers{filter:none}
+.workspace[data-mode="Away"] .fx-air{opacity:.55}
+.reduce-motion .scene-shade .shade-room{transition:none}
+
+/* Keep the mode explanation clear of the bottom-right air/heat/lighting legend. */
+.mode-scene-hint{top:55px;bottom:auto;left:255px;right:auto}
+/* Away is a quiet, unoccupied visualization: the real Eco systems remain active but subtle. */
+.workspace[data-mode="Away"] #airFx,.workspace[data-mode="Away"] #heatFx,.workspace[data-mode="Away"] #recoveryFx{opacity:.31}
+.workspace[data-mode="Night"] #airFx,.workspace[data-mode="Night"] #heatFx{opacity:.75}

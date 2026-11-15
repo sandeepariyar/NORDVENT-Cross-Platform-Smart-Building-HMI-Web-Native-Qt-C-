@@ -1,0 +1,95 @@
+/* NORDVENT v11 — real 800x480 fixed-layout MCU visual hierarchy. No scrolling. */
+:root{--cyan:#61e8e5;--ink:#071724}
+html,body,#viewport,.device{overflow:hidden!important}
+.device{width:800px!important;height:480px!important;position:absolute;left:50%;top:50%;margin-left:-400px;margin-top:-240px;transform-origin:center center}
+/* Permanent mode and safety actions, no menu/dropdown. */
+.top{height:46px;gap:8px;padding:0 12px}
+.wordmark{gap:5px;flex:0 0 auto}.wordmark b{font-size:13px;letter-spacing:1.6px}.logo-wave{width:22px;height:22px}
+.header-modes{height:38px;display:flex;align-items:center;gap:2px;margin-left:16px}
+.header-modes>span{font-size:8px;letter-spacing:1.1px;color:#7eacb8;margin-right:6px;font-weight:700}
+.mode-choice{height:35px;padding:0 9px;border:0;border-radius:5px;background:transparent;color:#89aeba;font-size:11px;font-weight:630;position:relative;transition:color .18s,background .18s;cursor:pointer}
+.mode-choice.active{color:#e5fcff;background:#37b9c216}
+.mode-choice.active:after{position:absolute;content:"";height:2px;bottom:2px;left:12px;right:12px;background:#6cf1e9;border-radius:8px}
+.mode-choice:active,.header-action:active{transform:scale(.96)}
+#modeCustom{font-size:8px;color:#ffc97f;font-style:normal;min-width:0;white-space:nowrap;margin-left:3px}
+.top-fill{min-width:0}.header-action{height:35px;display:flex;align-items:center;gap:4px;padding:0 7px;white-space:nowrap;border:0;border-radius:5px;background:#ffffff06;color:#b4d5de;cursor:pointer;font-size:10px;font-weight:650}
+.header-action .ico{width:14px;height:14px;color:#9ac2d1}.header-action.armed{color:#ffc782}.header-action.armed .ico{color:#ffbc6e}.header-action.unlocked{color:#ffc782}
+.outdoor{gap:2px}.outdoor strong{font-size:12px}.outdoor span{font-size:8px}.sim{padding:0;font-size:8px;color:#71a4ab;letter-spacing:.6px}.top time{font-size:11px;min-width:35px}
+.workspace{height:375px;overflow:hidden!important}.view,.room-view{overflow:hidden!important}.nav{height:59px}
+/* Home: only useful readings + one immediate action. */
+.home-panel{left:0;top:0;width:214px;height:375px;padding:22px 16px 12px;background:linear-gradient(90deg,#061a2bf8,#092b3be9)}
+.home-panel .h1{font-size:24px;margin:9px 0 15px}.home-panel .eyebrow{font-size:8px}
+.home-stats{margin:0 0 18px;gap:6px 0}.home-stat{min-height:69px;padding-top:9px;padding-bottom:5px}.home-stat small{font-size:10px}.home-stat strong{font-size:20px}.home-stat em{font-size:9px}.home-stat .unit{font-size:10px;letter-spacing:0;color:#98c9d5;font-weight:570}
+.home-buttons{display:block;margin-top:12px}.home-buttons .btn{height:43px;width:100%;font-size:11px}.home-legend{bottom:9px;right:12px}
+/* Image-led 2x2 room picker takes less than half the viewport. */
+.workspace[data-page="rooms"] .art{transform:translate(27px,0) scale(.99);filter:brightness(.86)}
+.rooms-panel{top:21px;left:12px;width:358px;height:285px;background:none;border:0;box-shadow:none}
+.micro-heading{display:flex;align-items:baseline;gap:11px;height:36px;color:#f3fcff;font-size:21px;font-weight:680;letter-spacing:-.65px}
+.micro-heading small,.micro-heading .soft-state{font-size:10px;letter-spacing:0;color:#a1bac7;font-weight:500}
+.room-cards{grid-template-columns:repeat(2,1fr);gap:8px}
+.room-card{height:100px;border-radius:7px!important;box-shadow:0 4px 12px #0007}
+.room-thumb{filter:brightness(var(--room-luminance,.9)) saturate(1.08)}
+.room-card-top{top:9px;left:9px;right:9px;font-size:12px}.room-card-arrow{font-size:14px}
+.room-card-bottom{bottom:9px;left:9px;right:9px;gap:2px}.room-temperature{font-size:22px}.room-temperature small{font-size:10px}
+.room-card-right{gap:3px}.room-card-right b{font-size:9px}.room-card-right small{font-size:9px;display:flex;align-items:center;gap:2px}.room-card-right .ico{width:10px;height:10px}
+/* Contextual room controls: slim bottom dock, leave house and focused floor visible. */
+.workspace[data-page="home"].focused .art{transform:translate(-90px,var(--zoom-y,0px)) scale(1.12);filter:brightness(.92)}
+.room-rail{left:11px;top:10px;width:auto;display:flex;gap:4px;z-index:10}
+.room-rail .rail-btn{height:37px;min-width:60px;padding:0 11px;border-radius:20px;border:1px solid #accac62e;background:#082338d9;font-size:10px;color:#a4c6d3;text-align:center;justify-content:center}
+.room-rail .rail-btn.active{border-color:#70eddf6e;background:#0c4655dd;color:#eeffff}
+.room-quick{position:absolute;left:9px;right:9px;bottom:8px;height:109px;display:grid;grid-template-columns:158px 131px 224px 1fr;align-items:center;background:linear-gradient(180deg,#081d2ef2,#0a2837f9);backdrop-filter:blur(10px);border:1px solid #acdce121;border-radius:9px;box-shadow:0 8px 24px #000b;z-index:11;padding:9px 7px}
+.quick-info,.quick-group{height:84px;min-width:0;padding:0 10px;border-right:1px solid #89d6db23}.quick-group:last-child{border:0}
+.quick-title{display:flex;align-items:center;justify-content:space-between;gap:4px}.quick-title strong{font-size:15px;font-weight:710;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.quick-back{height:30px;width:28px;border:0;background:#ffffff11;border-radius:7px;color:#d9f5f8;display:grid;place-items:center;flex:none}.quick-back .ico{width:14px;height:14px}
+.quick-readings{font-size:12px;color:#eaf7f9;font-weight:650;margin-top:9px;white-space:nowrap}.quick-status{color:#89b3c1;font-size:9px;display:block;margin-top:7px}
+.quick-group>small,.quick-label{height:28px;display:flex;align-items:center;gap:6px;color:#a5c5d1;font-size:10px;font-weight:660;white-space:nowrap}.quick-group small .ico,.quick-label .ico{width:13px;height:13px}
+.quick-label{background:none;border:0;color:#ffdeac;padding:0;cursor:pointer}.quick-label span{color:#7dc8d2}
+.quick-set{height:41px;display:flex;align-items:center;gap:4px}.quick-set button{height:38px;min-width:32px;padding:0 6px;border:0;border-radius:6px;background:#ffffff0e;color:#c8e5ec;font-size:11px;font-weight:660;cursor:pointer}
+.quick-set button.active{background:#5dced727;color:#9ffffb;box-shadow:inset 0 -2px #75dedd}
+.quick-set output{flex:1;text-align:center;font-size:17px;font-weight:730;color:#f2fdff;white-space:nowrap}
+.light-quick .quick-set button{padding:0 5px;min-width:28px}.light-quick .range{flex:1;min-width:48px;width:82px}
+.no-blinds{color:#7b9fb0;font-size:12px;padding-top:9px}
+/* Climate + Energy are compact tool strips, not a wall of boxes. */
+.page-shell.climate-compact,.page-shell.energy-compact{position:absolute;left:12px;top:16px;width:273px;height:323px;padding:6px 12px 8px;background:linear-gradient(95deg,#061a2bf8,#082b3aee 89%,#082b3a00);border:0}
+.climate-flow,.power-hero{height:64px;display:flex;align-items:baseline;gap:6px;margin-top:4px;position:relative}
+.climate-flow strong,.power-hero strong{font-size:44px;letter-spacing:-2.2px;line-height:1.2;font-weight:650;color:#e9fbff}
+.climate-flow>span,.power-hero>span{font-size:15px;color:#76e1df}
+.climate-flow small,.power-hero small{position:absolute;right:4px;top:15px;color:#88aebd;font-size:10px}
+.mini-label{font-size:10px;color:#94b4c1;margin-bottom:2px}
+.climate-compact .mode-row{display:flex;margin:0 0 8px;gap:2px}.climate-compact .mode-row .btn{height:34px;min-width:73px;font-size:11px}
+.compact-switch-row{height:42px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #a1ccd624;color:#d1e7ee;font-size:12px;font-weight:620}
+.compact-switch-row .switch{height:32px;min-width:54px;font-size:10px}
+.compact-switch-row .ico{width:13px;height:13px;vertical-align:middle;margin-right:6px;color:#ffc47e}
+.boost-inline{margin-top:11px;height:37px;width:100%;font-size:11px}
+.manual-inline{display:flex;align-items:center;gap:8px;height:34px;font-size:9px}.manual-inline .range{flex:1;min-width:0}.manual-inline b{white-space:nowrap;font-size:9px}
+.climate-caption{position:absolute;left:26px;bottom:9px;color:#b0d2d9;font-size:9px;background:#061b2aba;padding:5px 8px;border-radius:6px;max-width:270px}
+.energy-compact .power-hero{height:81px;margin-top:10px}.energy-compact .compact-switch-row{height:51px}.energy-metrics{display:flex;justify-content:space-between;color:#9fc6d1;font-size:12px;margin-top:15px}.energy-metrics .ico{width:13px;height:13px;vertical-align:middle}.energy-mini-caption{margin-top:10px;font-size:9px;color:#83a8b7}
+.energy-flow.v11-flow{position:absolute;left:388px;top:70px;width:320px;height:245px;opacity:.83;pointer-events:none;overflow:visible}
+.v11-flow .energy-node circle{fill:#092a3bd9;stroke:#4bc4c783;stroke-width:1.3}
+.v11-flow text{fill:#defaff;font-size:11px;font-weight:690;dominant-baseline:middle}
+.v11-flow .flow-secondary{font-size:10px;font-weight:460;fill:#82adbc}
+/* Compact routine list with fixed rows and aligned controls. */
+.routines-minimal{position:absolute;left:125px;top:20px;width:555px;height:330px;background:linear-gradient(90deg,#071c2bed,#0a2939db);padding:11px 18px}
+.routine-top{height:62px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #98bdc52a}
+.routine-top h2{font-size:22px;margin:0 0 4px;letter-spacing:-.7px}.routine-top small{font-size:10px;color:#8fbdc9}.routine-top .btn{height:38px;padding:0 14px}
+.routine-list{margin-top:5px}.routine-row{height:63px;min-height:0;display:grid;grid-template-columns:70px 1fr 52px 53px;align-items:center;gap:9px;padding:0;border:0;border-bottom:1px solid #9ac4ce27;background:transparent}
+.rt-time{font-size:19px;font-weight:700;font-variant-numeric:tabular-nums;color:#f2fbff}
+.routine-action{display:flex;flex-direction:column;gap:4px}.routine-action strong{font-size:11px;color:#ebf7fa}.routine-action span{font-size:10px;color:#98b8c8}
+.routine-toggle,.routine-edit{height:36px;border-radius:5px;border:0;font-size:10px;font-weight:650;color:#d1e6ef;background:#ffffff13;cursor:pointer}.routine-toggle.on{color:#6ee6de;background:#40cccc21}.routine-edit{background:transparent;text-decoration:underline;text-underline-offset:3px}
+.routine-count{margin-top:13px;color:#8dabbc;font-size:10px;display:flex;justify-content:space-between}.empty-routine{font-size:12px;color:#a6c7d2;padding:25px}
+/* More page: understated config, avoid duplicated permanent safety actions. */
+.page-shell.wide{left:122px;top:20px;width:555px;height:320px;padding:13px 18px}
+.more-hint{display:none}.setting-row{min-height:54px}
+/* Avoid motion when disabled. */
+.reduce-motion .mode-choice,.reduce-motion .header-action,.reduce-motion .room-quick{transition:none!important}
+
+/* Optional locally imported background sequence. Artwork always spans the fixed 800×352 map. */
+.background-video{width:800px;height:352px;object-fit:fill;position:absolute;inset:0;pointer-events:none;z-index:0}
+.asset-actions{display:flex;gap:5px;align-items:center;justify-content:flex-end}
+.asset-actions .btn{min-width:53px;min-height:35px;height:35px;padding:0 7px;font-size:10px}
+.more-display .setting-row{min-height:51px}
+
+/* v12 compact refinements */
+.mode-strip{display:flex;align-items:center;gap:4px;border-left:1px solid #28495d;padding-left:12px}.mode-label{font-size:8px;letter-spacing:1px;color:#7fa1b2;margin-right:2px}.mode-choice{height:28px;min-width:44px;padding:0 10px;border-radius:14px;border:1px solid #28495d;background:#0a2233;color:#b8d6e3;font-size:11px;font-weight:650}.mode-choice.active{background:#103a48;color:#f4ffff;border-color:#69ebe5}.mode-custom{font-size:9px;color:#95bece;min-width:34px}.header-action{height:28px;padding:0 9px;border-radius:14px;border:1px solid #28495d;background:#0a2233;color:#dceef5;font-size:10px;display:flex;align-items:center;gap:5px}.header-action.unlocked{color:#ffddab}.header-action.armed{color:#8ff3d3}.header-action .ico{width:12px;height:12px}
+.house#buildingVideo,.house#buildingImage{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rooms-panel.micro{top:12px;left:12px;width:176px;height:308px;background:linear-gradient(180deg,#081d2ef1,#0a2534f5);border:1px solid #2a4f61;border-radius:10px;padding:10px;box-shadow:0 8px 18px #0007}.room-icon-list{display:grid;grid-template-columns:1fr;gap:8px;margin-top:8px}.room-mini-card{display:grid;grid-template-columns:44px 1fr;grid-template-areas:'thumb main''thumb icons';gap:2px 8px;align-items:center;height:62px;border:1px solid #244b5f;border-radius:8px;background:#0a2233;padding:6px 7px;text-align:left}.room-mini-thumb{grid-area:thumb;width:44px;height:44px;border-radius:6px;object-fit:cover}.room-mini-main{grid-area:main;display:flex;flex-direction:column;min-width:0}.room-mini-main b{font-size:11px;color:#eefbfd;line-height:1}.room-mini-main small{font-size:9px;color:#9ebdca;line-height:1.1}.room-mini-icons{grid-area:icons;display:flex;gap:7px;align-items:center;flex-wrap:wrap}.room-mini-icons span{display:flex;gap:3px;align-items:center;color:#b9d9e5;font-size:8px}.room-mini-icons .ico{width:10px;height:10px;color:var(--thermal-accent)}.room-mini-icons em{font-style:normal}
+.room-quick.compact{left:10px;right:10px;bottom:8px;height:84px;grid-template-columns:130px 113px 166px 78px;padding:7px 7px}.quick-info .quick-title strong{font-size:14px}.quick-readings{font-size:11px}.quick-status{font-size:9px}.quick-group small{font-size:9px}.quick-set output{font-size:15px}.quick-set button{height:28px;min-width:34px;padding:0 7px}.quick-label.compact-only{height:28px;padding:0 10px;border-radius:14px;border:1px solid #2f6072;background:#0d2e3f;color:#d8f4ff;font-size:10px}

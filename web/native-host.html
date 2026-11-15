@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="color-scheme" content="dark" />
+<title>NORDVENT | Real Qt 6/QML WebAssembly Demo</title>
+<style>
+:root{color-scheme:dark;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#060f1b;color:#eaf7fd}
+body{background:radial-gradient(ellipse at 48% 0%,#183b4b 0%,#081825 49%,#050d16 100%)}
+.wrap{max-width:1100px;margin:auto;padding:25px 18px 40px}
+nav,.heading,.footer{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font-weight:800;letter-spacing:.28em;color:#c8edf5;font-size:13px;text-decoration:none}.brand i{color:#59e3eb;font-style:normal}
+a{color:#a7eaf0;text-decoration:none}a:hover{text-decoration:underline}
+nav .navlinks{display:flex;gap:18px;font-size:12px;color:#a9bcc9}
+.heading{margin:30px 0 18px;align-items:end}
+.eyebrow{color:#70ccdb;font-size:10px;letter-spacing:.17em;font-weight:700}
+h1{font-size:clamp(20px,4vw,32px);font-weight:650;margin:7px 0 5px;letter-spacing:-.02em}
+.subtitle{font-size:13px;color:#95b2c2;margin:0;line-height:1.6}
+.status{font-size:11px;font-weight:700;letter-spacing:.04em;border:1px solid #2b5365;border-radius:30px;padding:8px 13px;color:#b3dce2;background:#0e2633}
+.stage-shell{padding:18px;background:linear-gradient(165deg,#162e39,#0b141d);border-radius:21px;border:1px solid #304854;box-shadow:0 40px 90px #0007,0 10px 20px #0006}
+.stage-mat{background:#030b12;border-radius:9px;border:1px solid #284554;position:relative;overflow:hidden;width:100%;aspect-ratio:5/3}
+#scaled{position:absolute;width:800px;height:480px;left:50%;top:50%;transform-origin:center center;transform:translate(-50%,-50%) scale(1)}
+#qtScreen{position:relative;width:800px;height:480px;overflow:hidden;background:#061624}
+#splash{position:absolute;inset:0;display:grid;place-content:center;gap:11px;text-align:center;background:#061624;color:#d8eef6;z-index:3;pointer-events:none}
+#splash strong{letter-spacing:.2em;font-size:15px}#splash small{color:#83a6b8}
+.indicator{width:28px;height:28px;border:2px solid #1d525f;border-top-color:#65eaf0;border-radius:50%;animation:spin 1s linear infinite;justify-self:center}
+@keyframes spin{to{transform:rotate(360deg)}}
+#splash.hidden{display:none}
+.tools{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-top:15px;font-size:12px;color:#97b1bd}
+button{background:#123544;color:#bcf7fa;border:1px solid #366476;border-radius:7px;font-size:12px;padding:9px 13px;cursor:pointer}
+button:hover{background:#194657}
+.footer{margin-top:23px;color:#718f9d;font-size:11px;line-height:1.6}
+.notice{font-size:11px;color:#78939f;margin-top:10px}
+@media(max-width:620px){.wrap{padding:15px 9px 25px}.stage-shell{padding:6px;border-radius:9px}.heading{margin:20px 5px 14px}.status{font-size:10px}}
+body.is-embedded{overflow:hidden;background:#061624}
+body.is-embedded .wrap{max-width:none;margin:0;padding:0;width:100%;height:100vh}
+body.is-embedded nav,body.is-embedded .heading,body.is-embedded .tools,body.is-embedded .notice,body.is-embedded .footer{display:none!important}
+body.is-embedded .stage-shell{padding:0;border:0;border-radius:0;box-shadow:none;width:100%;height:100%;background:#061624}
+body.is-embedded .stage-mat{width:100%;height:100%;border:0;border-radius:0;aspect-ratio:auto}
+body.is-embedded #scaled{left:50%;top:50%}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><a href="../" class="brand">NORDVENT <i>/ QT LIVE</i></a><div class="navlinks"><a href="../">Engineering Lab</a><a href="../web/">Original HTML demo</a><a href="https://github.com/sandeepariyar/NORDVENT-Cross-Platform-Smart-Building-HMI-Web-Native-Qt-C-">GitHub</a></div></nav>
+<div class="heading"><div><div class="eyebrow">NATIVE QT 6.11.2 · WEBASSEMBLY · C++17</div><h1>Actual Qt application. In your browser.</h1><p class="subtitle">Same QML animations and C++ controller as NORDVENT v17.1 Desktop. No HTML reimplementation.</p></div><div id="status" class="status" role="status" aria-live="polite">INITIALIZING RUNTIME</div></div>
+<div class="stage-shell" id="stageShell"><div class="stage-mat" id="stageMat"><div id="scaled"><div id="qtScreen" aria-label="Live Qt WebAssembly building control interface"></div></div><div id="splash"><div class="indicator"></div><strong>N O R D V E N T</strong><small>Starting native QML/C++ runtime…</small></div></div><div class="tools"><span>800 × 480 logical touchscreen · Native Qt renderer</span><button id="fullscreen" type="button">Full screen</button></div></div>
+<p class="notice">Interactive simulation, not connected to building hardware. Browser requires WebAssembly and WebGL. If launch fails, see status and browser console.</p>
+<div class="footer"><span>DESIGNED &amp; DEVELOPED BY SANDEEP PARIYAR</span><span>© 2026 Sandeep Pariyar · All Rights Reserved</span></div>
+</div>
+<script src="NordventDesktop.js"></script>
+<script src="qtloader.js"></script>
+<script>
+(() => {
+  const embedded = new URLSearchParams(location.search).has('embed');
+  if(embedded) document.body.classList.add('is-embedded');
+  function report(type, message){try{if(window.parent !== window)window.parent.postMessage({type,message},location.origin)}catch(error){console.warn('NORDVENT_STATUS_BRIDGE',error)}}
+  const screen = document.getElementById('qtScreen');
+  const mat = document.getElementById('stageMat');
+  const scaled = document.getElementById('scaled');
+  const splash = document.getElementById('splash');
+  const status = document.getElementById('status');
+  window.__nordventStatus = 'loading';
+  function resize() {
+    const r = mat.getBoundingClientRect();
+    const scale = Math.min(r.width/800, r.height/480);
+    scaled.style.transform = `translate(-50%, -50%) scale(${scale})`;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+  document.getElementById('fullscreen').addEventListener('click', async () => {
+    if (!document.fullscreenElement) await document.getElementById('stageShell').requestFullscreen();
+    else await document.exitFullscreen();
+    resize();
+  });
+  document.addEventListener('fullscreenchange', resize);
+  function setStatus(state, label) {
+    window.__nordventStatus = state;
+    status.textContent = label;
+    if (state === 'ready') report('NORDVENT_WASM_READY',label);
+    if (state === 'exit' || state === 'error') report('NORDVENT_WASM_ERROR',label);
+  }
+  if (typeof qtLoad !== 'function' || typeof window.NordventDesktop_entry !== 'function') {
+    setStatus('error', 'QT LOADER MISSING');
+    splash.querySelector('small').textContent = 'Missing WebAssembly entry or Qt loader.';
+    console.error('NORDVENT_WASM_LOAD_ERROR: runtime scripts unavailable');
+    return;
+  }
+  qtLoad({ qt: {
+    entryFunction: window.NordventDesktop_entry,
+    containerElements: [screen],
+    onLoaded: () => { splash.classList.add('hidden'); setStatus('ready','QT RUNTIME ACTIVE'); },
+    onExit: event => {
+      console.error('NORDVENT_WASM_EXIT:', event);
+      setStatus('exit', 'QT RUNTIME EXITED');
+    }
+  }}).catch(error => {
+    console.error('NORDVENT_WASM_LOAD_ERROR:', error);
+    setStatus('error','QT FAILED TO LOAD');
+    splash.querySelector('small').textContent = String(error?.message || error);
+  });
+})();
+</script>
+</body>
+</html>

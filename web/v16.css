@@ -1,0 +1,28 @@
+/* NORDVENT v16 — minimal status dock, MCU-safe page motion, translucent Home. */
+/* The three *touch targets* are 44×44; visual symbols are deliberately smaller. */
+.nv16-visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;clip-path:inset(50%)!important}
+.security-overlay.nv16-status-dock{left:auto!important;right:12px!important;top:12px!important;width:auto!important;height:44px!important;display:flex!important;justify-content:flex-end!important;align-items:center!important;gap:5px!important;z-index:28!important;border:0!important;background:transparent!important;box-shadow:none!important;pointer-events:none!important}
+.security-overlay.nv16-status-dock .header-action,
+.security-overlay.nv16-status-dock .health-chip{all:unset;box-sizing:border-box!important;position:relative!important;display:grid!important;place-items:center!important;width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;max-width:44px!important;margin:0!important;padding:0!important;border:0!important;border-radius:13px!important;background:rgba(5,24,38,.79)!important;color:#b8c7d1!important;box-shadow:0 3px 10px #02101a44!important;pointer-events:auto!important;cursor:pointer!important;transition:background .18s ease,color .18s ease,transform .16s ease!important}
+.security-overlay.nv16-status-dock .nv16-status-button:hover{background:rgba(15,50,65,.94)!important}
+.security-overlay.nv16-status-dock .nv16-status-button:active{transform:scale(.96)!important}
+.security-overlay.nv16-status-dock .nv16-status-button:focus-visible{outline:2px solid #85f4ef!important;outline-offset:2px!important}
+.nv16-status-dock .nv16-status-button .ico{display:block!important;width:22px!important;height:22px!important;fill:none!important;stroke:currentColor!important;stroke-width:1.7!important;stroke-linecap:round!important;stroke-linejoin:round!important;filter:none!important}
+.security-overlay.nv16-status-dock #headerLock.locked{color:#91e6c8!important}
+.security-overlay.nv16-status-dock #headerLock.unlocked{color:#e8b879!important}
+.security-overlay.nv16-status-dock #headerAlarm.armed{color:#91e6c8!important}
+.security-overlay.nv16-status-dock #headerAlarm:not(.armed){color:#a5bac8!important}
+.security-overlay.nv16-status-dock #healthChip[data-level="ok"]{color:#91e6c8!important}
+.security-overlay.nv16-status-dock #healthChip[data-level="notice"]{color:#a7c5d9!important}
+.security-overlay.nv16-status-dock #healthChip[data-level="warning"]{color:#f0be75!important;background:rgba(42,32,20,.86)!important}
+.security-overlay.nv16-status-dock #healthChip[data-level="critical"]{color:#ff7e82!important;background:rgba(54,24,31,.9)!important}
+.security-overlay.nv16-status-dock #healthChip:is([data-level="warning"],[data-level="critical"])::after{content:"";position:absolute;top:6px;right:6px;width:6px;height:6px;border-radius:50%;background:currentColor}
+/* No persistent text card, label or container border around the group. */
+.workspace[data-page="home"]:not(.focused) .home-panel{background:linear-gradient(90deg,rgba(4,21,35,.88),rgba(5,27,40,.73))!important;backdrop-filter:none!important;box-shadow:none!important;border:0!important}
+.workspace[data-page="home"]:not(.focused) .home-panel .home-stats{isolation:isolate}
+/* Only new controller content enters; the image sequence and nav remain still. */
+@keyframes nv16ControllerArrive{from{opacity:.68;transform:translate3d(8px,0,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+#view>.nv16-enter,#roomView>.nv16-enter{animation:nv16ControllerArrive .19s cubic-bezier(.17,.8,.25,1) both!important;backface-visibility:hidden}
+/* Existing room selector always keeps room-specific values and effects. */
+.reduce-motion #view>.nv16-enter,.reduce-motion #roomView>.nv16-enter{animation:none!important}
+@media(prefers-reduced-motion:reduce){#view>.nv16-enter,#roomView>.nv16-enter{animation:none!important}}

@@ -1,0 +1,23 @@
+name: NORDVENT · Source Integrity and C++ Core
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Node syntax checks
+        run: |
+          node --check docs/lab.js
+          node --check docs/web/app.js
+          node --check web/app.js
+      - name: Source and Pages asset validation
+        run: python3 tools/validate_repo.py
+      - name: Configure C++ core
+        run: cmake -S native-qt/core -B build/core -DCMAKE_BUILD_TYPE=Release
+      - name: Build C++ core
+        run: cmake --build build/core --parallel
+      - name: Run core unit tests
+        run: ctest --test-dir build/core --output-on-failure

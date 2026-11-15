@@ -1,0 +1,138 @@
+{
+  "passed": 33,
+  "total": 33,
+  "checks": [
+    {
+      "name": "Status dock visible on building",
+      "passed": true
+    },
+    {
+      "name": "Exactly 3 icon-only status controls",
+      "passed": true
+    },
+    {
+      "name": "44x44 touch targets",
+      "passed": true
+    },
+    {
+      "name": "All status glyphs visible",
+      "passed": true
+    },
+    {
+      "name": "No persistent visible text labels",
+      "passed": true
+    },
+    {
+      "name": "Accessible icon labels",
+      "passed": true
+    },
+    {
+      "name": "Lock starts locked",
+      "passed": true
+    },
+    {
+      "name": "Alarm starts disarmed",
+      "passed": true
+    },
+    {
+      "name": "Health initially healthy",
+      "passed": true
+    },
+    {
+      "name": "Home uses translucent panel gradient",
+      "passed": true
+    },
+    {
+      "name": "Lock retains confirmation dialog",
+      "passed": true
+    },
+    {
+      "name": "Unlock changes glyph state",
+      "passed": true
+    },
+    {
+      "name": "Unlocked icon shown",
+      "passed": true
+    },
+    {
+      "name": "Alarm retains confirmation dialog",
+      "passed": true
+    },
+    {
+      "name": "Alarm armed state reflected",
+      "passed": true
+    },
+    {
+      "name": "Health icon opens existing popup",
+      "passed": true
+    },
+    {
+      "name": "Climate panel preserved",
+      "passed": true
+    },
+    {
+      "name": "Panel receives entrance class on page switch",
+      "passed": true
+    },
+    {
+      "name": "Status dock persists on Climate",
+      "passed": true
+    },
+    {
+      "name": "Energy panel preserved",
+      "passed": true
+    },
+    {
+      "name": "Energy panel transitions in",
+      "passed": true
+    },
+    {
+      "name": "Critical fault changes health icon to warning color",
+      "passed": true
+    },
+    {
+      "name": "Critical event reflected in accessible name",
+      "passed": true
+    },
+    {
+      "name": "Fault clear restores normal status",
+      "passed": true
+    },
+    {
+      "name": "Motion OFF suppresses page animation",
+      "passed": true
+    },
+    {
+      "name": "home stays no-scroll",
+      "passed": true
+    },
+    {
+      "name": "rooms stays no-scroll",
+      "passed": true
+    },
+    {
+      "name": "climate stays no-scroll",
+      "passed": true
+    },
+    {
+      "name": "energy stays no-scroll",
+      "passed": true
+    },
+    {
+      "name": "routines stays no-scroll",
+      "passed": true
+    },
+    {
+      "name": "more stays no-scroll",
+      "passed": true
+    },
+    {
+      "name": "No uncaught JS errors",
+      "passed": true
+    },
+    {
+      "name": "Icon dock visible when scaled to 400x240",
+      "passed": true
+    }
+  ]
+}
