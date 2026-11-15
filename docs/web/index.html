@@ -1159,4 +1159,13 @@ function updateClockAndBoost(){clock();if(state.boostUntil&&Date.now()>=state.bo
 $('buildingImage').src=sequenceUrls[0];startBackgroundSequence();setInterval(updateClockAndBoost,1000);render();
 })();
 
+</script><script>
+/* Same-origin, read-only inspector of the original self-contained v17 state.
+   The HTML simulation remains an independent app from the QML/C++ runtime. */
+try {
+  Object.defineProperty(window, '__NORDVENT_DEV__', {
+    configurable: false,
+    value: { snapshot: () => JSON.parse(JSON.stringify(state)) }
+  });
+} catch (error) { console.warn('NORDVENT inspector bridge unavailable',error); }
 </script></body></html>

@@ -12,17 +12,22 @@ int main(int argc,char**argv) {
     NordventBackend backend;
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("nv", &backend);
-    const QString installed = QCoreApplication::applicationDirPath()+"/qml/Main.qml";
-    // The QML and image assets are deployed beside the executable by CMake.
-    // Avoid compile-time Windows paths: quoted -D macros can break under MinGW.
-    const QString source = installed;
+    QObject::connect(&engine, &QQmlApplicationEngine::objectCreationFailed, &app,
+                     [] { QCoreApplication::exit(1); }, Qt::QueuedConnection);
+#ifdef __EMSCRIPTEN__
+    // Static Qt/QML modules load from the bundled Qt resource system.
+    // This is the identical C++ controller and QML display, not HTML recreation.
+    engine.loadFromModule("Nordvent", "Main");
+#else
+    // Preserve the working Windows desktop CMake deployment and editable QML.
+    const QString source = QCoreApplication::applicationDirPath()+"/qml/Main.qml";
     if (!QFileInfo::exists(source)) {
         qCritical().noquote() << "NORDVENT: QML entry point was not deployed:" << source;
-        qCritical().noquote() << "Rebuild the NordventDesktop target to copy qml/ and assets/ beside the executable.";
+        qCritical().noquote() << "Rebuild NordventDesktop to copy qml/ and assets/ beside the executable.";
         return 1;
     }
-    QObject::connect(&engine, &QQmlApplicationEngine::objectCreationFailed, &app, [] { QCoreApplication::exit(1); }, Qt::QueuedConnection);
     engine.load(QUrl::fromLocalFile(source));
-    if (engine.rootObjects().isEmpty()) qCritical() << "Unable to load root QML:" << source;
+#endif
+    if (engine.rootObjects().isEmpty()) qCritical() << "Unable to load NORDVENT root QML";
     return engine.rootObjects().isEmpty()?1:app.exec();
 }

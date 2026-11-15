@@ -1,10 +1,7 @@
-name: NORDVENT · Showcase / GitHub Pages
+name: NORDVENT · Qt WebAssembly + Engineering Lab
 on:
   push:
-    branches: [main]
-    paths:
-      - 'docs/**'
-      - '.github/workflows/pages.yml'
+    branches: [main, feature/unified-hmi-lab]
   workflow_dispatch:
 
 permissions:
@@ -17,36 +14,108 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-    name: Validate and package website
-    runs-on: ubuntu-latest
+  build-deploy:
+    name: Build real Qt/QML for the browser, test and deploy
+    runs-on: ubuntu-24.04
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Verify landing page and proprietary attribution
+      - uses: actions/checkout@v4
+      - name: Validate original web and native project source
         shell: bash
         run: |
           set -euo pipefail
+          test -s native-qt/qml/Main.qml
+          test -s native-qt/src/main.cpp
+          test -s web/NORDVENT_Standalone.html
           test -s docs/index.html
-          test -f docs/.nojekyll
-          grep -q 'Sandeep Pariyar' docs/index.html
-          grep -qi 'All Rights Reserved' docs/index.html
-          if test -d docs/web; then test -s docs/web/index.html; fi
-      - name: Prepare Pages
-        uses: actions/configure-pages@v5
-      - name: Upload website files only
-        uses: actions/upload-pages-artifact@v4
+          test -s docs/web/index.html
+          node --check docs/lab.js
+      - name: Install host prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build libgl1-mesa-dev libxkbcommon-x11-0 libfontconfig1 libxcb-cursor0 libcairo2
+          python3 -m pip install --user 'aqtinstall>=3.2,<4' 'Pillow>=11,<13' 'CairoSVG>=2.7,<3' 'beautifulsoup4>=4.12,<5'
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Restore original v17 assets and render source preview frames
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/rebuild_assets_from_standalone.py --with-doc-icons
+          python3 native-qt/tests/check_project.py
+          python3 native-qt/tests/check_animation_routes.py
+          node --check docs/lab.js
+          npm install --no-save --no-audit --no-fund playwright-core@1.56.1
+          CHROME_PATH="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME_PATH"
+          echo "CHROME_PATH=$CHROME_PATH" >> "$GITHUB_ENV"
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory docs >/tmp/nordvent-art.log 2>&1 &
+          ART_SERVER=$!
+          node scripts/capture_web.cjs
+          kill "$ART_SERVER"
+          python3 tools/validate_repo.py
+      - name: Install Qt 6.11.2 WASM (same toolchain as HELIOS)
+        run: |
+          "$HOME/.local/bin/aqt" install-qt all_os wasm 6.11.2 wasm_singlethread --autodesktop -O "$HOME/Qt"
+      - name: Install matching Emscripten 4.0.7
+        uses: mymindstorm/setup-emsdk@v14
         with:
-          path: docs
-
+          version: '4.0.7'
+      - name: Configure native Qt WebAssembly port
+        shell: bash
+        run: |
+          set -euo pipefail
+          export QT_WASM_ROOT="$HOME/Qt/6.11.2/wasm_singlethread"
+          export QT_HOST_ROOT="$HOME/Qt/6.11.2/gcc_64"
+          "$QT_WASM_ROOT/bin/qt-cmake" -S native-qt -B build-wasm -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release -DQT_HOST_PATH="$QT_HOST_ROOT"
+      - name: Compile original QML/C++ into browser WebAssembly
+        run: cmake --build build-wasm --parallel 4
+      - name: Assemble both demos for GitHub Pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p site/native
+          cp -a docs/. site/
+          cp web/native-host.html site/native/index.html
+          for f in build-wasm/NordventDesktop.js build-wasm/NordventDesktop.wasm build-wasm/NordventDesktop.data build-wasm/qtloader.js; do
+            if test -f "$f"; then cp "$f" site/native/; fi
+          done
+          test -s site/native/NordventDesktop.wasm
+          test -s site/native/NordventDesktop.js
+          test -s site/native/qtloader.js
+          test -s site/index.html
+          test -s site/web/index.html
+          touch site/.nojekyll
+      - name: Smoke-test actual Qt application in a browser
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --no-save --no-audit --no-fund playwright-core@1.56.1
+          test -n "$CHROME_PATH" || { echo "Chromium/Chrome not found"; exit 1; }
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory site >/tmp/nordvent-http.log 2>&1 &
+          node scripts/wasm_smoke.cjs
+      - name: Retain screenshot and browser logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nordvent-wasm-browser-verification
+          path: |
+            wasm-smoke.png
+            wasm-smoke.log
+          if-no-files-found: ignore
+      - uses: actions/configure-pages@v5
+        if: github.ref == 'refs/heads/main'
+      - uses: actions/upload-pages-artifact@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          path: site
   deploy:
-    name: Publish Pages
-    needs: build
-    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    needs: build-deploy
+    runs-on: ubuntu-24.04
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy
+      - name: Deploy Qt + Web showcase to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

@@ -1,42 +1,77 @@
 'use strict';
-const $ = (sel,root=document)=>root.querySelector(sel);
-const $$ = (sel,root=document)=>[...root.querySelectorAll(sel)];
-const frame=$('#webApp'), viewport=$('#webViewport'), bridgeStatus=$('#bridgeStatus');
-let history=[], previous=null, lastDiff={}, frameDoc=null, frameWin=null, actionSeq=0;
-const limits={maxHistory:150};
-function resizeIframe(){const s=viewport.clientWidth/800;frame.style.transform=`scale(${s})`;}
-new ResizeObserver(resizeIframe).observe(viewport);addEventListener('resize',resizeIframe);
-function snapshot(){try{return frameWin?.__NORDVENT_DEV__?.snapshot()||null;}catch{return null;}}
-function equal(a,b){return JSON.stringify(a)===JSON.stringify(b)}
-function changes(a,b,prefix='',out={}){
-  if(equal(a,b))return out;
-  if(a && b && typeof a==='object' && typeof b==='object' && !Array.isArray(a) && !Array.isArray(b)) {
-    for(const k of new Set([...Object.keys(a),...Object.keys(b)])) changes(a[k],b[k],prefix?`${prefix}.${k}`:k,out);
-  } else out[prefix]={before:a===undefined?null:a,after:b===undefined?null:b};
-  return out;
-}
-function pushEvent(evt){history.unshift(evt);history=history.slice(0,limits.maxHistory);$('#eventCount').textContent=history.length;$('#lastEventTime').textContent=evt.time;renderEvents();}
-function renderEvents(){const pane=$('#eventsPanel');pane.replaceChildren();if(!history.length){const x=document.createElement('div');x.className='empty-log';x.textContent='Interact with the live NORDVENT preview to begin tracing.';pane.append(x);return;}
-  history.slice(0,70).forEach(e=>{const line=document.createElement('div');line.className='event-line';const time=document.createElement('span');time.className='event-time';time.textContent=e.time;const main=document.createElement('div');main.className='event-main';const h=document.createElement('strong');h.textContent=`#${e.id} ${e.type.toUpperCase()} · ${e.action}`;const detail=document.createElement('small');const c=Object.entries(e.changes);detail.textContent=c.length?c.map(([k,v])=>`${k}: ${JSON.stringify(v.before)} → ${JSON.stringify(v.after)}`).slice(0,5).join('  ·  '):'No tracked simulation-state change (may be navigation, dialog, or non-state interaction).';main.append(h,detail);line.append(time,main);pane.append(line);});}
-function renderJson(){const s=snapshot();$('#statePanel').textContent=s?JSON.stringify(s,null,2):'State bridge unavailable';$('#diffPanel').textContent=Object.keys(lastDiff).length?JSON.stringify(lastDiff,null,2):'No tracked state changes yet.';}
-function targetName(t){if(t.dataset.page)return `Navigate / ${t.dataset.page}`;if(t.dataset.range)return `Range / ${t.dataset.range}${t.dataset.room?' / '+t.dataset.room:''}`;if(t.dataset.action)return `${t.dataset.action}${t.dataset.room?' / '+t.dataset.room:''}`;if(t.dataset.room)return `Open room / ${t.dataset.room}`;return (t.getAttribute('aria-label')||t.textContent||t.tagName).trim().replace(/\s+/g,' ').slice(0,60)||'Interaction';}
-function watch(evt){const t=evt.target?.closest?.('button,input,select');if(!t||t.disabled)return;if(evt.type==='input' && t.type!=='range')return;if(evt.type==='click' && t.type==='range')return;
-  const current=snapshot();const action=targetName(t);const typ=evt.type;let val=t.value;
-  setTimeout(()=>{const after=snapshot();const delta=changes(current,after);lastDiff=delta;previous=after;const time=new Date().toLocaleTimeString('en-GB',{hour12:false});pushEvent({id:++actionSeq,time,type:typ,action,inputValue:(typ==='input'?val:null),changes:delta,simulation:true});renderJson();},70);
-}
-function attach(){try{frameWin=frame.contentWindow;frameDoc=frameWin.document;const s=snapshot();if(!s)throw new Error('bridge missing');bridgeStatus.textContent='● WEB STATE CONNECTED';bridgeStatus.classList.add('ok');previous=s;history=[];lastDiff={};$('#eventCount').textContent='0';renderEvents();renderJson();frameDoc.addEventListener('click',watch,true);frameDoc.addEventListener('input',watch,true);frameDoc.addEventListener('change',e=>{if(e.target.tagName==='SELECT')watch(e)},true);}
-catch(err){bridgeStatus.textContent='Web bridge unavailable: use http://';bridgeStatus.classList.remove('ok');console.warn('NORDVENT inspector:',err);}}
-frame.addEventListener('load',()=>{resizeIframe();attach()});
-// Sections
-$$('[data-section]').forEach(b=>b.addEventListener('click',()=>{const name=b.dataset.section;$$('[data-section]').forEach(x=>x.classList.toggle('active',x===b));$$('.site-section').forEach(x=>x.classList.toggle('active',x.id==='section-'+name));if(name==='lab')resizeIframe();window.history.replaceState(null,'','#'+name);}));
-$$('[data-layout]').forEach(b=>b.addEventListener('click',()=>{$$('[data-layout]').forEach(x=>x.classList.toggle('selected',x===b));const grid=$('#labGrid');grid.classList.remove('web-only','qt-only');if(b.dataset.layout==='web')grid.classList.add('web-only');if(b.dataset.layout==='qt')grid.classList.add('qt-only');resizeIframe()}));
-$$('[data-inspect]').forEach(b=>b.addEventListener('click',()=>{$$('[data-inspect]').forEach(x=>x.classList.toggle('active',x===b));['events','state','diff'].forEach(k=>$('#'+k+'Panel').hidden=k!==b.dataset.inspect);renderJson()}));
-$$('[data-nav]').forEach(b=>b.addEventListener('click',()=>{try{frameDoc.querySelector(`[data-page="${b.dataset.nav}"]`)?.click()}catch(err){console.warn(err)}}));
-$('#webRefresh').addEventListener('click',()=>{frame.src='web/index.html';});
-$('#clearEvents').addEventListener('click',()=>{history=[];lastDiff={};$('#eventCount').textContent='0';renderEvents();renderJson();});
-$('#copyEvents').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(JSON.stringify(history,null,2));$('#copyEvents').textContent='Copied ✓';setTimeout(()=>$('#copyEvents').textContent='Copy JSON',1500)}catch{$('#copyEvents').textContent='Unavailable'}});
-const screens={home:'v17_reference_home.png',rooms:'v17_reference_rooms.png',climate:'v17_reference_climate.png',energy:'v17_reference_energy.png'};
-$$('[data-nav]').forEach(b=>b.addEventListener('click',()=>{if(screens[b.dataset.nav])$('#qtReference').src='assets/screens/'+screens[b.dataset.nav]}));
-$('#sampleButton').addEventListener('click',e=>{const active=e.currentTarget.getAttribute('aria-pressed')!=='true';e.currentTarget.setAttribute('aria-pressed',String(active));e.currentTarget.textContent=active?'Ventilation enabled':'Enable ventilation';$('#sampleState').textContent=active?'ON':'OFF';});
-fetch('metrics.json').then(r=>r.json()).then(d=>{$('#frameMiB').textContent=`${d.framesPngCompressedMiB.toFixed(2)} MiB`}).catch(()=>{});
-const hash=location.hash.replace('#','');if(['lab','system','architecture','study','performance'].includes(hash))document.querySelector(`[data-section="${hash}"]`)?.click();
+// NORDVENT Engineering Lab — original source inspection and UI workbench.
+// The inspector observes the REAL HTML application; it does not simulate hardware or Qt telemetry.
+const $=(selector,root=document)=>root.querySelector(selector);
+const $$=(selector,root=document)=>Array.from(root.querySelectorAll(selector));
+const webFrame=$('#webApp'),qtFrame=$('#qtApp');
+const webViewport=$('#webViewport'),qtViewport=$('#qtViewport');
+let webDoc=null,webWin=null,events=[],lastDiff={},sequence=0,qtStarted=false,qtReady=false;
+let iconManifest=[];let toastTimeout=0;
+const metrics={eventLimit:150};
+
+function notify(message){const el=$('#toast');el.textContent=message;el.classList.add('visible');clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>el.classList.remove('visible'),2100)}
+function fitFrame(iframe,viewport){if(!iframe||!viewport)return;const scale=viewport.clientWidth/800;iframe.style.transform=`scale(${scale})`}
+function resizeApps(){fitFrame(webFrame,webViewport);fitFrame(qtFrame,qtViewport)}
+if('ResizeObserver' in window){const observer=new ResizeObserver(resizeApps);observer.observe(webViewport);observer.observe(qtViewport)}
+addEventListener('resize',resizeApps);resizeApps();
+
+// Keep both independent runtime panels in this same page — no external navigation.
+$$('[data-layout]').forEach(b=>b.addEventListener('click',()=>{const layout=b.dataset.layout;$('#labGrid').classList.toggle('web-only',layout==='web');$('#labGrid').classList.toggle('qt-only',layout==='qt');$$('[data-layout]').forEach(x=>{const selected=x===b;x.classList.toggle('is-selected',selected);x.setAttribute('aria-pressed',String(selected))});requestAnimationFrame(resizeApps)}));
+$('#webRefresh').addEventListener('click',()=>{webFrame.src='web/index.html';notify('HTML simulation reset')});
+$('#qtRefresh').addEventListener('click',()=>{if(!qtStarted){loadQt();return;}qtReady=false;$('#qtStatus').textContent='◌ RESTARTING';$('#qtStatus').className='runtime-status status-busy';qtFrame.src=`native/?embed=1&restart=${Date.now()}`});
+$$('[data-expand]').forEach(b=>b.addEventListener('click',async()=>{const card=b.dataset.expand==='web'?$('#webCard'):$('#qtCard');try{if(document.fullscreenElement===card){await document.exitFullscreen()}else{await card.requestFullscreen()};resizeApps()}catch{notify('Fullscreen not supported by this browser')}}));
+$('#menuToggle').addEventListener('click',()=>{const header=$('.site-header');const open=header.classList.toggle('menu-open');$('#menuToggle').setAttribute('aria-expanded',String(open))});
+$$('.primary-nav a').forEach(a=>a.addEventListener('click',()=>{$('.site-header').classList.remove('menu-open');$('#menuToggle').setAttribute('aria-expanded','false')}));
+if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){$$('.primary-nav a').forEach(a=>a.classList.toggle('is-current',a.getAttribute('href')==='#'+e.target.id))}}),{rootMargin:'-20% 0px -65% 0px'});$$('main section[id]').forEach(s=>observer.observe(s))}
+
+// Actual native Qt app status is reported by the Qt host page using a same-origin message.
+function updateQtStatus(label,state){const el=$('#qtStatus');el.textContent=label;el.className=`runtime-status status-${state}`}
+async function qtBinaryPresent(){try{const r=await fetch('native/NordventDesktop.wasm',{method:'HEAD',cache:'no-cache'});return r.ok}catch{return false}}
+async function loadQt(){if(qtStarted)return;updateQtStatus('◌ CHECKING BUNDLE','busy');$('#qtHint').textContent='Checking for the published Qt WebAssembly build…';$('#loadQt').disabled=true;
+  if(!(await qtBinaryPresent())){updateQtStatus('○ BUILD PENDING','error');$('#qtHint').textContent='The compiled Qt .wasm file has not been published at /native/ yet. Original source is preserved.';$('#qtFootStatus').textContent='WASM bundle missing · Not a screenshot claimed as live';$('#loadQt').textContent='Retry Qt build check ↻';$('#loadQt').disabled=false;return}
+  qtStarted=true;updateQtStatus('◌ INITIALIZING','busy');$('#qtFootStatus').textContent='Loading real QML/C++ WebAssembly application';$('#wasmGate').hidden=true;qtFrame.src='native/?embed=1';resizeApps();}
+$('#loadQt').addEventListener('click',loadQt);
+addEventListener('message',event=>{if(event.origin!==location.origin||event.source!==qtFrame.contentWindow)return;const value=event.data||{};
+  if(value.type==='NORDVENT_WASM_READY'){qtReady=true;updateQtStatus('● QT RUNTIME ACTIVE','on');$('#qtFootStatus').textContent='Real compiled Qt Quick / QML / C++17 · browser simulation'}
+  if(value.type==='NORDVENT_WASM_ERROR'||value.type==='NORDVENT_WASM_EXIT'){qtReady=false;updateQtStatus('● QT RUNTIME ERROR','error');$('#qtFootStatus').textContent=String(value.message||'Qt runtime failed; inspect browser console').slice(0,130)}});
+// Proactive status only; actual native runtime waits for a user gesture to conserve memory.
+qtBinaryPresent().then(ok=>{if(!ok&&!qtStarted){updateQtStatus('○ BUILD NOT DEPLOYED','idle');$('#qtFootStatus').textContent='QML/C++ source exists · Generated WebAssembly not yet published';$('#qtHint').textContent='Deploy the GitHub Actions Qt build to activate this panel.'}});
+
+// Source-linked instrumentation, not a synthetic second simulation.
+function snapshot(){try{return webWin?.__NORDVENT_DEV__?.snapshot()||null}catch{return null}}
+function eq(a,b){return JSON.stringify(a)===JSON.stringify(b)}
+function diff(a,b,prefix='',result={}){if(eq(a,b))return result;if(a&&b&&typeof a==='object'&&typeof b==='object'&&!Array.isArray(a)&&!Array.isArray(b)){for(const key of new Set([...Object.keys(a),...Object.keys(b)]))diff(a[key],b[key],prefix?`${prefix}.${key}`:key,result)}else result[prefix||'value']={before:a===undefined?null:a,after:b===undefined?null:b};return result}
+function eventTargetName(target){if(target.dataset.page)return`Page / ${target.dataset.page}`;if(target.dataset.range)return`Range / ${target.dataset.range}`;if(target.dataset.action)return`${target.dataset.action}${target.dataset.room?' / '+target.dataset.room:''}`;if(target.dataset.room)return`Room / ${target.dataset.room}`;return(target.getAttribute('aria-label')||target.textContent||target.tagName||'Interaction').trim().replace(/\s+/g,' ').slice(0,55)}
+function pushEvent(e){events.unshift(e);events=events.slice(0,metrics.eventLimit);$('#eventCount').textContent=String(events.length);$('#lastEventTime').textContent=e.time;renderEvents()}
+function renderEvents(){const container=$('#eventsPanel');container.replaceChildren();if(!events.length){const p=document.createElement('p');p.className='empty-log';p.textContent='Events will appear here as you use the HTML application.';container.append(p);return}
+  events.slice(0,65).forEach(e=>{const row=document.createElement('div');row.className='event-line';const time=document.createElement('span');time.className='event-time';time.textContent=e.time;const detail=document.createElement('div');detail.className='event-main';const h=document.createElement('strong');h.textContent=`#${e.id} · ${e.type.toUpperCase()} · ${e.action}`;const sm=document.createElement('small');const changes=Object.entries(e.changes);sm.textContent=changes.length?changes.slice(0,4).map(([key,val])=>`${key}: ${JSON.stringify(val.before)} → ${JSON.stringify(val.after)}`).join(' · '):'No tracked state change (possibly navigation, focus or dialog).';detail.append(h,sm);row.append(time,detail);container.append(row)})}
+function renderJSON(){const snap=snapshot();$('#statePanel').textContent=snap?JSON.stringify(snap,null,2):'Source state bridge is unavailable';$('#diffPanel').textContent=Object.keys(lastDiff).length?JSON.stringify(lastDiff,null,2):'No tracked state changes yet'}
+function watch(event){const target=event.target?.closest?.('button,input,select');if(!target||target.disabled)return;if(event.type==='input'&&target.type!=='range')return;if(event.type==='click'&&target.type==='range')return;const before=snapshot();const name=eventTargetName(target);const type=event.type;
+  setTimeout(()=>{const after=snapshot();lastDiff=diff(before,after);pushEvent({id:++sequence,time:new Date().toLocaleTimeString('en-GB',{hour12:false}),type,action:name,changes:lastDiff,simulation:true});renderJSON()},70)}
+function attachWeb(){try{webWin=webFrame.contentWindow;webDoc=webWin.document;const initial=snapshot();if(!initial)throw Error('Original state contract not available');$('#bridgeStatus').textContent='● HTML STATE CONNECTED';$('#bridgeStatus').classList.add('ok');$('#webStatus').textContent='● LIVE WEB';webDoc.addEventListener('click',watch,true);webDoc.addEventListener('input',watch,true);webDoc.addEventListener('change',e=>{if(e.target.tagName==='SELECT')watch(e)},true);events=[];lastDiff={};$('#eventCount').textContent='0';renderEvents();renderJSON()}
+  catch(error){$('#bridgeStatus').textContent='SOURCE BRIDGE UNAVAILABLE';$('#bridgeStatus').classList.remove('ok');$('#webStatus').textContent='○ SOURCE UNAVAILABLE';console.warn('NORDVENT inspector:',error)}}
+webFrame.addEventListener('load',()=>{resizeApps();attachWeb()});
+$$('[data-inspect]').forEach(button=>button.addEventListener('click',()=>{$$('[data-inspect]').forEach(b=>b.classList.toggle('is-selected',b===button));for(const id of ['events','state','diff'])$('#'+id+'Panel').hidden=id!==button.dataset.inspect;renderJSON()}));
+$$('[data-page]').forEach(button=>button.addEventListener('click',()=>{try{const nav=webDoc?.querySelector(`[data-page="${button.dataset.page}"]`);if(nav){nav.click();notify(`Opened ${button.dataset.page} in HTML application`)}else notify('Original HTML preview is not ready')}catch{notify('Original web preview unavailable')}}));
+$('#clearEvents').addEventListener('click',()=>{events=[];lastDiff={};$('#eventCount').textContent='0';renderEvents();renderJSON();notify('Inspector history cleared')});
+$('#copyEvents').addEventListener('click',()=>copyText(JSON.stringify(events,null,2),'Event JSON copied'));
+async function copyText(text,message){try{await navigator.clipboard.writeText(text);notify(message)}catch{notify('Clipboard unavailable on this page')}}
+
+// Authored from NORDVENT's original web :root palette and 48x48 Qt PNG exports.
+async function initDesignSystem(){try{const [tokenResp,iconResp]=await Promise.all([fetch('design-system/tokens.json'),fetch('design-system/icons.json')]);if(!tokenResp.ok||!iconResp.ok)throw Error('Design system manifest missing');const tokens=await tokenResp.json();iconManifest=await iconResp.json();
+    const palette=$('#colorGrid');for(const [name,hex] of Object.entries(tokens.colors)){const b=document.createElement('button');b.type='button';b.className='color-card';b.setAttribute('aria-label',`Copy ${name} ${hex}`);const swatch=document.createElement('span');swatch.className='color-swatch';swatch.style.background=hex;const heading=document.createElement('strong');heading.textContent=name.replace(/-/g,' ');const code=document.createElement('small');code.textContent=hex.toUpperCase();b.append(swatch,heading,code);b.addEventListener('click',()=>copyText(hex.toUpperCase(),`${name} · ${hex.toUpperCase()} copied`));palette.append(b)}
+    $('#assetCount').textContent=String(iconManifest.length);renderIcons();}catch(err){$('#colorGrid').textContent='The source-token manifest could not be loaded.';$('#iconGrid').textContent='Native icon manifest unavailable.';$('#iconCount').textContent=String(err.message)}}
+function renderIcons(){const query=$('#iconSearch').value.trim().toLowerCase(),variant=$('#iconVariant').value;const items=iconManifest.filter(item=>(variant==='all'||item.variant===variant)&&(!query||item.name.toLowerCase().includes(query)));const grid=$('#iconGrid');grid.replaceChildren();const fragment=document.createDocumentFragment();
+  for(const item of items){const button=document.createElement('button');button.type='button';button.className='icon-card';button.title=`${item.name} — original native Qt export`;const img=document.createElement('img');img.loading='lazy';img.src=item.path;img.width=48;img.height=48;img.alt='';const label=document.createElement('span');label.textContent=item.name.replace(/_/g,' / ');button.append(img,label);button.addEventListener('click',()=>copyText(`native-qt/assets/icons/${item.name}.png`,'Native asset path copied'));fragment.append(button)}grid.append(fragment);$('#iconCount').textContent=`Showing ${items.length} of ${iconManifest.length} real icon files`}
+$('#iconSearch').addEventListener('input',renderIcons);$('#iconVariant').addEventListener('change',renderIcons);initDesignSystem();
+
+// The specimen playground is a separate controlled preview, not a live hardware connection.
+let clicks=0;function feedback(message){clicks++;$('#sampleFeedback').textContent=`LOCAL / ${String(clicks).padStart(2,'0')} · ${message}`;}
+$$('[data-theme]').forEach(button=>button.addEventListener('click',()=>{$$('[data-theme]').forEach(b=>b.classList.toggle('is-selected',b===button));$('#componentSurface').dataset.themeMode=button.dataset.theme;feedback(button.dataset.theme==='day'?'Light concept (exploration only)':'Original dark tokens')}));
+$$('[data-demo-action]').forEach(button=>button.addEventListener('click',()=>feedback(button.dataset.demoAction)));
+$$('[data-demo-mode]').forEach(button=>button.addEventListener('click',()=>{$$('[data-demo-mode]').forEach(b=>{const on=b===button;b.classList.toggle('active',on);b.setAttribute('aria-pressed',String(on))});$('#modeValue').textContent=button.dataset.demoMode.toUpperCase();feedback(`Mode: ${button.dataset.demoMode}`)}));
+$('#setpointDemo').addEventListener('input',event=>{$('#setpointValue').textContent=Number(event.target.value).toFixed(1);feedback(`Setpoint: ${event.target.value} °C`)});
+$('#fanSwitch').addEventListener('click',()=>{const sw=$('#fanSwitch'),on=sw.getAttribute('aria-checked')!=='true';sw.setAttribute('aria-checked',String(on));sw.classList.toggle('on',on);$('#fanLabel').textContent=on?'ON':'OFF';feedback(`Ventilation: ${on?'ON':'OFF'}`)});
+$('#blindToggle').addEventListener('click',()=>{$('#blindStudy').classList.toggle('is-closed');feedback('Blinds sample toggled')});
+$('#motionEnabled').addEventListener('change',event=>{$('#motionGallery').classList.toggle('is-paused',!event.target.checked);feedback(event.target.checked?'Motion enabled':'Motion paused')});
+fetch('metrics.json').then(r=>r.ok?r.json():null).then(data=>{if(data&&typeof data.framesPngCompressedMiB==='number')$('#frameMiB').textContent=`${data.framesPngCompressedMiB.toFixed(2)} MiB`}).catch(()=>{});

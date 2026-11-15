@@ -1,0 +1,576 @@
+[
+  {
+    "name": "air_active",
+    "variant": "active",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/air_active.png"
+  },
+  {
+    "name": "air_idle",
+    "variant": "idle",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/air_idle.png"
+  },
+  {
+    "name": "air_white",
+    "variant": "white",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/air_white.png"
+  },
+  {
+    "name": "back_active",
+    "variant": "active",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/back_active.png"
+  },
+  {
+    "name": "back_idle",
+    "variant": "idle",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/back_idle.png"
+  },
+  {
+    "name": "back_white",
+    "variant": "white",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/back_white.png"
+  },
+  {
+    "name": "blinds_active",
+    "variant": "active",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/blinds_active.png"
+  },
+  {
+    "name": "blinds_idle",
+    "variant": "idle",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/blinds_idle.png"
+  },
+  {
+    "name": "blinds_white",
+    "variant": "white",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/blinds_white.png"
+  },
+  {
+    "name": "check_active",
+    "variant": "active",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/check_active.png"
+  },
+  {
+    "name": "check_idle",
+    "variant": "idle",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/check_idle.png"
+  },
+  {
+    "name": "check_white",
+    "variant": "white",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/check_white.png"
+  },
+  {
+    "name": "clock_active",
+    "variant": "active",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/clock_active.png"
+  },
+  {
+    "name": "clock_idle",
+    "variant": "idle",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/clock_idle.png"
+  },
+  {
+    "name": "clock_white",
+    "variant": "white",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/clock_white.png"
+  },
+  {
+    "name": "close_active",
+    "variant": "active",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/close_active.png"
+  },
+  {
+    "name": "close_idle",
+    "variant": "idle",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/close_idle.png"
+  },
+  {
+    "name": "close_white",
+    "variant": "white",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/close_white.png"
+  },
+  {
+    "name": "energy_active",
+    "variant": "active",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/energy_active.png"
+  },
+  {
+    "name": "energy_idle",
+    "variant": "idle",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/energy_idle.png"
+  },
+  {
+    "name": "energy_white",
+    "variant": "white",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/energy_white.png"
+  },
+  {
+    "name": "fan_active",
+    "variant": "active",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/fan_active.png"
+  },
+  {
+    "name": "fan_idle",
+    "variant": "idle",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/fan_idle.png"
+  },
+  {
+    "name": "fan_white",
+    "variant": "white",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/fan_white.png"
+  },
+  {
+    "name": "focus_active",
+    "variant": "active",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/focus_active.png"
+  },
+  {
+    "name": "focus_idle",
+    "variant": "idle",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/focus_idle.png"
+  },
+  {
+    "name": "focus_white",
+    "variant": "white",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/focus_white.png"
+  },
+  {
+    "name": "home_active",
+    "variant": "active",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/home_active.png"
+  },
+  {
+    "name": "home_idle",
+    "variant": "idle",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/home_idle.png"
+  },
+  {
+    "name": "home_white",
+    "variant": "white",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/home_white.png"
+  },
+  {
+    "name": "info_active",
+    "variant": "active",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/info_active.png"
+  },
+  {
+    "name": "info_idle",
+    "variant": "idle",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/info_idle.png"
+  },
+  {
+    "name": "info_white",
+    "variant": "white",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/info_white.png"
+  },
+  {
+    "name": "light_active",
+    "variant": "active",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/light_active.png"
+  },
+  {
+    "name": "light_idle",
+    "variant": "idle",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/light_idle.png"
+  },
+  {
+    "name": "light_white",
+    "variant": "white",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/light_white.png"
+  },
+  {
+    "name": "minus_active",
+    "variant": "active",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/minus_active.png"
+  },
+  {
+    "name": "minus_idle",
+    "variant": "idle",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/minus_idle.png"
+  },
+  {
+    "name": "minus_white",
+    "variant": "white",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/minus_white.png"
+  },
+  {
+    "name": "moon_active",
+    "variant": "active",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/moon_active.png"
+  },
+  {
+    "name": "moon_idle",
+    "variant": "idle",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/moon_idle.png"
+  },
+  {
+    "name": "moon_white",
+    "variant": "white",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/moon_white.png"
+  },
+  {
+    "name": "more_active",
+    "variant": "active",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/more_active.png"
+  },
+  {
+    "name": "more_idle",
+    "variant": "idle",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/more_idle.png"
+  },
+  {
+    "name": "more_white",
+    "variant": "white",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/more_white.png"
+  },
+  {
+    "name": "nordvent_logo",
+    "variant": "base",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/nordvent_logo.png"
+  },
+  {
+    "name": "nv-lock_active",
+    "variant": "active",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/nv-lock_active.png"
+  },
+  {
+    "name": "nv-lock_idle",
+    "variant": "idle",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/nv-lock_idle.png"
+  },
+  {
+    "name": "nv-lock_white",
+    "variant": "white",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/nv-lock_white.png"
+  },
+  {
+    "name": "nv-shield-idle_active",
+    "variant": "active",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/nv-shield-idle_active.png"
+  },
+  {
+    "name": "nv-shield-idle_idle",
+    "variant": "idle",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/nv-shield-idle_idle.png"
+  },
+  {
+    "name": "nv-shield-idle_white",
+    "variant": "white",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/nv-shield-idle_white.png"
+  },
+  {
+    "name": "nv-shield_active",
+    "variant": "active",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/nv-shield_active.png"
+  },
+  {
+    "name": "nv-shield_idle",
+    "variant": "idle",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/nv-shield_idle.png"
+  },
+  {
+    "name": "nv-shield_white",
+    "variant": "white",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/nv-shield_white.png"
+  },
+  {
+    "name": "nv-system_active",
+    "variant": "active",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/nv-system_active.png"
+  },
+  {
+    "name": "nv-system_idle",
+    "variant": "idle",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/nv-system_idle.png"
+  },
+  {
+    "name": "nv-system_white",
+    "variant": "white",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/nv-system_white.png"
+  },
+  {
+    "name": "nv-unlock_active",
+    "variant": "active",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/nv-unlock_active.png"
+  },
+  {
+    "name": "nv-unlock_idle",
+    "variant": "idle",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/nv-unlock_idle.png"
+  },
+  {
+    "name": "nv-unlock_white",
+    "variant": "white",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/nv-unlock_white.png"
+  },
+  {
+    "name": "plus_active",
+    "variant": "active",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/plus_active.png"
+  },
+  {
+    "name": "plus_idle",
+    "variant": "idle",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/plus_idle.png"
+  },
+  {
+    "name": "plus_white",
+    "variant": "white",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/plus_white.png"
+  },
+  {
+    "name": "rooms_active",
+    "variant": "active",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/rooms_active.png"
+  },
+  {
+    "name": "rooms_idle",
+    "variant": "idle",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/rooms_idle.png"
+  },
+  {
+    "name": "rooms_white",
+    "variant": "white",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/rooms_white.png"
+  },
+  {
+    "name": "shield_active",
+    "variant": "active",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/shield_active.png"
+  },
+  {
+    "name": "shield_idle",
+    "variant": "idle",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/shield_idle.png"
+  },
+  {
+    "name": "shield_white",
+    "variant": "white",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/shield_white.png"
+  },
+  {
+    "name": "snow_active",
+    "variant": "active",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/snow_active.png"
+  },
+  {
+    "name": "snow_idle",
+    "variant": "idle",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/snow_idle.png"
+  },
+  {
+    "name": "snow_white",
+    "variant": "white",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/snow_white.png"
+  },
+  {
+    "name": "sun_active",
+    "variant": "active",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/sun_active.png"
+  },
+  {
+    "name": "sun_idle",
+    "variant": "idle",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/sun_idle.png"
+  },
+  {
+    "name": "sun_white",
+    "variant": "white",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/sun_white.png"
+  },
+  {
+    "name": "temp_active",
+    "variant": "active",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/temp_active.png"
+  },
+  {
+    "name": "temp_idle",
+    "variant": "idle",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/temp_idle.png"
+  },
+  {
+    "name": "temp_white",
+    "variant": "white",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/temp_white.png"
+  },
+  {
+    "name": "water_active",
+    "variant": "active",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/water_active.png"
+  },
+  {
+    "name": "water_idle",
+    "variant": "idle",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/water_idle.png"
+  },
+  {
+    "name": "water_white",
+    "variant": "white",
+    "width": 48,
+    "height": 48,
+    "path": "assets/icons/water_white.png"
+  }
+]

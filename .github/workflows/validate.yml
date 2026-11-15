@@ -8,13 +8,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Recover assets from v17 source HTML
+        run: |
+          python3 -m pip install 'Pillow>=11,<13' 'CairoSVG>=2.7,<3' 'beautifulsoup4>=4.12,<5'
+          python3 scripts/rebuild_assets_from_standalone.py
+          python3 native-qt/tests/check_project.py
+          python3 native-qt/tests/check_animation_routes.py
       - name: Node syntax checks
         run: |
           node --check docs/lab.js
           node --check docs/web/app.js
           node --check web/app.js
-      - name: Source and Pages asset validation
-        run: python3 tools/validate_repo.py
+      - name: Source and build integrity
+        run: |
+          test -s web/NORDVENT_Standalone.html
+          test -s docs/index.html
+          test -s native-qt/src/main.cpp
       - name: Configure C++ core
         run: cmake -S native-qt/core -B build/core -DCMAKE_BUILD_TYPE=Release
       - name: Build C++ core

@@ -13,11 +13,18 @@ assert 'All rights reserved' in (root/'LICENSE.md').read_text(), 'Missing propri
 assert len(list((site/'web/assets/sequence_webp').glob('frame_*.webp'))) == 15, 'Web sequence incomplete'
 assert len(list((root/'native-qt/assets/sequence').glob('frame_*.png'))) == 15, 'Qt sequence incomplete'
 assert len(list((root/'native-qt/assets/lighting').glob('*.png'))) == 8, 'Lighting overlays incomplete'
-assert 'window.__NORDVENT_DEV__' in (site/'web/app.js').read_text(), 'Missing read-only inspector bridge'
-assert 'window.__NORDVENT_DEV__' not in (root/'web/app.js').read_text(), 'Do not mutate original HTML source'
+assert 'window.__NORDVENT_DEV__' in (site/'web/index.html').read_text(), 'Missing read-only inspector bridge in live original application'
+assert 'window.__NORDVENT_DEV__' not in (root/'web/NORDVENT_Standalone.html').read_text(), 'Do not mutate original authored HTML source'
+# Only inspect actual tag attributes, not JavaScript template strings in the original HTML.
+from html.parser import HTMLParser
+class LinkChecker(HTMLParser):
+    def __init__(self):
+        super().__init__();self.refs=[]
+    def handle_starttag(self,tag,attrs):
+        self.refs.extend(v for k,v in attrs if k in ('src','href') and v)
 for file in (site/'index.html',site/'web/index.html'):
-    html=file.read_text(encoding='utf8')
-    for relative in re.findall(r'(?:src|href)="([^"]+)"',html):
-        if not relative or relative.startswith(('http://','https://','data:','blob:','#','mailto:','../')): continue
+    checker=LinkChecker();checker.feed(file.read_text(encoding='utf8'))
+    for relative in checker.refs:
+        if relative.startswith(('http://','https://','data:','blob:','#','mailto:','../')):continue
         assert (file.parent/relative).exists(),f'Missing relative link: {file}: {relative}'
 print('NORDVENT repo integrity: PASS')
