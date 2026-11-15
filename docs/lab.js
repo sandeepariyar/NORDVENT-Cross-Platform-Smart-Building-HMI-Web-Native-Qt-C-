@@ -19,7 +19,62 @@ addEventListener('resize',resizeApps);resizeApps();
 $$('[data-layout]').forEach(b=>b.addEventListener('click',()=>{const layout=b.dataset.layout;$('#labGrid').classList.toggle('web-only',layout==='web');$('#labGrid').classList.toggle('qt-only',layout==='qt');$$('[data-layout]').forEach(x=>{const selected=x===b;x.classList.toggle('is-selected',selected);x.setAttribute('aria-pressed',String(selected))});requestAnimationFrame(resizeApps)}));
 $('#webRefresh').addEventListener('click',()=>{webFrame.src='web/index.html';notify('HTML simulation reset')});
 $('#qtRefresh').addEventListener('click',()=>{if(!qtStarted){loadQt();return;}qtReady=false;$('#qtStatus').textContent='◌ RESTARTING';$('#qtStatus').className='runtime-status status-busy';qtFrame.src=`native/?embed=1&restart=${Date.now()}`});
-$$('[data-expand]').forEach(b=>b.addEventListener('click',async()=>{const card=b.dataset.expand==='web'?$('#webCard'):$('#qtCard');try{if(document.fullscreenElement===card){await document.exitFullscreen()}else{await card.requestFullscreen()};resizeApps()}catch{notify('Fullscreen not supported by this browser')}}));
+// Two device inspection modes. Neither invokes the browser's fullscreen API.
+let physicalCard=null;
+let physicalMode='device';
+const physicalMask=$('#physicalMask'),physicalTools=$('#physicalTools');
+const physicalAdjust=$('#physicalAdjust'),physicalPercent=$('#physicalPercent');
+const savedPhysicalScale=Number(localStorage.getItem('nordventPhysicalCalibration'))||100;
+physicalAdjust.value=Math.min(180,Math.max(50,savedPhysicalScale));
+function renderPhysical(){
+  if(!physicalCard)return;
+  const nominalWidthMm=5*25.4*800/Math.hypot(800,480);
+  const nominalHeightMm=5*25.4*480/Math.hypot(800,480);
+  const factor=Number(physicalAdjust.value)/100;
+  const width=physicalMode==='pixels'?800:nominalWidthMm*96/25.4*factor;
+  const height=physicalMode==='pixels'?480:nominalHeightMm*96/25.4*factor;
+  const roomWidth=Math.max(100,innerWidth-30),roomHeight=Math.max(100,innerHeight-225);
+  const safetyScale=Math.min(1,roomWidth/width,roomHeight/height);
+  const scaledWidth=width*safetyScale,scaledHeight=height*safetyScale;
+  physicalCard.style.setProperty('--physical-width',scaledWidth+'px');
+  physicalCard.style.setProperty('--physical-height',scaledHeight+'px');
+  physicalCard.style.setProperty('--physical-scale',scaledWidth/800);
+  $('#physicalRuler').style.width=(100*96/25.4*factor)+'px';
+  physicalPercent.textContent=physicalMode==='pixels'?'800 × 480 logical pixels at CSS 1:1'+(safetyScale<1?' · reduced to fit window':''):'5-inch screen · '+Number(physicalAdjust.value)+'% calibration'+(safetyScale<1?' · reduced to fit window':'');
+  resizeApps();
+}
+function closePhysical(){
+  if(!physicalCard)return;
+  physicalCard.classList.remove('physical-active');
+  physicalCard.style.removeProperty('--physical-width');
+  physicalCard.style.removeProperty('--physical-height');
+  physicalCard.style.removeProperty('--physical-scale');
+  physicalCard=null;
+  physicalMask.hidden=true;physicalTools.hidden=true;
+  document.body.classList.remove('physical-open');
+  resizeApps();
+}
+function openPhysical(card,mode){
+  if(physicalCard)closePhysical();
+  physicalCard=card;physicalMode=mode;
+  physicalMask.hidden=false;physicalTools.hidden=false;
+  document.body.classList.add('physical-open');
+  card.classList.add('physical-active');
+  $('#physicalLabel').textContent='NORDVENT · '+(mode==='pixels'?'800 × 480 PIXEL INSPECTION':'CALIBRATED PHYSICAL SCREEN');
+  physicalTools.classList.toggle('pixel-mode',mode==='pixels');
+  renderPhysical();
+}
+$('[data-expand]').forEach(b=>b.addEventListener('click',()=>{
+  const card=b.dataset.expand==='web'?$('#webCard'):$('#qtCard');
+  openPhysical(card,'device');
+}));
+$('#closePhysical').addEventListener('click',closePhysical);
+physicalMask.addEventListener('click',closePhysical);
+addEventListener('keydown',event=>{if(event.key==='Escape'&&physicalCard)closePhysical()});
+physicalAdjust.addEventListener('input',()=>{localStorage.setItem('nordventPhysicalCalibration',physicalAdjust.value);renderPhysical()});
+$('#resetPhysical').addEventListener('click',()=>{physicalAdjust.value=100;localStorage.removeItem('nordventPhysicalCalibration');renderPhysical()});
+addEventListener('resize',()=>{if(physicalCard)renderPhysical()});
+
 $('#menuToggle').addEventListener('click',()=>{const header=$('.site-header');const open=header.classList.toggle('menu-open');$('#menuToggle').setAttribute('aria-expanded',String(open))});
 $$('.primary-nav a').forEach(a=>a.addEventListener('click',()=>{$('.site-header').classList.remove('menu-open');$('#menuToggle').setAttribute('aria-expanded','false')}));
 if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){$$('.primary-nav a').forEach(a=>a.classList.toggle('is-current',a.getAttribute('href')==='#'+e.target.id))}}),{rootMargin:'-20% 0px -65% 0px'});$$('main section[id]').forEach(s=>observer.observe(s))}
