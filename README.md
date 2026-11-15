@@ -23,6 +23,8 @@ The web and Qt applications are **separate implementations**, not a single share
 - `tools/` — source integrity checks
 - `.github/workflows/` — validation pipeline
 
+Read the [complete-source publishing instructions](PUBLISHING.md) for the one-command Windows upload.
+
 **Publishing status:** The repository has been initialized with the project description and proprietary notice. The full source/assets upload is a separate step; paths above may not appear until it completes. Do not enable GitHub Pages as a completed demonstration until the files are present.
 
 Once the complete source is uploaded, enable GitHub Pages under **Settings → Pages → Deploy from a branch → main /docs**.
