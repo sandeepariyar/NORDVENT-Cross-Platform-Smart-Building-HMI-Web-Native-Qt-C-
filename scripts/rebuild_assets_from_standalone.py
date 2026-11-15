@@ -139,14 +139,11 @@ def main():
             d=DOC_DST/p.name
             d.parent.mkdir(parents=True,exist_ok=True)
             if args.force or not d.exists():d.write_bytes(p.read_bytes())
-    # The browser comparison uses the exact self-contained original v17 application.
-    # Expose its internal state only for the same-origin read-only engineering inspector.
-    bridge="\nwindow.__NORDVENT_DEV__ = Object.freeze({snapshot: () => JSON.parse(JSON.stringify(state))});\n"
-    anchor="})();\n\n</script>"
-    if html.count(anchor) != 1: raise RuntimeError('Cannot instrument original v17 IIFE')
+    # Publish the original standalone HTML unchanged. Browser-side diagnostic
+    # injection was removed; the engineering inspector now reads native C++.
     web_out=ROOT/'docs/web/index.html'
     web_out.parent.mkdir(parents=True,exist_ok=True)
-    web_out.write_text(html.replace(anchor,bridge+anchor),encoding='utf-8')
+    web_out.write_text(html,encoding='utf-8')
     # The website icon and motion galleries use the original SVG symbols and FX exports.
     for p in (DST/'icons').glob('*.png'):
         d=DOC_DST/p.name
