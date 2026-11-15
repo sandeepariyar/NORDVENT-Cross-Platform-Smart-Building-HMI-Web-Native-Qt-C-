@@ -1,0 +1,52 @@
+name: NORDVENT · Showcase / GitHub Pages
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: nordvent-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Validate and package website
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Verify landing page and proprietary attribution
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s docs/index.html
+          test -f docs/.nojekyll
+          grep -q 'Sandeep Pariyar' docs/index.html
+          grep -qi 'All Rights Reserved' docs/index.html
+          if test -d docs/web; then test -s docs/web/index.html; fi
+      - name: Prepare Pages
+        uses: actions/configure-pages@v5
+      - name: Upload website files only
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: docs
+
+  deploy:
+    name: Publish Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
