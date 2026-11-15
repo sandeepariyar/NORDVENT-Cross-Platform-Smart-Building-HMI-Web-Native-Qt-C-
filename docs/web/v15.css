@@ -1,0 +1,59 @@
+/* NORDVENT v15 — Spatial data lives on the building; large physical controls stay left. */
+.climate-v15,.energy-v15{width:252px!important;height:375px!important;padding:20px 17px 12px!important;background:linear-gradient(90deg,#061b2bf9 0%,#092738f6 95%,#092738e9 100%)}
+.climate-v15 .side-titleline,.energy-v15 .side-titleline{min-height:44px;margin-top:7px}
+.climate-v15 .side-titleline h2,.energy-v15 .side-titleline h2{font-size:26px}
+.climate-v15 .side-titleline small,.energy-v15 .side-titleline small{font-size:10px}
+.v15-command-rows{display:grid;gap:4px;margin-top:14px}
+.v15-command-row{height:56px;display:flex;justify-content:space-between;align-items:center;gap:6px;border-bottom:1px solid #c0dce31b}
+.v15-command-row>span{display:flex;align-items:center;gap:9px;min-width:0;color:#cfecf2}
+.v15-command-row>span b{font-size:12px;font-weight:650;white-space:nowrap}
+.v15-command-row .ico{color:#62dbdb;width:18px;height:18px;flex:none}
+.v15-control-switch{height:43px;min-width:85px;padding:0 10px;border:1px solid #6a9ea93f;border-radius:9px;background:#1c3748b8;color:#bacdd7;font-size:12px;font-weight:730;transition:background .15s,color .15s,border-color .15s}
+.v15-control-switch.is-on{background:#125763c9;border-color:#5ce5e6aa;color:#b3fff9}
+.v15-control-switch.is-warning{color:#ffe1ad;border-color:#dca97077;background:#51413044}
+.v15-control-switch:active,.v15-boost:active,.v15-hud-modes button:active{transform:scale(.975)}
+.v15-boost{width:100%;height:51px;margin-top:15px;border:0;border-radius:10px;background:#55dadd;color:#08313e;font-size:12px;font-weight:780;display:flex;gap:7px;align-items:center;justify-content:center;box-shadow:0 3px 14px #19baca36;transition:background .16s}
+.v15-boost .ico{height:18px;width:18px}
+.v15-boost small{font-size:10px;font-weight:720;margin-left:auto;margin-right:8px;color:#174455}
+.v15-boost.is-active{background:#d2fcff;color:#062f3d}
+.v15-manual-control{margin-top:7px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:2px 8px;height:42px}
+.v15-manual-control label{font-size:9px;color:#a2c9d3}
+.v15-manual-control output{font-size:10px;color:#dbf5fb;font-variant-numeric:tabular-nums}
+.v15-manual-control input{grid-column:span 2;width:100%;height:18px;margin:0}
+.v15-pump-status{display:flex;align-items:center;justify-content:space-between;height:43px;margin-top:9px;border-bottom:1px solid #c0dce322;color:#a8c8d4;font-size:11px}
+.v15-pump-status>span{display:flex;align-items:center;gap:7px}
+.v15-pump-status .ico{height:15px;width:15px}
+.v15-pump-status strong{color:#d6f5f8;font-weight:700}
+.v15-pump-status .is-warning{color:#ffbd94}
+.v15-health-link{height:40px;width:100%;background:transparent;border:1px solid #61b7bf3a;border-radius:9px;color:#b9e9e8;font-size:11px;display:flex;align-items:center;gap:8px;justify-content:center;margin-top:10px}
+.v15-health-link .ico{height:14px;width:14px}.v15-health-link span{font-size:18px;line-height:1}
+/* Floating HUD: placed in the dark left sky, below the permanent security chips. */
+.v15-hud{position:absolute;left:282px;top:105px;width:228px;z-index:12;pointer-events:auto;border:0;border-radius:10px;padding:11px 12px 12px;background:linear-gradient(100deg,#061b2bb8,#061b2b72 70%,#061b2b21);color:#ecfeff;box-shadow:0 7px 22px #00142038;isolation:isolate}
+.v15-hud-kicker{display:flex;align-items:center;gap:6px;font-size:9px;font-weight:750;letter-spacing:1px;color:#aee4e4;white-space:nowrap}
+.v15-hud-kicker .v15-dot{width:6px;height:6px;flex:none;border-radius:100%;background:#60f0ef;box-shadow:0 0 6px #43e9e8}
+.v15-hud-kicker em{margin-left:auto;max-width:120px;overflow:hidden;text-overflow:ellipsis;font-size:8px;letter-spacing:.4px;color:#9fc4d1;font-style:normal}
+.v15-hud-value{display:flex;align-items:baseline;gap:8px;margin:5px 0 9px}
+.v15-hud-value strong{font-size:44px;font-weight:720;line-height:1.07;letter-spacing:-1.9px;color:#f5ffff;font-variant-numeric:tabular-nums;text-shadow:0 2px 7px #0009}
+.v15-hud-value>span{font-size:13px;color:#72efeb;font-weight:740}
+.v15-hud-modes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+.v15-hud-modes button{min-height:43px;padding:0 5px;border:1px solid #4c9baf63;border-radius:8px;background:#102e41db;color:#c5dce6;font-size:11px;font-weight:710}
+.v15-hud-modes button.active{background:#165865e9;border-color:#55ece6;color:#f0ffff;box-shadow:inset 0 -2px #65fcf1}
+.v15-hud-modes button:focus-visible{outline:2px solid #acffff;outline-offset:2px}
+.v15-hud-message{font-size:9px;margin-top:8px;line-height:1.2;color:#a8faf0}
+.v15-energy-hud{top:119px}
+.v15-energy-hud .v15-hud-value>span{color:#f3c78c}
+.v15-energy-hud .v15-dot{background:#f8b566;box-shadow:0 0 7px #f0aa73}
+.v15-energy-status{display:flex;gap:7px}
+.v15-energy-status>span{flex:1;display:flex;align-items:center;gap:4px;min-width:0;padding:7px 6px;border-radius:7px;background:#112b3dcb;font-size:10px;color:#cde5ed;white-space:nowrap}
+.v15-energy-status .ico{width:12px;height:12px;flex:none}
+.v15-energy-status b{margin-left:auto;color:#e9f6f9;font-weight:730}
+.v15-heat .ico{color:#ffbb77}.v15-water .ico{color:#8aaeff}
+.v15-energy-distribution{height:5px;display:flex;width:100%;gap:2px;margin-top:11px;border-radius:4px;overflow:hidden;background:#1d3442}
+.v15-energy-distribution i{display:block;height:100%;min-width:1px}
+.reduce-motion .v15-hud-modes button,.reduce-motion .v15-boost,.reduce-motion .v15-control-switch{transition:none}
+/* Manual-only density adjustment: slider may never push Boost under the nav. */
+.climate-v15:has(.v15-manual-control) .v15-command-rows{margin-top:7px;gap:0}
+.climate-v15:has(.v15-manual-control) .v15-command-row{height:48px}
+.climate-v15:has(.v15-manual-control) .v15-control-switch{height:38px}
+.climate-v15:has(.v15-manual-control) .v15-manual-control{margin-top:6px;height:41px}
+.climate-v15:has(.v15-manual-control) .v15-boost{height:44px;margin-top:7px}

@@ -1,0 +1,262 @@
+[
+  {
+    "name": "Global system-health chip visible",
+    "passed": true
+  },
+  {
+    "name": "Health OK on startup",
+    "passed": true
+  },
+  {
+    "name": "Animated background bundled offline",
+    "passed": true
+  },
+  {
+    "name": "Alarm and lock remain over the building",
+    "passed": true
+  },
+  {
+    "name": "Living light is on by default",
+    "passed": true
+  },
+  {
+    "name": "Airflow moved to house",
+    "passed": true
+  },
+  {
+    "name": "Eco airflow shown in house overlay",
+    "passed": true
+  },
+  {
+    "name": "No redundant large number in left dock",
+    "passed": true
+  },
+  {
+    "name": "Eco/Auto/Manual selector located on house",
+    "passed": true
+  },
+  {
+    "name": "Three large side controls",
+    "passed": true
+  },
+  {
+    "name": "Side switches have 43px touch targets",
+    "passed": true
+  },
+  {
+    "name": "Mode selector has 43px touch targets",
+    "passed": true
+  },
+  {
+    "name": "Climate HUD avoids lock",
+    "passed": true
+  },
+  {
+    "name": "Climate HUD avoids alarm",
+    "passed": true
+  },
+  {
+    "name": "Climate HUD avoids system-health chip",
+    "passed": true
+  },
+  {
+    "name": "Climate HUD avoids control dock",
+    "passed": true
+  },
+  {
+    "name": "Auto airflow updates house overlay",
+    "passed": true
+  },
+  {
+    "name": "Auto FX active",
+    "passed": true
+  },
+  {
+    "name": "Manual reveals slider in dock only when needed",
+    "passed": true
+  },
+  {
+    "name": "Manual selected visually",
+    "passed": true
+  },
+  {
+    "name": "Manual input changes house flow immediately",
+    "passed": true
+  },
+  {
+    "name": "Manual control readout updates",
+    "passed": true
+  },
+  {
+    "name": "Manual keeps Boost completely above nav",
+    "passed": true
+  },
+  {
+    "name": "Boost airflow shown on building",
+    "passed": true
+  },
+  {
+    "name": "Boost distinct animation state",
+    "passed": true
+  },
+  {
+    "name": "Boost activation surge active",
+    "passed": true
+  },
+  {
+    "name": "Boost stop control distinct",
+    "passed": true
+  },
+  {
+    "name": "Power reading moved to house",
+    "passed": true
+  },
+  {
+    "name": "No redundant large power number in dock",
+    "passed": true
+  },
+  {
+    "name": "Power unit shown",
+    "passed": true
+  },
+  {
+    "name": "Heating and water summaries on house",
+    "passed": true
+  },
+  {
+    "name": "Mini energy-flow strip shows independent loads",
+    "passed": true
+  },
+  {
+    "name": "Heating, water and valve have large controls",
+    "passed": true
+  },
+  {
+    "name": "Energy switches have 43px touch targets",
+    "passed": true
+  },
+  {
+    "name": "Energy HUD avoids health",
+    "passed": true
+  },
+  {
+    "name": "Energy HUD avoids control dock",
+    "passed": true
+  },
+  {
+    "name": "Energy health action fits above nav",
+    "passed": true
+  },
+  {
+    "name": "Heating status updates on house",
+    "passed": true
+  },
+  {
+    "name": "Hot-water status updates on house",
+    "passed": true
+  },
+  {
+    "name": "Hot-water circuit turns off independently",
+    "passed": true
+  },
+  {
+    "name": "Water shutoff requires confirmation",
+    "passed": true
+  },
+  {
+    "name": "Valve state updates",
+    "passed": true
+  },
+  {
+    "name": "Water circuit stops when valve shut",
+    "passed": true
+  },
+  {
+    "name": "Side Health action opens health dialog",
+    "passed": true
+  },
+  {
+    "name": "Leak critical alert preserved",
+    "passed": true
+  },
+  {
+    "name": "Air quality override updates house reading",
+    "passed": true
+  },
+  {
+    "name": "Air quality FX distinct",
+    "passed": true
+  },
+  {
+    "name": "Air quality auto off restores Eco flow",
+    "passed": true
+  },
+  {
+    "name": "Home page renders",
+    "passed": true
+  },
+  {
+    "name": "Home has no scroll",
+    "passed": true
+  },
+  {
+    "name": "Rooms page renders",
+    "passed": true
+  },
+  {
+    "name": "Rooms has no scroll",
+    "passed": true
+  },
+  {
+    "name": "Climate page renders",
+    "passed": true
+  },
+  {
+    "name": "Climate has no scroll",
+    "passed": true
+  },
+  {
+    "name": "Energy page renders",
+    "passed": true
+  },
+  {
+    "name": "Energy has no scroll",
+    "passed": true
+  },
+  {
+    "name": "Routines page renders",
+    "passed": true
+  },
+  {
+    "name": "Routines has no scroll",
+    "passed": true
+  },
+  {
+    "name": "More page renders",
+    "passed": true
+  },
+  {
+    "name": "More has no scroll",
+    "passed": true
+  },
+  {
+    "name": "Direct room cycling preserved",
+    "passed": true
+  },
+  {
+    "name": "Night appearance preserved",
+    "passed": true
+  },
+  {
+    "name": "Away appearance preserved",
+    "passed": true
+  },
+  {
+    "name": "Alarm confirmation preserved",
+    "passed": true
+  },
+  {
+    "name": "No uncaught JavaScript errors: []",
+    "passed": true
+  }
+]

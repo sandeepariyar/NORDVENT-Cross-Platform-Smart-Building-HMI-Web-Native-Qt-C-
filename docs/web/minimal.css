@@ -1,0 +1,135 @@
+/* NORDVENT v10 | minimal architectural HMI
+   Fixed logical canvas 800 x 480. Never scroll. Image-driven rooms, no nested panel borders.
+   Core interaction behavior remains in app.js; this is the visual system. */
+:root{--bg:#071522;--panel:#092536;--muted:#96b1c0;--white:#edf9fd;--cyan:#5ce4e7;--amber:#ffc580;--ease:cubic-bezier(.2,.75,.25,1)}
+.device{border:0;background:#061723;box-shadow:0 22px 85px #000a}
+/* Quiet system bar: a label, a current scene, and actual statuses. */
+.top{height:46px;border:0;border-bottom:1px solid #b1dceb16;background:linear-gradient(180deg,#091d2e,#071b2a);padding:0 18px;gap:12px}
+.wordmark b{font-size:14px;letter-spacing:2.5px;font-weight:740}.wordmark-trail{border:0;padding:0;margin:0 0 0 2px;opacity:.58;font-size:8px}.logo-wave{width:24px;height:24px;filter:none}
+.scene-top{min-width:104px;height:39px;gap:5px;border:0;padding:0 6px 0 8px;justify-content:flex-start;border-radius:0;position:relative;transition:background .2s}
+.scene-top::after{content:'';position:absolute;left:8px;right:24px;bottom:5px;height:1px;background:#8dbccc70;transform:scaleX(.25);transform-origin:left;transition:transform .24s}
+.scene-top:hover::after,.scene-top:focus-visible::after{transform:scaleX(1)}
+.scene-top .top-kicker{font-size:8px;color:#7196a9;letter-spacing:1px}.scene-top strong{font-size:13px;letter-spacing:.2px}.scene-top .down{color:#83dadf;font-size:14px}
+.sim{border:0;padding-left:4px;letter-spacing:1.4px;color:#83a5b5;font-size:9px}.sim i{width:5px;height:5px;box-shadow:none}.outdoor strong{font-size:13px}
+.workspace{background:radial-gradient(ellipse at 80% 20%,#183d50,#071826 64%)}.workspace::before{background:linear-gradient(0deg,#061522d6,transparent 24%)}
+/* The building remains the dominant visual object. */
+.workspace[data-page="rooms"] .art{transform:translate(96px,5px) scale(.91);filter:brightness(.82) saturate(1.06)}
+.workspace[data-page="climate"] .art{filter:brightness(.76)}
+.workspace[data-page="energy"] .art{filter:brightness(.74)}
+.thermal-zone{fill:transparent;opacity:0;mix-blend-mode:screen;filter:blur(5px);transition:opacity .48s ease,fill .48s ease;pointer-events:none}
+#thermalFx{pointer-events:none}
+.workspace[data-page="rooms"] .fx-blind{opacity:.08}
+.workspace.focused .fx-blind{opacity:.72}
+/* Borders no longer define the hierarchy: typography, spacing and tone do. */
+.panel,.page-shell,.room-controls{border:0;box-shadow:none;backdrop-filter:blur(8px);background:linear-gradient(95deg,#061a2bf7 0%,#082436ef 88%,#092637df 100%);border-radius:0}
+.panel{background:linear-gradient(90deg,#071d2dfc,#0b2837f4)}
+.home-panel{left:0;top:0;height:375px;width:229px;padding:19px 19px 12px}
+.eyebrow{font-size:8px;letter-spacing:1.5px;color:#75cbcf;font-weight:760}
+.h1{font-size:26px;line-height:1.06;letter-spacing:-1.1px;font-weight:670;margin:10px 0 10px}
+.h2{font-size:22px;font-weight:690;letter-spacing:-.75px}
+.hero-desc{line-height:1.42;color:#9bbbc6;font-size:11px;margin-bottom:12px}
+.home-stats{gap:0;margin:9px 0 15px}
+.home-stat{background:transparent;border:0;border-radius:0;min-height:62px;padding:6px 4px 8px 1px;position:relative}
+.home-stat:nth-child(odd)::after{position:absolute;content:'';width:1px;height:35px;right:7px;top:11px;background:#6eabb12f}
+.home-stat small{font-size:10px;color:#89aeba;margin-bottom:5px}.home-stat strong{font-size:19px;font-weight:690;letter-spacing:-.5px}
+.home-stat em{font-size:9px;margin-top:4px;color:#6fbcac}
+.home-buttons{grid-template-columns:1fr 65px;gap:7px;margin-top:12px}
+.home-buttons .btn{height:42px}.home-buttons .btn:not(.primary){background:transparent;color:#9adadf;padding:0 1px;text-decoration:underline;text-decoration-color:#63c7cd65;text-underline-offset:5px}
+.home-footer{margin-top:9px;font-size:9px;line-height:1.35;color:#8cabb7}
+.home-legend{border:0;background:#092334cf;border-radius:20px;box-shadow:0 3px 20px #0005}
+/* Default actions are quiet flat surfaces. One expressive filled action per context. */
+.btn,.icon-btn,.switch{border:0;border-radius:9px;background:#ffffff0e;box-shadow:none;color:#d6edf3;transition:background .18s,color .18s,transform .18s,box-shadow .18s}
+.btn:hover,.icon-btn:hover,.switch:hover{background:#ffffff19}
+.btn:active,.switch:active{transform:scale(.97)}
+.btn.selected,.btn.on{background:#3ed3dc2a;color:#8df6f3;border:0;box-shadow:inset 0 -2px #69e1df}
+.btn.primary{border:0;background:#5fdcdd;color:#042834;box-shadow:0 3px 16px #1cc5d044}
+.btn.primary:hover{background:#81eeee}
+.switch.on{border:0;background:#35c7ce29;color:#8af0eb;box-shadow:inset 0 -2px #69e1df}
+.switch.warning{border:0;color:#ffc480}
+.status-chip{border:0;background:#47d5ca14;border-radius:30px;color:#89e0ce;letter-spacing:.2px}
+/* Dedicated room panel: soft translucent sheet, open separators, large setpoint. */
+.room-controls{right:0;top:0;bottom:0;width:312px;padding:16px 16px 10px;background:linear-gradient(145deg,#0a2637f8,#061b2bf9)}
+.room-head{height:43px}.room-head h2{font-size:21px;font-weight:670;letter-spacing:-.8px}.room-head .icon-btn{background:transparent}
+.room-meta{border:0;border-radius:0;background:transparent;margin:5px 0 9px;padding:0;color:#8eb4c1;height:31px;font-size:10px;border-bottom:1px solid #9ed7dc22}
+.room-meta b{color:#e2f2f7}
+.control-stack{gap:0}
+.control-row{padding:9px 0 10px;min-height:84px;border:0;border-radius:0;border-bottom:1px solid #a0cdd025;background:transparent}
+.control-row:last-child{border-bottom:0}
+.control-head{margin-bottom:9px}.control-head .title{font-weight:650;font-size:11px}.control-head .value{font-size:11px;color:#b1cdda;font-weight:630}
+.control-inputs .btn{height:38px;min-width:39px}.control-inputs output{font-size:21px;font-weight:650}
+.room-controls .detail{margin-top:8px;color:#729aa9}
+.room-rail{left:14px;top:12px;width:105px;gap:2px}
+.room-rail .rail-btn{border:0;border-left:2px solid transparent;border-radius:0;background:#061a2bb8;font-size:11px;height:44px;padding:0 11px}
+.room-rail .rail-btn.active{background:#093849de;border-color:#63e7e7;color:#e9fcff}
+.rail-btn .dot{width:5px;height:5px}
+.focus-hint{background:#071d2cbd;border:0;box-shadow:none;left:12px;max-width:150px;bottom:16px;font-size:9px;color:#a4c7d2}
+.fixture-link{background:transparent;border:0;padding:0;justify-content:flex-start;color:#ffe3ae;min-width:0}
+.fixture-link:hover,.fixture-link:focus-visible{border:0;background:transparent;text-decoration:underline;text-underline-offset:4px}
+/* Page shells are wide sheets without nested framed cards. */
+.page-shell{left:0;top:0;width:451px;height:375px;padding:19px 20px}
+.page-shell.wide{top:0;left:92px;width:603px;height:375px;padding:19px 24px}
+.page-header{height:50px}
+.page-header .h2{font-size:22px;font-weight:680}.page-header .subtitle{color:#91aeba}
+.compact-card{border:0;border-radius:8px;background:#ffffff09;padding:10px 11px}
+.compact-card p{color:#94b9c6}
+.mode-row{gap:5px;margin:7px 0 12px;padding-bottom:1px;border-bottom:1px solid #9fcdd024}
+.mode-row .btn{border-radius:0;background:transparent;height:39px;box-shadow:none;color:#93aebb;font-size:12px;font-weight:620}
+.mode-row .btn.selected{color:#90f3f2;box-shadow:inset 0 -2px #67e0df;background:transparent}
+.subsystem{border-bottom:1px solid #aecdd020;min-height:53px}
+.climate-banner{border:0;background:#65e1de13;border-radius:5px}
+.energy-stats{gap:0;margin:8px 0 8px}
+.energy-stat{border:0;background:transparent;padding:9px 7px;border-right:1px solid #a1cbd025;border-radius:0}
+.energy-stat:last-child{border:0}.energy-stat strong{font-size:19px;font-weight:650}
+.energy-flow{opacity:.9}
+.energy-note{border:0;background:#061b2ac9}
+/* Photograph-led room selection: real crops from the exact house artwork. */
+.rooms-panel{left:14px;top:9px;width:438px;height:354px}
+.rooms-heading{height:46px;margin:0}
+.rooms-heading .eyebrow{font-size:8px}
+.rooms-heading .h2{font-size:23px;margin:3px 0}
+.rooms-subtitle{font-size:10px;letter-spacing:.1px;color:#a5c1cc;font-weight:450;margin-left:11px;vertical-align:middle}
+.room-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.room-card{position:relative!important;height:139px;min-height:0;display:block;overflow:hidden;border:0;border-radius:9px;background:#0a293b;padding:0;isolation:isolate;text-align:left;box-shadow:0 3px 16px #0007;transition:transform .2s var(--ease),box-shadow .22s}
+.room-card:hover{border:0;background:#0a293b;box-shadow:0 5px 19px #000b}
+.room-card:focus-visible{outline:2px solid #71eeee;outline-offset:-2px}
+.room-thumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(var(--room-luminance,.9)) saturate(1.12) contrast(1.06);transition:filter .35s,transform .55s var(--ease);pointer-events:none}
+.room-card:hover .room-thumb{transform:scale(1.04)}
+.room-shade{position:absolute;inset:0;background:linear-gradient(180deg,#01101b5b 0%,#04152200 30%,#031522b3 65%,#02121eea 100%);pointer-events:none}
+.room-visual-tint{position:absolute;top:0;right:0;width:80px;height:92px;background:radial-gradient(circle at 100% 0%,var(--thermal-accent),transparent 76%);opacity:.23;pointer-events:none;mix-blend-mode:screen}
+.room-card-top{position:absolute;left:11px;right:11px;top:12px;display:flex;justify-content:space-between;align-items:center;color:#f3fbfd;font-size:13px;letter-spacing:-.2px;text-shadow:0 1px 6px #000b}
+.room-card-top b{font-weight:720}.room-card-arrow{font-size:18px;font-weight:300;color:#b4f9fa}
+.room-card-bottom{position:absolute;left:11px;right:11px;bottom:12px;display:flex;align-items:end;justify-content:space-between;gap:3px}
+.room-temperature{font-size:25px;font-weight:680;line-height:.9;letter-spacing:-1px;color:#f1fbfe;text-shadow:0 2px 8px #0008}.room-temperature small{font-size:11px;font-weight:520;letter-spacing:0;margin-left:2px}
+.room-card-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;white-space:nowrap}
+.room-card-right b{font-size:10px;font-weight:650}.room-card-right small{font-size:9px;color:#bdd3de}
+.rooms-footnote{margin-top:9px;display:flex;align-items:center;justify-content:space-between;font-size:9px;color:#96b8c4}
+.thermal-key{display:flex;align-items:center;gap:5px}.thermal-key i{width:5px;height:5px;border-radius:50%;display:inline-block}.thermal-key .cold{background:#69c6ff}.thermal-key .neutral{background:#91e6bf}.thermal-key .warm{background:#ffbc73}
+.rooms-hint{border:0;background:#071c2ccf;right:10px;bottom:12px;color:#aed3dc}
+/* Secondary views inherit the same open visual rhythm. */
+.routine-row{background:transparent;border:0;border-bottom:1px solid #b7d8dc2b;border-radius:0;padding:10px 0;min-height:66px}
+.routine-row .rt-time{font-weight:660}
+.routine-row .btn{background:#ffffff12}
+.routine-note{background:transparent;border-left:2px solid #64dfdf;color:#a4c4ce;padding:5px 9px}
+.more-tabs{gap:12px;margin:4px 0 12px}
+.more-tabs .btn{background:transparent;border-radius:0;height:34px;font-size:11px;color:#8facba}
+.more-tabs .btn.selected{background:transparent;box-shadow:inset 0 -2px #66e2e0;color:#b3fafa}
+.setting-row{border-bottom:1px solid #8eafbd27}
+/* No giant active box in navigation: a quiet line and a tint. */
+.nav{border-top:1px solid #a6e7ee1c;background:#061927;padding:5px 9px;gap:4px}
+.nav-item{border-radius:0;font-weight:600}
+.nav-item.selected{background:transparent;color:#f3ffff}
+.nav-item.selected::before{top:-5px;width:24px;height:2px;background:#70e1e3;box-shadow:0 0 8px #61e6e766}
+.nav-item.selected .ico{color:#7df1ef}
+.nav-item:not(.selected):hover{background:#ffffff0a}
+/* Scene selection is an editorial list, not a stack of card buttons. */
+.modal-back{background:#03111ed9;backdrop-filter:blur(9px)}
+.dialog{background:#092336;border:0;border-radius:12px;box-shadow:0 24px 80px #000d;padding:15px 20px}
+.dialog-head h2{font-size:20px;font-weight:680;letter-spacing:-.6px}
+.dialog-body .scene-opt{height:60px;background:transparent;border:0;border-bottom:1px solid #b5d8df29;border-radius:0;margin:0;padding:9px 3px}
+.dialog-body .scene-opt:hover{background:#ffffff09}
+.scene-opt strong{font-size:15px;font-weight:650}
+.scene-opt small{font-size:10px;color:#8fb4c1}
+.fixture-row{background:transparent;border:0;border-bottom:1px solid #b6d9e02a;border-radius:0;margin:3px 0;padding:6px 0}
+.dialog-body input,.dialog-body select{background:#102e41;border:0;border-radius:7px}
+/* Respect the embedded budget: only 2D opacity/motion, no heavy live shaders needed. */
+.reduce-motion .room-thumb,.reduce-motion .thermal-zone{transition:none!important}

@@ -1,0 +1,166 @@
+{
+  "passed": 40,
+  "total": 40,
+  "checks": [
+    {
+      "name": "Home camera neutral 1.0",
+      "passed": true
+    },
+    {
+      "name": "Scene has a transform transition",
+      "passed": true
+    },
+    {
+      "name": "House frames in camera scene",
+      "passed": true
+    },
+    {
+      "name": "SVG FX in same camera scene",
+      "passed": true
+    },
+    {
+      "name": "Lighting masks in same camera scene",
+      "passed": true
+    },
+    {
+      "name": "Night/Away shading in same camera scene",
+      "passed": true
+    },
+    {
+      "name": "rooms page receives exact preset",
+      "passed": true
+    },
+    {
+      "name": "rooms camera reaches target scale",
+      "passed": true
+    },
+    {
+      "name": "rooms stays within fixed screen",
+      "passed": true
+    },
+    {
+      "name": "Lock/status dock remains fixed on rooms",
+      "passed": true
+    },
+    {
+      "name": "climate page receives exact preset",
+      "passed": true
+    },
+    {
+      "name": "climate camera reaches target scale",
+      "passed": true
+    },
+    {
+      "name": "climate stays within fixed screen",
+      "passed": true
+    },
+    {
+      "name": "Lock/status dock remains fixed on climate",
+      "passed": true
+    },
+    {
+      "name": "energy page receives exact preset",
+      "passed": true
+    },
+    {
+      "name": "energy camera reaches target scale",
+      "passed": true
+    },
+    {
+      "name": "energy stays within fixed screen",
+      "passed": true
+    },
+    {
+      "name": "Lock/status dock remains fixed on energy",
+      "passed": true
+    },
+    {
+      "name": "routines page receives exact preset",
+      "passed": true
+    },
+    {
+      "name": "routines camera reaches target scale",
+      "passed": true
+    },
+    {
+      "name": "routines stays within fixed screen",
+      "passed": true
+    },
+    {
+      "name": "Lock/status dock remains fixed on routines",
+      "passed": true
+    },
+    {
+      "name": "more page receives exact preset",
+      "passed": true
+    },
+    {
+      "name": "more camera reaches target scale",
+      "passed": true
+    },
+    {
+      "name": "more stays within fixed screen",
+      "passed": true
+    },
+    {
+      "name": "Lock/status dock remains fixed on more",
+      "passed": true
+    },
+    {
+      "name": "bedroom focus preset",
+      "passed": true
+    },
+    {
+      "name": "bedroom retains visible controller",
+      "passed": true
+    },
+    {
+      "name": "living focus preset",
+      "passed": true
+    },
+    {
+      "name": "living retains visible controller",
+      "passed": true
+    },
+    {
+      "name": "kitchen focus preset",
+      "passed": true
+    },
+    {
+      "name": "kitchen retains visible controller",
+      "passed": true
+    },
+    {
+      "name": "utility focus preset",
+      "passed": true
+    },
+    {
+      "name": "utility retains visible controller",
+      "passed": true
+    },
+    {
+      "name": "Motion OFF disables camera offsets",
+      "passed": true
+    },
+    {
+      "name": "Motion OFF suppresses panel transition",
+      "passed": true
+    },
+    {
+      "name": "No page animation expected when motion off",
+      "passed": true
+    },
+    {
+      "name": "No JavaScript errors in camera test",
+      "passed": true
+    },
+    {
+      "name": "Artwork visible at half-size MCU preview",
+      "passed": true
+    },
+    {
+      "name": "Half-size preview no scrolling",
+      "passed": true
+    }
+  ]
+}

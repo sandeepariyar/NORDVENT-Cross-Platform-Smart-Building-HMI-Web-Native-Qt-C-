@@ -1,0 +1,849 @@
+{
+  "assets/icons/nv-shield_white.png": {
+    "bytes": 1452,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/check_active.png": {
+    "bytes": 490,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/plus_white.png": {
+    "bytes": 310,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/air_white.png": {
+    "bytes": 906,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/info_active.png": {
+    "bytes": 1600,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/plus_idle.png": {
+    "bytes": 313,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/back_idle.png": {
+    "bytes": 464,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/snow_active.png": {
+    "bytes": 768,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/nv-unlock_white.png": {
+    "bytes": 944,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/close_active.png": {
+    "bytes": 590,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/sun_white.png": {
+    "bytes": 1173,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/air_idle.png": {
+    "bytes": 993,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/nv-shield-idle_idle.png": {
+    "bytes": 1462,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/blinds_active.png": {
+    "bytes": 493,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/shield_active.png": {
+    "bytes": 1621,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/temp_white.png": {
+    "bytes": 1038,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/focus_white.png": {
+    "bytes": 377,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/water_white.png": {
+    "bytes": 1375,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/minus_active.png": {
+    "bytes": 201,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/check_idle.png": {
+    "bytes": 493,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/blinds_white.png": {
+    "bytes": 469,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/water_idle.png": {
+    "bytes": 1664,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/nv-shield_active.png": {
+    "bytes": 1708,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/info_idle.png": {
+    "bytes": 1620,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/nv-unlock_idle.png": {
+    "bytes": 1087,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/air_active.png": {
+    "bytes": 996,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/nv-lock_white.png": {
+    "bytes": 943,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/nv-system_idle.png": {
+    "bytes": 1943,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/focus_active.png": {
+    "bytes": 383,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/nv-unlock_active.png": {
+    "bytes": 1046,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/sun_idle.png": {
+    "bytes": 1239,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/sun_active.png": {
+    "bytes": 1258,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/home_white.png": {
+    "bytes": 700,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/plus_active.png": {
+    "bytes": 324,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/more_idle.png": {
+    "bytes": 295,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/back_active.png": {
+    "bytes": 446,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/blinds_idle.png": {
+    "bytes": 491,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/close_idle.png": {
+    "bytes": 561,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/focus_idle.png": {
+    "bytes": 378,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/energy_idle.png": {
+    "bytes": 1037,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/energy_active.png": {
+    "bytes": 1054,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/home_active.png": {
+    "bytes": 904,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/fan_idle.png": {
+    "bytes": 2027,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/rooms_active.png": {
+    "bytes": 616,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/info_white.png": {
+    "bytes": 1350,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/nv-lock_active.png": {
+    "bytes": 1054,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/clock_idle.png": {
+    "bytes": 1703,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/rooms_idle.png": {
+    "bytes": 632,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/clock_active.png": {
+    "bytes": 1684,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/nv-system_active.png": {
+    "bytes": 1900,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/energy_white.png": {
+    "bytes": 984,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/nv-lock_idle.png": {
+    "bytes": 1085,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/shield_white.png": {
+    "bytes": 1395,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/moon_idle.png": {
+    "bytes": 1548,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/rooms_white.png": {
+    "bytes": 585,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/more_white.png": {
+    "bytes": 288,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/snow_idle.png": {
+    "bytes": 766,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/home_idle.png": {
+    "bytes": 899,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/water_active.png": {
+    "bytes": 1637,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/light_idle.png": {
+    "bytes": 1266,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/back_white.png": {
+    "bytes": 443,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/fan_active.png": {
+    "bytes": 1999,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/light_active.png": {
+    "bytes": 1240,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/minus_white.png": {
+    "bytes": 193,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/nv-shield-idle_active.png": {
+    "bytes": 1435,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/nv-system_white.png": {
+    "bytes": 1627,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/fan_white.png": {
+    "bytes": 1785,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/check_white.png": {
+    "bytes": 469,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/moon_white.png": {
+    "bytes": 1349,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/temp_idle.png": {
+    "bytes": 1125,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/nv-shield_idle.png": {
+    "bytes": 1731,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/clock_white.png": {
+    "bytes": 1453,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/minus_idle.png": {
+    "bytes": 196,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/nv-shield-idle_white.png": {
+    "bytes": 1249,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/light_white.png": {
+    "bytes": 1114,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/shield_idle.png": {
+    "bytes": 1643,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/temp_active.png": {
+    "bytes": 1114,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/close_white.png": {
+    "bytes": 509,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/snow_white.png": {
+    "bytes": 743,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/more_active.png": {
+    "bytes": 285,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/icons/moon_active.png": {
+    "bytes": 1531,
+    "size": [
+      48,
+      48
+    ]
+  },
+  "assets/rooms/utility.png": {
+    "bytes": 65416,
+    "size": [
+      428,
+      196
+    ]
+  },
+  "assets/rooms/bedroom.png": {
+    "bytes": 87556,
+    "size": [
+      428,
+      196
+    ]
+  },
+  "assets/rooms/living.png": {
+    "bytes": 94852,
+    "size": [
+      428,
+      196
+    ]
+  },
+  "assets/rooms/kitchen.png": {
+    "bytes": 86969,
+    "size": [
+      428,
+      196
+    ]
+  },
+  "assets/fx/blinds_kitchen.png": {
+    "bytes": 313,
+    "size": [
+      194,
+      71
+    ]
+  },
+  "assets/fx/heatFx.png": {
+    "bytes": 4048,
+    "size": [
+      800,
+      352
+    ]
+  },
+  "assets/fx/defrostFx.png": {
+    "bytes": 3075,
+    "size": [
+      800,
+      352
+    ]
+  },
+  "assets/fx/blinds_living.png": {
+    "bytes": 331,
+    "size": [
+      266,
+      67
+    ]
+  },
+  "assets/fx/waterFx.png": {
+    "bytes": 1684,
+    "size": [
+      800,
+      352
+    ]
+  },
+  "assets/fx/leaderLines.png": {
+    "bytes": 2049,
+    "size": [
+      800,
+      352
+    ]
+  },
+  "assets/fx/blinds_bedroom.png": {
+    "bytes": 325,
+    "size": [
+      266,
+      64
+    ]
+  },
+  "assets/fx/recoveryFx.png": {
+    "bytes": 1344,
+    "size": [
+      800,
+      352
+    ]
+  },
+  "assets/fx/airFx.png": {
+    "bytes": 8852,
+    "size": [
+      800,
+      352
+    ]
+  },
+  "assets/lighting/kitchen_pendants_on.png": {
+    "bytes": 47719,
+    "size": [
+      236,
+      94
+    ]
+  },
+  "assets/lighting/bedroom_left_lamp_on.png": {
+    "bytes": 42526,
+    "size": [
+      225,
+      92
+    ]
+  },
+  "assets/lighting/bedroom_ceiling_on.png": {
+    "bytes": 61367,
+    "size": [
+      318,
+      92
+    ]
+  },
+  "assets/lighting/living_ceiling_on.png": {
+    "bytes": 63383,
+    "size": [
+      327,
+      89
+    ]
+  },
+  "assets/lighting/utility_worklight_on.png": {
+    "bytes": 22071,
+    "size": [
+      113,
+      94
+    ]
+  },
+  "assets/lighting/living_floor_lamp_on.png": {
+    "bytes": 56701,
+    "size": [
+      296,
+      91
+    ]
+  },
+  "assets/lighting/kitchen_cabinets_on.png": {
+    "bytes": 38632,
+    "size": [
+      216,
+      92
+    ]
+  },
+  "assets/lighting/bedroom_right_lamp_on.png": {
+    "bytes": 42355,
+    "size": [
+      239,
+      91
+    ]
+  },
+  "assets/room_icons/utility.png": {
+    "bytes": 5839,
+    "size": [
+      96,
+      96
+    ]
+  },
+  "assets/room_icons/bedroom.png": {
+    "bytes": 3573,
+    "size": [
+      96,
+      96
+    ]
+  },
+  "assets/room_icons/living.png": {
+    "bytes": 3947,
+    "size": [
+      96,
+      96
+    ]
+  },
+  "assets/room_icons/kitchen.png": {
+    "bytes": 3617,
+    "size": [
+      96,
+      96
+    ]
+  },
+  "assets/sequence/frame_13.png": {
+    "bytes": 436643,
+    "size": [
+      800,
+      352
+    ]
+  },
+  "assets/sequence/frame_07.png": {
+    "bytes": 436742,
+    "size": [
+      800,
+      352
+    ]
+  },
+  "assets/sequence/frame_08.png": {
+    "bytes": 436466,
+    "size": [
+      800,
+      352
+    ]
+  },
+  "assets/sequence/frame_15.png": {
+    "bytes": 436452,
+    "size": [
+      800,
+      352
+    ]
+  },
+  "assets/sequence/frame_10.png": {
+    "bytes": 436394,
+    "size": [
+      800,
+      352
+    ]
+  },
+  "assets/sequence/frame_04.png": {
+    "bytes": 436856,
+    "size": [
+      800,
+      352
+    ]
+  },
+  "assets/sequence/frame_14.png": {
+    "bytes": 436477,
+    "size": [
+      800,
+      352
+    ]
+  },
+  "assets/sequence/frame_03.png": {
+    "bytes": 436538,
+    "size": [
+      800,
+      352
+    ]
+  },
+  "assets/sequence/frame_02.png": {
+    "bytes": 436530,
+    "size": [
+      800,
+      352
+    ]
+  },
+  "assets/sequence/frame_11.png": {
+    "bytes": 436179,
+    "size": [
+      800,
+      352
+    ]
+  },
+  "assets/sequence/frame_09.png": {
+    "bytes": 436660,
+    "size": [
+      800,
+      352
+    ]
+  },
+  "assets/sequence/frame_05.png": {
+    "bytes": 436727,
+    "size": [
+      800,
+      352
+    ]
+  },
+  "assets/sequence/frame_12.png": {
+    "bytes": 436474,
+    "size": [
+      800,
+      352
+    ]
+  },
+  "assets/sequence/frame_01.png": {
+    "bytes": 436152,
+    "size": [
+      800,
+      352
+    ]
+  },
+  "assets/sequence/frame_06.png": {
+    "bytes": 436880,
+    "size": [
+      800,
+      352
+    ]
+  }
+}

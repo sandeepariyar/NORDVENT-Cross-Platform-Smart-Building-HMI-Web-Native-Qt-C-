@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="352" viewBox="0 0 800 352">
+ <defs>
+  <linearGradient id="night" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#0e2c48"/><stop offset=".6" stop-color="#081b2e"/><stop offset="1" stop-color="#0a1527"/></linearGradient>
+  <linearGradient id="glass" x1="0" x2="1" y1="0" y2="0"><stop stop-color="#0e3048" stop-opacity=".83"/><stop offset=".55" stop-color="#304e5a" stop-opacity=".35"/><stop offset="1" stop-color="#102a3f" stop-opacity=".78"/></linearGradient>
+  <linearGradient id="wood" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#5d4c41"/><stop offset=".52" stop-color="#342f2c"/><stop offset="1" stop-color="#171f27"/></linearGradient>
+  <linearGradient id="side" x1="0" x2="1"><stop stop-color="#2a3b4b"/><stop offset="1" stop-color="#0c1826"/></linearGradient>
+  <linearGradient id="snow" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#d6eeff" stop-opacity=".9"/><stop offset="1" stop-color="#355b77" stop-opacity=".45"/></linearGradient>
+  <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feGaussianBlur stdDeviation="10"/></filter>
+  <filter id="lampGlow"><feGaussianBlur stdDeviation="8"/></filter>
+ </defs>
+ <rect width="800" height="352" fill="url(#night)"/>
+ <path d="M0 282 Q80 255 153 275 T308 285 T510 278 T800 267 L800 352 0 352" fill="#122b41"/>
+ <g opacity=".6" fill="#18354c">
+  <path d="M25 302 L48 231 71 302H58L65 320H32L39 302Z"/><path d="M80 298L108 200 131 298H120L130 322H87L98 298Z"/>
+  <path d="M726 296L746 222 767 296H754L764 325H727L736 296Z"/><path d="M762 282L780 193 800 282Z"/>
+ </g>
+ <ellipse cx="502" cy="328" rx="299" ry="22" fill="#040a13" opacity=".75" filter="url(#shadow)"/>
+ <!-- architectural shell and floors -->
+ <path d="M242 67L279 46H708L739 66V319L709 331H242Z" fill="url(#side)" stroke="#456278" stroke-width="2"/>
+ <path d="M255 76H702V316H255Z" fill="url(#wood)"/>
+ <path d="M230 79L281 51H715L747 75L742 84H236Z" fill="#263949" stroke="#8099a8" stroke-width="2"/>
+ <path d="M237 76L281 49H710L739 71H275Z" fill="url(#snow)" opacity=".87"/>
+ <!-- rooftop ventilation unit -->
+ <rect x="560" y="14" width="102" height="46" rx="5" fill="#29455a" stroke="#8197a5" stroke-width="2"/>
+ <rect x="567" y="20" width="88" height="35" rx="4" fill="#0c1b2a" stroke="#688497"/>
+ <circle cx="609" cy="37" r="15" stroke="#82aabc" stroke-width="2" fill="#14283a"/>
+ <path d="M607 36Q594 18 606 24Q615 31 609 38Q628 30 623 41Q614 46 608 39Q605 55 596 47Q597 39 607 36" fill="#679bb2"/>
+ <circle cx="608" cy="37" r="4" fill="#b2d2df"/>
+ <path d="M662 42H703V76" fill="none" stroke="#607f91" stroke-width="11" stroke-linejoin="round"/><path d="M662 42H703V76" fill="none" stroke="#20364a" stroke-width="6"/>
+ <path d="M557 42H523V78" fill="none" stroke="#607f91" stroke-width="11" stroke-linejoin="round"/><path d="M557 42H523V78" fill="none" stroke="#20364a" stroke-width="6"/>
+ <!-- floor rooms -->
+ <g stroke="#667582" stroke-width="2">
+  <path d="M255 161H713M255 239H713M255 315H713"/>
+  <path d="M255 77V315M713 77V315" stroke-width="8"/>
+  <path d="M487 78V314" stroke="#536677" stroke-width="5" opacity=".7"/>
+ </g>
+ <!-- warm interiors -->
+ <rect x="262" y="85" width="436" height="70" fill="#896444" opacity=".28"/>
+ <rect x="262" y="169" width="436" height="62" fill="#987050" opacity=".23"/>
+ <rect x="262" y="245" width="436" height="62" fill="#805d3b" opacity=".24"/>
+ <!-- furniture top bedroom -->
+ <rect x="310" y="125" width="138" height="12" rx="3" fill="#c6b9a3"/><rect x="304" y="113" width="39" height="17" rx="6" fill="#98a5a5"/><rect x="345" y="112" width="93" height="17" rx="4" fill="#687d80"/>
+ <rect x="300" y="132" width="7" height="17" fill="#74635b"/><rect x="444" y="132" width="6" height="17" fill="#74635b"/>
+ <rect x="542" y="105" width="53" height="36" rx="2" fill="#252b2e" stroke="#6a6a66"/>
+ <path d="M544 130L565 112L579 119L592 106" stroke="#8d9ca7" stroke-width="2" fill="none"/>
+ <rect x="636" y="104" width="31" height="43" rx="2" fill="#544d42"/>
+ <!-- living furniture -->
+ <path d="M299 211H425V225H299Z" fill="#b5ab99"/><rect x="309" y="200" width="102" height="16" rx="6" fill="#828a80"/>
+ <rect x="436" y="214" width="49" height="7" rx="3" fill="#8c6344"/>
+ <path d="M455 213V225M477 213V225" stroke="#876448" stroke-width="2"/>
+ <path d="M556 195H569V228H556" stroke="#2b373a" stroke-width="5"/><path d="M542 199L559 173L577 199" fill="#ddd0ae"/>
+ <path d="M601 214L609 196L617 214Z" fill="#28534c"/><rect x="606" y="214" width="6" height="12" fill="#825a42"/>
+ <!-- kitchen -->
+ <rect x="488" y="272" width="208" height="33" fill="#50515a"/><rect x="489" y="267" width="210" height="5" fill="#baaa93"/>
+ <rect x="520" y="279" width="26" height="22" rx="2" fill="#353b41"/><rect x="554" y="278" width="29" height="23" rx="2" fill="#343941"/>
+ <rect x="304" y="280" width="113" height="8" rx="2" fill="#a78361"/><path d="M314 287L310 302M408 287L411 302" stroke="#775c47" stroke-width="4"/>
+ <rect x="334" y="292" width="16" height="5" fill="#a98b70"/><rect x="379" y="292" width="16" height="5" fill="#a98b70"/>
+ <!-- utility compartment lower right -->
+ <rect x="636" y="243" width="65" height="66" fill="#1a2d3c" stroke="#69818b"/>
+ <rect x="649" y="253" width="37" height="46" rx="4" fill="#8095a0"/><rect x="654" y="261" width="27" height="18" rx="2" fill="#294659"/><circle cx="667" cy="287" r="5" fill="#1b394b"/>
+ <!-- windows structural mullions -->
+ <g stroke="#6a93a7" stroke-width="4" opacity=".8">
+  <path d="M255 84V310M483 84V310M713 84V310"/><path d="M376 84V310M602 84V310"/>
+ </g>
+ <rect x="258" y="84" width="452" height="224" fill="url(#glass)" opacity=".5"/>
+ <g fill="#fff3c0" opacity=".75"><circle cx="366" cy="90" r="3"/><circle cx="583" cy="90" r="3"/><circle cx="385" cy="175" r="3"/><circle cx="581" cy="176" r="3"/><circle cx="363" cy="251" r="3"/><circle cx="583" cy="252" r="3"/></g>
+ <!-- exterior foundation + snow -->
+ <path d="M229 316H742L752 334H214Z" fill="#2a3943" stroke="#496074" stroke-width="2"/>
+ <path d="M220 316L747 316L735 320H227Z" fill="#dceeff" opacity=".9"/>
+ <path d="M214 332Q310 323 380 332T540 331T770 329V352H185Z" fill="#9cbcd2" opacity=".24"/>
+ <!-- corner path lights -->
+ <path d="M198 328V302M762 328V302" stroke="#567788" stroke-width="4"/><circle cx="198" cy="299" r="4" fill="#ffe0a4"/><circle cx="762" cy="299" r="4" fill="#ffe0a4"/>
+ <!-- static badge, communicates placeholder art -->
+ <rect x="619" y="323" width="130" height="19" rx="9.5" fill="#071522" fill-opacity=".88" stroke="#496178" stroke-opacity=".7"/>
+ <text x="684" y="336" fill="#a8bdca" font-family="Arial,Helvetica,sans-serif" font-size="9" text-anchor="middle" letter-spacing="1">BUILDING ART · REPLACEABLE</text>
+</svg>
