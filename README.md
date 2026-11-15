@@ -1,57 +1,56 @@
-# NORDVENT — Interactive Embedded HMI Engineering Lab
+# NORDVENT — Embedded Smart-Building HMI
 
-**Designed & Developed by Sandeep Pariyar** · Proprietary / All Rights Reserved
+**Designed & Developed by Sandeep Pariyar** · © 2026 · All rights reserved
 
-A dual-implementation smart-building HMI showcase: the original fully interactive HTML v17 and the separate Qt 6/QML/C++ v17.1 native desktop port. It features an engineering inspector for **actual web UI actions and browser simulation state**, component and motion documentation, an architecture walkthrough, and an honest MCU-readiness checklist.
+An 800 × 480 smart-building control interface implemented in **Qt Quick/QML and C++17**, with an independently running HTML/CSS/JavaScript design prototype for comparison. The project examines how a visual concept is translated into native controls, reusable QML components, image-sequence animation, a typed C++ backend and an MCU-oriented asset pipeline.
 
-## Live showcase
+**[Open the interactive engineering showcase](https://sandeepariyar.github.io/NORDVENT-Cross-Platform-Smart-Building-HMI-Web-Native-Qt-C-/)**
 
-Enable GitHub Pages once using **Settings → Pages → Source: GitHub Actions**. The build workflow deploys `docs/` plus the compiled Qt WebAssembly runtime to `https://sandeepariyar.github.io/NORDVENT-Cross-Platform-Smart-Building-HMI-Web-Native-Qt-C-/`.
+The showcase places both implementations at the top of the page. The Qt WebAssembly application starts automatically when a compiled bundle is deployed; otherwise its status identifies the missing build. Both applications are simulations; neither is connected to real equipment.
 
-To preview locally (from this repository root):
+## Native implementation
+
+- **QML:** fixed 800 × 480 scene, page/room navigation, reusable buttons, labels, icons and sliders; moving blinds, HVAC rotor, lighting and flow animations.
+- **C++17:** Qt-independent typed control core, Qt/QML adapter and simulated room, lighting, climate and security state.
+- **Build:** CMake and Qt 6 Quick/QML; desktop Qt Creator target and a separate WebAssembly CI target.
+- **Tests:** portable controller checks, asset/route validation and a browser smoke test in the published WASM workflow.
+
+## Project layout
+
+| Path | Purpose |
+| --- | --- |
+| `native-qt/qml/` | Native QML screens, controls and animation routes |
+| `native-qt/src/` | Qt/C++ application entry and QML-facing backend |
+| `native-qt/core/` | Portable C++ controller state and logic |
+| `native-qt/assets/` | Raster artwork used by the native runtime |
+| `web/` | Original independent browser prototype |
+| `docs/` | Showcase, browser inspector, design system and engineering notes |
+| `.github/workflows/pages.yml` | Qt WebAssembly build, checks and Pages deployment |
+
+## Run with Qt Creator
+
+Open `native-qt/CMakeLists.txt` with a **Qt 6.11.2 MinGW 64-bit** kit on Windows. Configure, build and run `NordventDesktop`. The desktop build copies QML and assets alongside the executable so visual work can continue without relinking C++.
+
+## Browser presentation and device-size inspection
+
+The landing page displays the native port beside its browser prototype. Both have independent state. The browser inspector reads actual HTML application events; it is **not** a native Qt telemetry inspector.
+
+The **Actual size** control has two modes: an 800 × 480 logical-pixel inspection view and a calibrated physical 5-inch-screen view. Physical-size accuracy depends on measuring the supplied 100 mm calibration line with a ruler; CSS pixels alone cannot determine a monitor's physical scale.
+
+To preview the static showcase locally:
 
 ```bash
 python -m http.server 8080 -d docs
 ```
 
-Open `http://localhost:8080`. Do not open the showcase using `file://`: browser security prevents cross-frame inspection in that context.
+Open `http://localhost:8080`. A real native browser run requires the compiled Qt WebAssembly artifacts at `/native/`; the static placeholder is not presented as a running Qt application. See [PUBLISH.md](PUBLISH.md) for the build/deployment workflow.
 
-For the complete source/asset upload instructions, see **[PUBLISH.md](PUBLISH.md)**. The initial GitHub repository includes an honest standalone preview; the complete original applications become visible there after the full package upload.
+## Implementation status
 
-## Repository structure
+The desktop QML/C++ project and its source files are included. CI is configured to build and smoke-test the WebAssembly port before deployment. A working local Qt desktop build has been reported by the project author; this README does not substitute for a fresh native runtime test.
 
-- `docs/` — GitHub Pages site, developer inspector, design system, engineering case study and embedded web application
-- `web/` — unmodified original source v17 (plus original technical documentation)
-- `native-qt/` — working v17.1 CMake / Qt Quick / QML / C++ project with animated blinds, rotor, fixed-route flow effects
-- `docs/web/` — browser deployment of original v17 with an additional **read-only** state inspection hook
+**Not implemented or validated:** physical MCU firmware, Qt Quick Ultralite or LVGL ports, real sensor/actuator integration, safety-rated equipment control and device-level timing/memory measurements. Those require target hardware and separate verification.
 
-## Engineering truth and scope
+## License
 
-- **Live web controls are real**, and the developer inspector observes input events and snapshots reported by the original web simulation.
-- **The Qt implementation is a separate native application**. The Qt panel screenshot remains labelled as an original design reference; its separate `/native/` viewer loads a real QML/C++ WebAssembly build once the CI compile and browser test have passed.
-- No connected building hardware, MCU target or actuator feedback is demonstrated. Virtual state changes do **not** imply physical device acknowledgments.
-- Qt Quick Ultralite and LVGL target builds are future engineering tracks, not shipped targets.
-
-## Qt Desktop development
-
-Open `native-qt/CMakeLists.txt` in Qt Creator using **Qt 6.11.2 MinGW 64-bit** (Windows), then configure/build/run `NordventDesktop`. Original README and build notes are preserved.
-
-## Working versions and remaining work
-
-- Original HTML v17 — complete browser source and assets in this package.
-- Qt v17.1 — working native Windows Qt 6/QML/C++ desktop application (reported by creator); source and portable C++ unit tests included.
-- Developer inspector — real browser-side event/state changes, no invented hardware communication.
-- Qt WebAssembly — **implemented as a CI build; browser runtime must pass the workflow smoke test before deployment**.
-- Actual MCU deployment, LVGL renderer, physical devices — **not built or validated**.
-
-## Licensing
-
-**Copyright © 2026 Sandeep Pariyar. All rights reserved. Not MIT.** See [LICENSE.md](LICENSE.md). Third-party components retain their own licenses.
-
-## Real Qt WebAssembly demo
-
-`/native/` is a **native Qt 6.11.2 / QML / C++17** application compiled by Emscripten 4.0.7, not an HTML recreation. It uses the exact v17.1 control backend and graphics. The workflow `.github/workflows/pages.yml` packages source QML and all raster assets into the WebAssembly resource system, tests it with Chromium/Playwright, and publishes the GitHub Pages site only if tests pass.
-
-The existing `/web/` is the original independent HTML/JS version. Windows Qt Creator builds remain supported and use local source QML for rapid editing. No physical MCU deployment is claimed.
-
-**Live Pages URL after a successful workflow:** https://sandeepariyar.github.io/NORDVENT-Cross-Platform-Smart-Building-HMI-Web-Native-Qt-C-/native/
+**Proprietary — all rights reserved.** See [LICENSE.md](LICENSE.md). Third-party components retain their own licenses.
