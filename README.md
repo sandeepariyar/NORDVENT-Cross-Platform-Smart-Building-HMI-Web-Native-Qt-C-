@@ -10,6 +10,10 @@ A winter-night control panel for lighting, ventilation, blinds, and security. Ex
 
 [Open the side-by-side demo →](https://sandeepariyar.github.io/NORDVENT-Cross-Platform-Smart-Building-HMI-Web-Native-Qt-C-/) · Runs in your browser
 
+[![NORDVENT live comparison with the Qt runtime on the left and Web reference on the right](readme-media/nordvent-runtimes.png)](https://sandeepariyar.github.io/NORDVENT-Cross-Platform-Smart-Building-HMI-Web-Native-Qt-C-/#live)
+
+*Live comparison. Qt Quick and C++ on the left, original web design on the right.*
+
 ## Try it
 
 - Move between rooms and adjust the lighting, ventilation, or blinds.
@@ -28,6 +32,12 @@ Use **Actual size** to inspect the logical display dimensions or calibrate the p
 | Source | [Native Qt project](native-qt/) | [Web prototype](web/) |
 
 The Qt view uses reusable QML controls, raster artwork, and frame sequences for selected motion. The engineering panel reads state from the C++ backend running in WebAssembly. If the compiled Qt bundle is unavailable, the showcase displays its build status.
+
+## Design system
+
+[![NORDVENT component bench showing buttons, modes, setpoint, switches, instruments and confirmation](readme-media/nordvent-components.png)](https://sandeepariyar.github.io/NORDVENT-Cross-Platform-Smart-Building-HMI-Web-Native-Qt-C-/#design)
+
+*Interactive component bench for controls, indicators and instrument states.*
 
 ## Embedded display budget
 
