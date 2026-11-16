@@ -1,62 +1,45 @@
-# NORDVENT — Embedded Smart-Building HMI
+# NORDVENT — Smart Building Control Interface
 
-**Designed & Developed by Sandeep Pariyar** · © 2026 · All rights reserved
+**Sandeep Pariyar · Developer / Designer**
 
-An 800 × 480 smart-building control interface implemented in **Qt Quick/QML and C++17**, with an independently running HTML/CSS/JavaScript design prototype for comparison. The project examines how a visual concept is translated into native controls, reusable QML components, image-sequence animation, a typed C++ backend and an MCU-oriented asset pipeline.
+An interactive touchscreen concept for controlling lighting, ventilation, blinds, and security. Compare the original web design with the Qt Quick interface and its C++ controller.
 
-**[Open the interactive engineering showcase](https://sandeepariyar.github.io/NORDVENT-Cross-Platform-Smart-Building-HMI-Web-Native-Qt-C-/)**
+[![Launch the NORDVENT demo](https://img.shields.io/badge/Launch%20the%20live%20demo-NORDVENT-227866?style=for-the-badge)](https://sandeepariyar.github.io/NORDVENT-Cross-Platform-Smart-Building-HMI-Web-Native-Qt-C-/)
 
-The first screen leads with the native Qt/QML/C++ WebAssembly runtime and places the independent HTML design reference alongside it. The native build starts automatically when the compiled bundle is available; otherwise the UI shows an explicit build status. Neither demonstration controls real equipment.
+[Open the side-by-side demo →](https://sandeepariyar.github.io/NORDVENT-Cross-Platform-Smart-Building-HMI-Web-Native-Qt-C-/) · Runs in your browser
 
-## MCU engineering target
+## Try it
 
-The reference display is **800 × 480**, with an intended **5-inch WVGA-class touch interface**. The current Qt 6 Quick/QML implementation is a **desktop/WebAssembly demonstration**, not a Qt Quick Ultralite firmware build. A single full-screen RGB565 framebuffer would require **768,000 bytes (0.732 MiB)**; double-buffering would require **1,536,000 bytes (1.465 MiB)**, before textures, stack, heap and application data. These are calculated sizing examples, not measured target memory usage.
+- Move between rooms and adjust the lighting, ventilation, or blinds.
+- Compare the independent web and Qt interfaces at the same **800 × 480** logical size.
+- Open the engineering panel while using the Qt version. Watch the C++ state revision, selected view, ventilation value, and simulated fault count update.
 
-The design favors reusable controls, constrained raster artwork, explicit state changes and frame-based animation where appropriate. A hardware port must still validate image formats and decompression, flash/RAM/PSRAM budgets, frame timing, touch latency, event routing and physical I/O on the selected board. No MCU performance measurements are claimed.
+Use **Actual size** to inspect the logical display dimensions or calibrate the physical 5-inch view with the 100 mm reference line.
 
-## Native implementation
+## Two implementations, one design
 
-- **QML:** fixed 800 × 480 scene, page/room navigation, reusable buttons, labels, icons and sliders; moving blinds, HVAC rotor, lighting and flow animations.
-- **C++17:** Qt-independent typed control core, Qt/QML adapter and simulated room, lighting, climate and security state.
-- **Build:** CMake and Qt 6 Quick/QML; desktop Qt Creator target and a separate WebAssembly CI target.
-- **Tests:** portable controller checks, asset/route validation and a browser smoke test in the published WASM workflow.
+| | Web design | Qt implementation |
+| --- | --- | --- |
+| Interface | HTML, CSS, JavaScript | Qt Quick / QML |
+| Control logic | Independent browser simulation | Typed C++17 controller and QML adapter |
+| Browser runtime | JavaScript | Qt WebAssembly |
+| Source | [Web prototype](web/) | [Native Qt project](native-qt/) |
 
-## Project layout
+The Qt view uses reusable QML controls, raster artwork, and frame sequences for selected motion. The engineering panel reads state from the C++ backend running in WebAssembly. If the compiled Qt bundle is unavailable, the showcase displays its build status.
 
-| Path | Purpose |
-| --- | --- |
-| `native-qt/qml/` | Native QML screens, controls and animation routes |
-| `native-qt/src/` | Qt/C++ application entry and QML-facing backend |
-| `native-qt/core/` | Portable C++ controller state and logic |
-| `native-qt/assets/` | Raster artwork used by the native runtime |
-| `web/` | Original independent browser prototype |
-| `docs/` | Native C++ diagnostics, dual-runtime showcase, design system and engineering notes |
-| `.github/workflows/pages.yml` | Qt WebAssembly build, checks and Pages deployment |
+## Embedded display budget
 
-## Run with Qt Creator
+The reference is an **800 × 480, 5-inch WVGA-class touch display**.
 
-Open `native-qt/CMakeLists.txt` with a **Qt 6.11.2 MinGW 64-bit** kit on Windows. Configure, build and run `NordventDesktop`. The desktop build copies QML and assets alongside the executable so visual work can continue without relinking C++.
+| RGB565 display buffer | Estimated memory |
+| --- | ---: |
+| One full framebuffer | 768,000 bytes (750 KiB) |
+| Two full framebuffers | 1,536,000 bytes (1,500 KiB) |
 
-## Browser presentation and device-size inspection
+These figures cover pixel storage. Images, fonts, application state, stack, and heap add to the runtime budget. The showcase demonstrates desktop Qt and its browser build. Qt Quick Ultralite, firmware fit, physical I/O, and on-device performance remain to be validated.
 
-The landing page prioritizes the native Qt implementation while retaining the browser prototype as a visual comparison. The engineering panel is driven by read-only messages emitted from the **actual C++ backend running in WebAssembly**, including state revision, runtime uptime, selected view, ventilation model value, simulated fault count and controller JSON. These are not browser click events, measured frame rates or real hardware telemetry.
+## Build and explore the source
 
-The **Actual size** control has two modes: an 800 × 480 logical-pixel inspection view and a calibrated physical 5-inch-screen view. Physical-size accuracy depends on measuring the supplied 100 mm calibration line with a ruler; CSS pixels alone cannot determine a monitor's physical scale.
+Open [native-qt/CMakeLists.txt](native-qt/CMakeLists.txt) in Qt Creator with the **Qt 6.11.2 MinGW 64-bit** desktop kit and build **NordventDesktop**. See the [native build notes](native-qt/README.md), [WebAssembly publishing workflow](PUBLISH.md), and [GitHub Actions build](.github/workflows/pages.yml).
 
-To preview the static showcase locally:
-
-```bash
-python -m http.server 8080 -d docs
-```
-
-Open `http://localhost:8080`. A real native browser run requires the compiled Qt WebAssembly artifacts at `/native/`; the static placeholder is not presented as a running Qt application. See [PUBLISH.md](PUBLISH.md) for the build/deployment workflow.
-
-## Implementation status
-
-The desktop QML/C++ project and its source files are included. CI builds the WebAssembly port and checks native controller snapshots, changes in state revision and the portfolio's device-view controls before deploying. A working local Qt desktop build has been reported by the project author; this README does not substitute for a fresh native runtime test.
-
-**Not implemented or validated:** physical MCU firmware, Qt Quick Ultralite or LVGL ports, real sensor/actuator integration, safety-rated equipment control and device-level timing/memory measurements. Those require target hardware and separate verification.
-
-## License
-
-**Proprietary — all rights reserved.** See [LICENSE.md](LICENSE.md). Third-party components retain their own licenses.
+**Proprietary · All rights reserved.** See [LICENSE.md](LICENSE.md). Third-party components retain their own licenses.
