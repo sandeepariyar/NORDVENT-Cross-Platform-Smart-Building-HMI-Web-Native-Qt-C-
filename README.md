@@ -1,10 +1,12 @@
-# NORDVENT — Smart Building Control Interface
+# NORDVENT — Smart Building HMI
+
+**ENGINEERING LAB / 17.1**
 
 **Sandeep Pariyar · Developer / Designer**
 
-An interactive touchscreen concept for controlling lighting, ventilation, blinds, and security. Compare the original web design with the Qt Quick interface and its C++ controller.
+A winter-night control panel for lighting, ventilation, blinds, and security. Explore two independent implementations of the same smart-building interface.
 
-[![Launch the NORDVENT demo](https://img.shields.io/badge/Launch%20the%20live%20demo-NORDVENT-227866?style=for-the-badge)](https://sandeepariyar.github.io/NORDVENT-Cross-Platform-Smart-Building-HMI-Web-Native-Qt-C-/)
+[![Launch the NORDVENT demo](https://img.shields.io/badge/Open%20live%20applications-57DCE2?style=for-the-badge&labelColor=0B1924)](https://sandeepariyar.github.io/NORDVENT-Cross-Platform-Smart-Building-HMI-Web-Native-Qt-C-/)
 
 [Open the side-by-side demo →](https://sandeepariyar.github.io/NORDVENT-Cross-Platform-Smart-Building-HMI-Web-Native-Qt-C-/) · Runs in your browser
 
@@ -18,12 +20,12 @@ Use **Actual size** to inspect the logical display dimensions or calibrate the p
 
 ## Two implementations, one design
 
-| | Web design | Qt implementation |
+| | A · Native engineering port | B · Original design reference |
 | --- | --- | --- |
-| Interface | HTML, CSS, JavaScript | Qt Quick / QML |
-| Control logic | Independent browser simulation | Typed C++17 controller and QML adapter |
-| Browser runtime | JavaScript | Qt WebAssembly |
-| Source | [Web prototype](web/) | [Native Qt project](native-qt/) |
+| Interface | Qt Quick / QML | HTML, CSS, JavaScript |
+| Control logic | Typed C++17 controller and QML adapter | Independent browser simulation |
+| Browser runtime | Qt WebAssembly | JavaScript |
+| Source | [Native Qt project](native-qt/) | [Web prototype](web/) |
 
 The Qt view uses reusable QML controls, raster artwork, and frame sequences for selected motion. The engineering panel reads state from the C++ backend running in WebAssembly. If the compiled Qt bundle is unavailable, the showcase displays its build status.
 
